@@ -22,10 +22,6 @@ exports[`<Hero/ > should render with a default heading 1`] = `
 }
 
 .emotion-1 {
-  margin-right: var(--chakra-space-4);
-}
-
-.emotion-2 {
   font-family: var(--chakra-fonts-heading);
   font-weight: var(--chakra-fontWeights-bold);
   font-size: 6vw;
@@ -33,7 +29,7 @@ exports[`<Hero/ > should render with a default heading 1`] = `
 }
 
 @media screen and (min-width: 48em) {
-  .emotion-2 {
+  .emotion-1 {
     line-height: 1.2;
   }
 }
@@ -73,15 +69,10 @@ exports[`<Hero/ > should render with a default heading 1`] = `
     <div
       class="emotion-0"
     >
-      <img
-        alt="Chakra-ui Logo"
-        class="chakra-image emotion-1"
-        src="/img/chakra-logo.png"
-      />
       <h2
-        class="chakra-heading emotion-2"
+        class="chakra-heading emotion-1"
       >
-        NextJS with Chakra-ui Boilerplate
+        Fullstack Alchemists
       </h2>
     </div>
   </div>

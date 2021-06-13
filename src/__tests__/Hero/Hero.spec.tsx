@@ -1,16 +1,14 @@
 import { render, screen } from 'utils/test-utils'
 
-import Hero from '.'
+import { Hero } from '../../components/Hero'
 
 describe('<Hero/ >', () => {
   it('should render with a default heading', () => {
     const { container } = render(<Hero />)
 
-    expect(screen.getByRole('img', { name: /chakra-ui logo/i }))
-
     expect(
       screen.getByRole('heading', {
-        name: /nextJS with chakra-ui boilerplate/i
+        name: /fullstack alchemists/i
       })
     ).toBeInTheDocument()
 

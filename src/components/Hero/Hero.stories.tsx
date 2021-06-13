@@ -1,6 +1,6 @@
 import { Story, Meta } from '@storybook/react/types-6-0'
 
-import Hero, { HeroProps } from '.'
+import { Hero, HeroProps } from '.'
 
 export default {
   title: 'Hero',

@@ -1,8 +1,8 @@
 import { render, screen } from 'utils/test-utils'
 
-import Container from '.'
+import { Container } from '../../components/Container'
 
-describe('<Container/ >', () => {
+describe('<Container/>', () => {
   it('should render with children', () => {
     render(
       <Container>

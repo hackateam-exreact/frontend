@@ -16,12 +16,12 @@ module.exports = (plop) => {
       },
       {
         type: 'add',
-        path: '../src/components/{{pascalCase name}}/stories.tsx',
+        path: '../src/components/{{pascalCase name}}/{{pascalCase name}}.stories.tsx',
         templateFile: 'templates/stories.tsx.hbs'
       },
       {
         type: 'add',
-        path: '../src/components/{{pascalCase name}}/test.tsx',
+        path: '../src/__tests__/{{pascalCase name}}/{{pascalCase name}}.spec.tsx',
         templateFile: 'templates/test.tsx.hbs'
       }
     ]

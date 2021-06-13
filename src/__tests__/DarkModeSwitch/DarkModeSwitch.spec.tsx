@@ -1,6 +1,6 @@
 import { render, screen } from 'utils/test-utils'
 
-import DarkModeSwitch from '.'
+import { DarkModeSwitch } from '../../components/DarkModeSwitch'
 
 describe('<DarkModeSwitch/ >', () => {
   it('should render with a checkbox input', () => {

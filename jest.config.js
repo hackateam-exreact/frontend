@@ -4,11 +4,13 @@ module.exports = {
   collectCoverage: true,
   collectCoverageFrom: [
     'src/**/*.ts(x)?',
-    '!src/**/stories.tsx',
+    '!src/**/*.stories.tsx',
     '!src/pages/**/*.tsx',
-    '!src/theme/**/*.ts(x)?',
-    '!src/**/mock.ts',
-    '!src/utils/test-utils.tsx'
+    '!src/styles/**/*.ts',
+    '!src/utils/apollo.ts',
+    '!src/types/**/*.d.ts',
+    '!src/components/**/mock.ts',
+    '!src/theme/**'
   ],
   setupFilesAfterEnv: ['<rootDir>/.jest/setup.ts'],
   snapshotSerializers: ['@emotion/jest/serializer'],
