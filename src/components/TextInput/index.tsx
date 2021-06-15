@@ -14,7 +14,7 @@ import { FieldError } from 'react-hook-form'
 import { ReactElement } from 'react'
 
 interface InputProps extends ChakraInputProps {
-  name: string
+  inputName: string
   label?: string
   error?: FieldError
   focusBorderColor?: 'blue.500' | 'green.500'
@@ -24,7 +24,7 @@ interface InputProps extends ChakraInputProps {
 
 const TextInputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
   {
-    name,
+    inputName,
     label,
     error = null,
     focusBorderColor = 'blue.500',
@@ -36,14 +36,14 @@ const TextInputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
 ) => {
   return (
     <FormControl isInvalid={!!error}>
-      {label && <FormLabel htmlFor={name}>{label}</FormLabel>}
+      {label && <FormLabel htmlFor={inputName}>{label}</FormLabel>}
       <InputGroup>
         {!!leftIcon && (
           <InputLeftElement pointerEvents="all">{leftIcon}</InputLeftElement>
         )}
         <ChakraInput
-          name={name}
-          id={name}
+          name={inputName}
+          id={inputName}
           focusBorderColor={focusBorderColor}
           errorBorderColor="red.500"
           bg="gray.800"

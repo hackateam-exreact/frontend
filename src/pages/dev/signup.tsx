@@ -85,28 +85,28 @@ export default function SignIn() {
             </Text>
             <VStack w="100%" spacing="1">
               <TextInput
-                name="firstName"
+                inputName="firstName"
                 error={errors.firstName}
                 type="firstName"
                 placeholder="Nome"
                 {...register('firstName')}
               />
               <TextInput
-                name="lastName"
+                inputName="lastName"
                 error={errors.lastName}
                 type="lastName"
                 placeholder="Sobrenome"
                 {...register('lastName')}
               />
               <TextInput
-                name="email"
+                inputName="email"
                 error={errors.email}
                 type="email"
                 placeholder="Email"
                 {...register('email')}
               />
               <TextInput
-                name="password"
+                inputName="password"
                 error={errors.password}
                 rightIcon={
                   showPassword ? (
