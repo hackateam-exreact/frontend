@@ -1,6 +1,7 @@
 const Button = {
   baseStyle: {
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    fontFamily: 'Archivo'
   }
 }
 

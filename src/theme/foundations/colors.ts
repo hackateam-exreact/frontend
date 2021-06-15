@@ -20,6 +20,7 @@ export default {
     '500': '#FFFFFF'
   },
   gray: {
+    '500': '#9C98A6',
     '800': '#212224'
   },
   black: {
