@@ -30,6 +30,7 @@ interface SignInData {
 
 export default function SignIn() {
   const [showPassword, setShowPassword] = useState(false)
+  const highlightColor = 'blue.500'
 
   const {
     register,
@@ -54,7 +55,7 @@ export default function SignIn() {
           <IconButton
             aria-label="Voltar para página inicial"
             icon={<Icon as={FaLongArrowAltLeft} />}
-            color="blue.500"
+            color={highlightColor}
             variant="ghost"
             onClick={() => Router.push('/')}
           />
@@ -87,7 +88,7 @@ export default function SignIn() {
             </Heading>
           </VStack>
           <VStack align="flex-start" maxW="20rem" spacing="5">
-            <Heading as="h3" color="blue.500">
+            <Heading as="h3" color={highlightColor}>
               Login para Devs
             </Heading>
             <VStack w="100%" spacing="1">
@@ -119,11 +120,11 @@ export default function SignIn() {
             <Button type="submit" fullWidth={true} isLoading={isSubmitting}>
               Entrar
             </Button>
-            <Text as="span" fontSize="sm">
+            <Text as="span" fontSize="sm" color="gray.500">
               Não tem conta?
             </Text>
             <Link href="/dev/signup" passHref={true}>
-              <ChakraLink color="blue.500" fontSize="sm">
+              <ChakraLink color={highlightColor} fontSize="sm">
                 Cadastre-se
               </ChakraLink>
             </Link>
