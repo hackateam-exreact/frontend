@@ -1,5 +1,5 @@
 const fonts = {
-  heading: "'Roboto', Arial, Helvetica, sans-serif",
+  heading: "'Ubuntu', Arial, Helvetica, sans-serif",
   body: "'Roboto', Arial, Helvetica, sans-serif"
 }
 
