@@ -1,5 +1,4 @@
 import {
-  Box,
   Button as ChakraButton,
   ButtonProps as ChakraButtonProps
 } from '@chakra-ui/react'
@@ -18,18 +17,16 @@ export const Button = ({
   size = 'md',
   ...props
 }: ButtonProps) => (
-  <Box>
-    <ChakraButton
-      color="white"
-      backgroundColor={backgroundColor}
-      width={fullWidth ? '100%' : 'auto'}
-      size={size}
-      _hover={{
-        backgroundColor
-      }}
-      {...props}
-    >
-      {children}
-    </ChakraButton>
-  </Box>
+  <ChakraButton
+    color="white"
+    backgroundColor={backgroundColor}
+    width={fullWidth ? '100%' : 'auto'}
+    size={size}
+    _hover={{
+      backgroundColor
+    }}
+    {...props}
+  >
+    {children}
+  </ChakraButton>
 )
