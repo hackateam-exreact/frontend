@@ -10,6 +10,7 @@ export interface IUser {
   location: string
   contact: string
   status: 'Open' | 'Studying' | 'Employed'
+  about: string
   created_at: string
   updated_at: string
 }
@@ -53,7 +54,10 @@ export function ProfileSummary({ user }: ProfileSummaryProps) {
       </SkeletonCircle>
       {/* mt calc (profilePicSize / 2 + 10) / 16 = 5.312 | Round to 5.25 */}
       <VStack spacing="5" mt="5.25rem">
-        <Text fontWeight="bold">{`${user.first_name} ${user.last_name}`}</Text>
+        <Text
+          fontWeight="bold"
+          fontSize="lg"
+        >{`${user.first_name} ${user.last_name}`}</Text>
         <Text fontSize="sm" color="gray.500" align="center">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium
           quas, non ab accusantium provident deleniti repellendus sequi error
