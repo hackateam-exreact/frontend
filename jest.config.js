@@ -7,7 +7,7 @@ module.exports = {
     '!src/**/*.stories.tsx',
     '!src/pages/**/*.tsx',
     '!src/styles/**/*.ts',
-    '!src/utils/apollo.ts',
+    '!src/utils/**',
     '!src/types/**/*.d.ts',
     '!src/components/**/mock.ts',
     '!src/theme/**'
