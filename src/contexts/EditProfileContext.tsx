@@ -15,9 +15,7 @@ interface EditProfileProviderProps {
   children: ReactNode
 }
 
-export const EditProfileContext = createContext(
-  {} as Partial<EditProfileContextData>
-)
+export const EditProfileContext = createContext({} as EditProfileContextData)
 
 export function EditProfileProvider({ children }: EditProfileProviderProps) {
   const [user, setUser] = useState<IUser>({} as IUser)

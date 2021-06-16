@@ -3,6 +3,7 @@ import { render, screen } from 'utils/test-utils'
 import { EditProfileBtn } from '../../components/Profile/EditProfileBtn'
 import { EditProfileContext } from 'contexts/EditProfileContext'
 import { IUser } from 'components/Profile/ProfileSummary'
+import { useDisclosure } from '@chakra-ui/react'
 
 const user: IUser = {
   id: 'randomId',
@@ -16,6 +17,13 @@ const user: IUser = {
   updated_at: String(Date.now())
 }
 
+jest.mock('@chakra-ui/react', () => {
+  return {
+    ...jest.requireActual('@chakra-ui/react'),
+    useDisclosure: jest.fn()
+  }
+})
+
 describe('<EditProfileBtn />', () => {
   it('should render correctly', () => {
     render(<EditProfileBtn user={user} />)
@@ -27,7 +35,14 @@ describe('<EditProfileBtn />', () => {
     const handleEditUserProfile = jest.fn()
 
     const { container } = render(
-      <EditProfileContext.Provider value={{ handleEditUserProfile }}>
+      <EditProfileContext.Provider
+        value={{
+          user,
+          setUser: jest.fn,
+          disclosure: useDisclosure(),
+          handleEditUserProfile
+        }}
+      >
         <EditProfileBtn user={user} />
       </EditProfileContext.Provider>
     )
