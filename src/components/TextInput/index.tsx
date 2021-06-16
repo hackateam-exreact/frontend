@@ -13,7 +13,7 @@ import { ForwardRefRenderFunction, forwardRef } from 'react'
 import { FieldError } from 'react-hook-form'
 import { ReactElement } from 'react'
 
-interface InputProps extends ChakraInputProps {
+export interface InputProps extends ChakraInputProps {
   inputName: string
   label?: string
   error?: FieldError

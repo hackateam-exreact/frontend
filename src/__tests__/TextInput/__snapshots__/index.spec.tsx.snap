@@ -1,0 +1,134 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TextInput /> should render with label 1`] = `
+.emotion-0 {
+  width: 100%;
+  position: relative;
+}
+
+.emotion-1 {
+  display: block;
+  text-align: start;
+  font-size: var(--chakra-fontSizes-md);
+  -webkit-margin-end: var(--chakra-space-3);
+  margin-inline-end: var(--chakra-space-3);
+  margin-bottom: var(--chakra-space-2);
+  font-weight: var(--chakra-fontWeights-medium);
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+  opacity: 1;
+}
+
+.emotion-1[disabled],
+.emotion-1[aria-disabled=true],
+.emotion-1[data-disabled] {
+  opacity: 0.4;
+}
+
+.emotion-2 {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+}
+
+.emotion-3 {
+  width: 100%;
+  min-width: 0px;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  position: relative;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+  font-size: var(--chakra-fontSizes-lg);
+  -webkit-padding-start: var(--chakra-space-4);
+  padding-inline-start: var(--chakra-space-4);
+  -webkit-padding-end: var(--chakra-space-4);
+  padding-inline-end: var(--chakra-space-4);
+  height: var(--chakra-sizes-12);
+  border-radius: var(--chakra-radii-md);
+  border: var(--chakra-borders-none);
+  border-color: inherit;
+  background: var(--chakra-colors-gray-800);
+  padding: var(--chakra-space-3);
+}
+
+.emotion-3:hover,
+.emotion-3[data-hover] {
+  border-color: var(--chakra-colors-whiteAlpha-400);
+}
+
+.emotion-3[aria-readonly=true],
+.emotion-3[readonly],
+.emotion-3[data-readonly] {
+  box-shadow: none!important;
+  -webkit-user-select: all;
+  -moz-user-select: all;
+  -ms-user-select: all;
+  user-select: all;
+}
+
+.emotion-3[disabled],
+.emotion-3[aria-disabled=true],
+.emotion-3[data-disabled] {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.emotion-3[aria-invalid=true],
+.emotion-3[data-invalid] {
+  border-color: #FF4062;
+  box-shadow: 0 0 0 1px #FF4062;
+}
+
+.emotion-3:focus,
+.emotion-3[data-focus] {
+  z-index: 1;
+  border-color: #5271FF;
+  box-shadow: 0 0 0 1px #5271FF;
+}
+
+.emotion-3::-webkit-input-placeholder {
+  font-size: var(--chakra-fontSizes-sm);
+}
+
+.emotion-3::-moz-placeholder {
+  font-size: var(--chakra-fontSizes-sm);
+}
+
+.emotion-3:-ms-input-placeholder {
+  font-size: var(--chakra-fontSizes-sm);
+}
+
+.emotion-3::placeholder {
+  font-size: var(--chakra-fontSizes-sm);
+}
+
+<div
+  class="chakra-form-control emotion-0"
+  role="group"
+>
+  <label
+    class="chakra-form__label emotion-1"
+    for="email"
+    id="field-1-label"
+  >
+    Label
+  </label>
+  <div
+    class="chakra-input__group emotion-2"
+  >
+    <input
+      class="chakra-input emotion-3"
+      id="email"
+      name="email"
+    />
+  </div>
+</div>
+`;
