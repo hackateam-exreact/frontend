@@ -9,6 +9,7 @@ import Head from 'next/head'
 import { ProfileDescription } from 'components/Profile/ProfileDescription'
 import { ProfileSummary } from 'components/Profile/ProfileSummary'
 import { ProjectList } from 'components/Profile/ProjectList'
+import { TechList } from 'components/Profile/TechList'
 import { useAuth } from 'hooks/useAuth'
 
 export default function ProfilePage() {
@@ -17,7 +18,7 @@ export default function ProfilePage() {
   return (
     <>
       <Head>
-        <title>Luis Filipe | Devspot</title>
+        <title>{user.first_name} | Devspot</title>
       </Head>
 
       <Box h="6rem" mb="1rem" />
@@ -43,6 +44,7 @@ export default function ProfilePage() {
               <ProfileDescription description={user.about} />
               <ProjectList projects={user.projects} />
               <ArticleList user={user} articles={user.articles} />
+              <TechList techs={user.techs} />
             </VStack>
           </GridItem>
         </Grid>
