@@ -12,6 +12,7 @@ import { Button } from 'components/Button'
 import Link from 'next/link'
 import { TextInput } from 'components/TextInput'
 import { signUpSchema } from 'utils/yupSchemas'
+import { useAuth } from 'hooks/useAuth'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
@@ -30,6 +31,8 @@ export function SignUpForm({ target = 'dev' }: SignUpFormProps) {
   const [showPassword, setShowPassword] = useState(false)
   const highlightColor = target === 'dev' ? 'blue.500' : 'green.500'
 
+  const { handleSignUp } = useAuth()
+
   const {
     register,
     handleSubmit,
@@ -39,7 +42,7 @@ export function SignUpForm({ target = 'dev' }: SignUpFormProps) {
   })
 
   const onSubmit = async (values: SignUpData) => {
-    console.log(values)
+    await handleSignUp(values)
   }
 
   return (
