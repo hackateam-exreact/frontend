@@ -72,7 +72,7 @@ const user: IUser = {
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.'
     }
   ],
-
+  techs: [],
   created_at: String(Date.now()),
   updated_at: String(Date.now())
 }
