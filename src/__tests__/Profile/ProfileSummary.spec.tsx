@@ -1,27 +1,12 @@
 import { render, screen } from 'utils/test-utils'
 
-import { IUser } from 'interfaces/user'
 import { ProfileSummary } from 'components/Profile/ProfileSummary'
 import React from 'react'
+import { userTemplate } from 'utils/userTemplate'
 
 // import { useState } from 'react'
 
-const user: IUser = {
-  id: 'randomId',
-  avatar: '/img/chakra-logo.png',
-  first_name: 'Jane',
-  last_name: 'Doe',
-  email: 'jane.doe@example.com',
-  location: 'Jane Doe',
-  contact: '99999999999',
-  status: 'Open',
-  about: 'about',
-  articles: [],
-  projects: [],
-  techs: [],
-  created_at: String(Date.now()),
-  updated_at: String(Date.now())
-}
+const user = userTemplate
 
 // jest.mock('react', () => ({
 //   ...jest.requireActual('react'),

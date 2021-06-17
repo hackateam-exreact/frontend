@@ -2,80 +2,10 @@ import { render, screen } from 'utils/test-utils'
 
 import { EditProfileBtn } from '../../components/Profile/EditProfileBtn'
 import { EditProfileContext } from 'contexts/EditProfileContext'
-import { IUser } from 'interfaces/user'
 import { useDisclosure } from '@chakra-ui/react'
+import { userTemplate } from 'utils/userTemplate'
 
-const user: IUser = {
-  id: '123',
-  avatar: '/img/chakra-logo.png',
-  first_name: 'Luis Filipe',
-  last_name: 'Fernandes Almeida',
-  email: 'luisfilipe.faw@gmail.com',
-  location: 'Balneário Camboriú',
-  contact: '42988860098',
-  status: 'Open',
-  about:
-    'Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem maiores aspernatur quasi sed alias quo. Consequatur magnam provident iusto error rem dicta, esse dignissimos. Alias dolore dolor voluptatibus veniam aperiam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem maiores aspernatur quasi sed alias quo. Consequatur magnam provident iusto error rem dicta, esse dignissimos. Alias dolore dolor voluptatibus veniam aperiam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem maiores aspernatur quasi sed alias quo. Consequatur magnam provident iusto error rem dicta, esse dignissimos. Alias dolore dolor voluptatibus veniam aperiam.',
-  articles: [
-    {
-      id: 'adasd',
-      title: 'Lorem Ipsum',
-      body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.',
-      created_at: String(Date.now()),
-      updated_at: String(Date.now())
-    },
-    {
-      id: 'adasd',
-      title: 'Lorem Ipsum',
-      body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.',
-      created_at: String(Date.now()),
-      updated_at: String(Date.now())
-    },
-    {
-      id: 'adasd',
-      title: 'Lorem Ipsum',
-      body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.',
-      created_at: String(Date.now()),
-      updated_at: String(Date.now())
-    },
-    {
-      id: 'adasd',
-      title: 'Lorem Ipsum',
-      body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.',
-      created_at: String(Date.now()),
-      updated_at: String(Date.now())
-    }
-  ],
-  projects: [
-    {
-      id: 'asdsada',
-      title: 'Lorem Ipsum',
-      description:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.'
-    },
-    {
-      id: 'asdsada',
-      title: 'Lorem Ipsum',
-      description:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.'
-    },
-    {
-      id: 'asdsada',
-      title: 'Lorem Ipsum',
-      description:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.'
-    },
-    {
-      id: 'asdsada',
-      title: 'Lorem Ipsum',
-      description:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.'
-    }
-  ],
-  techs: [],
-  created_at: String(Date.now()),
-  updated_at: String(Date.now())
-}
+const user = userTemplate
 
 jest.mock('@chakra-ui/react', () => {
   return {

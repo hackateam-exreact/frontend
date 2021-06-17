@@ -30,6 +30,8 @@ describe('<ProfileSectionItemContainer />', () => {
       </ProfileSectionItemContainer>
     )
 
-    expect(screen.queryByTestId('Mock Stack')?.className !== 'chakra-stack')
+    expect(
+      screen.getByTestId('Mock Stack').classList.contains('chakra-stack')
+    ).toBeFalsy()
   })
 })
