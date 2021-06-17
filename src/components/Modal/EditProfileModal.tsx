@@ -8,23 +8,25 @@ import {
   ModalOverlay
 } from '@chakra-ui/react'
 
+import { EditProfileForm } from 'components/Form/EditProfileForm'
 import { useAuth } from 'hooks/useAuth'
 import { useEditProfile } from 'hooks/useEditProfile'
 
 export function EditProfileModal() {
   const { disclosure } = useEditProfile()
   const { user } = useAuth()
-  const { isOpen, onClose } = disclosure
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={disclosure.isOpen} onClose={disclosure.onClose} size="2xl">
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent bg="black.500">
         <ModalHeader>Editando perfil de {user.first_name}</ModalHeader>
         <ModalCloseButton />
-        <ModalBody></ModalBody>
+        <ModalBody>
+          <EditProfileForm initialValues={user} />
+        </ModalBody>
 
-        <ModalFooter></ModalFooter>
+        <ModalFooter />
       </ModalContent>
     </Modal>
   )
