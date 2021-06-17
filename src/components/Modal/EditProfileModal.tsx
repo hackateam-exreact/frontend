@@ -8,10 +8,12 @@ import {
   ModalOverlay
 } from '@chakra-ui/react'
 
+import { useAuth } from 'hooks/useAuth'
 import { useEditProfile } from 'hooks/useEditProfile'
 
 export function EditProfileModal() {
-  const { disclosure, user } = useEditProfile()
+  const { disclosure } = useEditProfile()
+  const { user } = useAuth()
   const { isOpen, onClose } = disclosure
 
   return (
