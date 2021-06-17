@@ -5,19 +5,17 @@ import { IUser } from 'interfaces/user'
 import { TextArea } from 'components/TextArea'
 import { TextInput } from 'components/TextInput'
 import { editProfileSchema } from 'utils/yupSchemas'
+import { useAuth } from 'hooks/useAuth'
 import { useEditProfile } from 'hooks/useEditProfile'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
-type EditProfileData = Partial<IUser>
+type EditProfileData = Pick<IUser, 'about' | 'name' | 'email' | 'phone'>
 
-interface EditProfileFormProps {
-  initialValues: EditProfileData
-}
-
-export function EditProfileForm({ initialValues }: EditProfileFormProps) {
+export function EditProfileForm() {
   const { disclosure } = useEditProfile()
+  const { user } = useAuth()
 
   const {
     register,
@@ -29,10 +27,10 @@ export function EditProfileForm({ initialValues }: EditProfileFormProps) {
   })
 
   useEffect(() => {
-    setValue('about', initialValues.about)
-    setValue('name', initialValues.name)
-    setValue('email', initialValues.email)
-    setValue('phone', initialValues.phone)
+    setValue('about', user.about)
+    setValue('name', user.name)
+    setValue('email', user.email)
+    setValue('phone', user.phone)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -47,7 +45,7 @@ export function EditProfileForm({ initialValues }: EditProfileFormProps) {
           inputName="about"
           error={errors.about}
           label="Sobre"
-          maxH="48"
+          h="52"
           placeholder="Fale um pouco sobre você"
           {...register('about')}
         />
@@ -55,7 +53,7 @@ export function EditProfileForm({ initialValues }: EditProfileFormProps) {
           inputName="name"
           error={errors.name}
           label="Nome"
-          placeholder="coolname"
+          placeholder="John Doe"
           {...register('name')}
         />
         <TextInput
@@ -69,6 +67,7 @@ export function EditProfileForm({ initialValues }: EditProfileFormProps) {
           inputName="phone"
           error={errors.phone}
           label="Telefone"
+          type="number"
           placeholder="(99) 99999-9999"
           {...register('phone')}
         />
