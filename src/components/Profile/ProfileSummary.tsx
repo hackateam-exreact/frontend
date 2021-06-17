@@ -15,7 +15,7 @@ export function ProfileSummary({ user }: ProfileSummaryProps) {
     <Flex
       direction="column"
       bg="gray.800"
-      w="18.75rem"
+      w="72"
       borderRadius="md"
       p="3"
       pos="relative"
@@ -41,7 +41,7 @@ export function ProfileSummary({ user }: ProfileSummaryProps) {
         />
       </SkeletonCircle>
       {/* mt calc (profilePicSize / 2 + 10) / 16 = 5.312 | Round to 5.25 */}
-      <VStack spacing="5" mt="5.25rem">
+      <VStack spacing="5" mt="20">
         <Text
           fontWeight="bold"
           fontSize="lg"
