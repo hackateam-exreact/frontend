@@ -6,7 +6,7 @@ const user: IUser = {
   avatar: '/img/chakra-logo.png',
   first_name: 'John',
   last_name: 'Doe',
-  name: '',
+  name: 'John Doe',
   email: 'johndoe@example.com',
   phone: '',
   location: 'Doe York',
@@ -90,7 +90,6 @@ const user: IUser = {
 
 export const userTemplate: IUser = {
   ...user,
-  name: `${user.first_name} ${user.last_name}`,
   articles: user.articles.map((article) => ({
     ...article,
     readingTime: calcReadingTime(article.title + article.body)
