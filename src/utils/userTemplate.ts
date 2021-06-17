@@ -80,7 +80,7 @@ const user: IUser = {
       title: 'React JS',
       description:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.912621963193861asdas',
-      experience: '5',
+      experience: 5,
       thumbnail: '/img/react-logo.png'
     }
   ],
