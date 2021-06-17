@@ -13,7 +13,7 @@ import { TechList } from 'components/Profile/TechList'
 import { useAuth } from 'hooks/useAuth'
 
 export default function ProfilePage() {
-  const { user } = useAuth()
+  const { user, isAuthenticated } = useAuth()
 
   return (
     <>
@@ -33,10 +33,12 @@ export default function ProfilePage() {
           <GridItem>
             <VStack align="center" spacing="10">
               <ProfileSummary user={user} />
-              <EditProfileProvider>
-                <EditProfileBtn user={user} />
-                <EditProfileModal />
-              </EditProfileProvider>
+              {isAuthenticated && (
+                <EditProfileProvider>
+                  <EditProfileBtn user={user} />
+                  <EditProfileModal />
+                </EditProfileProvider>
+              )}
             </VStack>
           </GridItem>
           <GridItem colSpan={2}>
