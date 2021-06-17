@@ -1,5 +1,6 @@
 import { IArticle } from './article'
 import { IProject } from './project'
+import { ITech } from './tech'
 
 export interface IUser {
   id: string
@@ -13,6 +14,7 @@ export interface IUser {
   about: string
   articles: IArticle[]
   projects: IProject[]
+  techs: ITech[]
   created_at: string
   updated_at: string
 }

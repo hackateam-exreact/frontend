@@ -87,7 +87,16 @@ export function AuthProvider({ children }: AuthProviderProps) {
           'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.'
       }
     ],
-
+    techs: [
+      {
+        id: '213123',
+        thumbnail: '/img/react-logo.png',
+        title: 'React JS',
+        experience: '1-2 anos',
+        description:
+          'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.'
+      }
+    ],
     created_at: String(Date.now()),
     updated_at: String(Date.now())
   })
