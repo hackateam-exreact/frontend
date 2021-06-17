@@ -15,6 +15,7 @@ export function EditProfileBtn({ user }: EditProfileBtnProps) {
     <Button
       leftIcon={<Icon as={FiEdit} />}
       onClick={() => handleEditUserProfile(user)}
+      size="lg"
     >
       Editar perfil
     </Button>
