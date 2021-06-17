@@ -23,7 +23,7 @@ export function EditProfileModal() {
         <ModalHeader>Editando perfil de {user.first_name}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <EditProfileForm initialValues={user} />
+          <EditProfileForm />
         </ModalBody>
 
         <ModalFooter />
