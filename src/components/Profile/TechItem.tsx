@@ -1,6 +1,8 @@
-import { HStack, Heading, Image, Text, VStack } from '@chakra-ui/react'
+import { Image, Text, VStack } from '@chakra-ui/react'
 
 import { ITech } from 'interfaces/tech'
+import { ProfileSectionItemContainer } from 'components/Container/ProfileSectionItemContainer'
+import { ProfileSectionItemHeading } from 'components/Heading/ProfileSectionItemHeading'
 
 interface TechItemProps {
   tech: ITech
@@ -10,7 +12,7 @@ export function TechItem({ tech }: TechItemProps) {
   const techThumbSize = '120px'
 
   return (
-    <HStack spacing="2" p="3" bg="gray.800" borderRadius="md" w="100%">
+    <ProfileSectionItemContainer direction="row" align="center">
       <Image
         src={tech.thumbnail}
         alt={tech.title}
@@ -19,7 +21,7 @@ export function TechItem({ tech }: TechItemProps) {
         objectFit="cover"
       />
       <VStack align="flex-start">
-        <Heading as="h4">{tech.title}</Heading>
+        <ProfileSectionItemHeading>{tech.title}</ProfileSectionItemHeading>
         <Text>
           Experiência de:{' '}
           <Text as="span" color="blue.500">
@@ -30,6 +32,6 @@ export function TechItem({ tech }: TechItemProps) {
           {tech.description}
         </Text>
       </VStack>
-    </HStack>
+    </ProfileSectionItemContainer>
   )
 }

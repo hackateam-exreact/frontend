@@ -1,6 +1,7 @@
-import { Text, VStack } from '@chakra-ui/react'
-
 import { IProject } from 'interfaces/project'
+import { ProfileSectionItemContainer } from 'components/Container/ProfileSectionItemContainer'
+import { ProfileSectionItemHeading } from 'components/Heading/ProfileSectionItemHeading'
+import { Text } from '@chakra-ui/react'
 
 interface ProjectItemProps {
   project: IProject
@@ -8,13 +9,13 @@ interface ProjectItemProps {
 
 export function ProjectItem({ project }: ProjectItemProps) {
   return (
-    <VStack spacing="3" p="3" bg="gray.800" borderRadius="md">
-      <Text color="blue.500" fontWeight="bold">
+    <ProfileSectionItemContainer>
+      <ProfileSectionItemHeading color="blue.500">
         {project.title}
-      </Text>
+      </ProfileSectionItemHeading>
       <Text color="gray.500" align="justify">
         {project.description}
       </Text>
-    </VStack>
+    </ProfileSectionItemContainer>
   )
 }

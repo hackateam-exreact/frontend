@@ -1,8 +1,10 @@
-import { Flex, HStack, Icon, Text, VStack } from '@chakra-ui/react'
+import { Divider, Flex, HStack, Icon, Text } from '@chakra-ui/react'
 
 import { FiClock } from 'react-icons/fi'
 import { IArticle } from 'interfaces/article'
 import { IUser } from 'interfaces/user'
+import { ProfileSectionItemContainer } from 'components/Container/ProfileSectionItemContainer'
+import { ProfileSectionItemHeading } from 'components/Heading/ProfileSectionItemHeading'
 import { UserBadge } from './UserBadge'
 
 interface ArticleItemProps {
@@ -12,17 +14,9 @@ interface ArticleItemProps {
 
 export function ArticleItem({ user, article }: ArticleItemProps) {
   return (
-    <VStack
-      align="flex-start"
-      spacing="10"
-      p="3"
-      bg="gray.800"
-      borderRadius="md"
-      w="100%"
-    >
-      <Text fontSize="lg" fontWeight="bold">
-        {article.title}
-      </Text>
+    <ProfileSectionItemContainer>
+      <ProfileSectionItemHeading>{article.title}</ProfileSectionItemHeading>
+      <Divider />
       <Flex align="center" justify="space-between" w="100%">
         <UserBadge user={user} />
         <HStack>
@@ -35,6 +29,6 @@ export function ArticleItem({ user, article }: ArticleItemProps) {
           16/06/2021
         </Text>
       </Flex>
-    </VStack>
+    </ProfileSectionItemContainer>
   )
 }
