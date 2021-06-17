@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction } from 'react'
 import { ReactNode, createContext, useState } from 'react'
 import { UseDisclosureReturn, useDisclosure } from '@chakra-ui/react'
 
-import { IUser } from 'components/Profile/ProfileSummary'
+import { IUser } from 'interfaces/user'
 
 interface EditProfileContextData {
   user: IUser

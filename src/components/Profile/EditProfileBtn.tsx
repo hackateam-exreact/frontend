@@ -1,6 +1,6 @@
 import { Button } from 'components/Button'
 import { FiEdit } from 'react-icons/fi'
-import { IUser } from './ProfileSummary'
+import { IUser } from 'interfaces/user'
 import { Icon } from '@chakra-ui/react'
 import { useEditProfile } from 'hooks/useEditProfile'
 
