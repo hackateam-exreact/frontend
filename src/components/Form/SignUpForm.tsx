@@ -1,7 +1,15 @@
-import { Button, Heading, Icon, Text, VStack } from '@chakra-ui/react'
+import {
+  Link as ChakraLink,
+  Heading,
+  Icon,
+  Text,
+  VStack
+} from '@chakra-ui/react'
 import { FiEye, FiEyeOff } from 'react-icons/fi'
 import React, { useState } from 'react'
 
+import { Button } from 'components/Button'
+import Link from 'next/link'
 import { TextInput } from 'components/TextInput'
 import { signUpSchema } from 'utils/yupSchemas'
 import { useForm } from 'react-hook-form'
@@ -33,6 +41,7 @@ export function SignUpForm({ target = 'dev' }: SignUpFormProps) {
   const onSubmit = async (values: SignUpData) => {
     console.log(values)
   }
+
   return (
     <VStack
       as="form"
@@ -86,6 +95,14 @@ export function SignUpForm({ target = 'dev' }: SignUpFormProps) {
       <Button type="submit" fullWidth={true} isLoading={isSubmitting}>
         Cadastrar
       </Button>
+      <Text as="span" fontSize="sm" color="gray.500">
+        Já possui conta?
+      </Text>
+      <Link href="/dev/signin" passHref={true}>
+        <ChakraLink color={highlightColor} fontSize="sm">
+          Entrar
+        </ChakraLink>
+      </Link>
     </VStack>
   )
 }
