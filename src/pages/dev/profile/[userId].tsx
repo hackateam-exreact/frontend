@@ -7,6 +7,7 @@ import { EditProfileModal } from 'components/Modal/EditProfileModal'
 import { EditProfileProvider } from 'contexts/EditProfileContext'
 import Head from 'next/head'
 import { ProfileDescription } from 'components/Profile/ProfileDescription'
+import { ProjectList } from 'components/Profile/ProjectList'
 
 export default function ProfilePage() {
   const user: IUser = {
@@ -22,6 +23,33 @@ export default function ProfilePage() {
     created_at: String(Date.now()),
     updated_at: String(Date.now())
   }
+
+  const projects = [
+    {
+      id: 'asdsada',
+      title: 'Lorem Ipsum',
+      description:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.'
+    },
+    {
+      id: 'asdsada',
+      title: 'Lorem Ipsum',
+      description:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.'
+    },
+    {
+      id: 'asdsada',
+      title: 'Lorem Ipsum',
+      description:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.'
+    },
+    {
+      id: 'asdsada',
+      title: 'Lorem Ipsum',
+      description:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.'
+    }
+  ]
 
   return (
     <>
@@ -48,7 +76,10 @@ export default function ProfilePage() {
             </VStack>
           </GridItem>
           <GridItem colSpan={2}>
-            <ProfileDescription description={user.about} />
+            <VStack spacing="10">
+              <ProfileDescription description={user.about} />
+              <ProjectList projects={projects} />
+            </VStack>
           </GridItem>
         </Grid>
       </Container>
