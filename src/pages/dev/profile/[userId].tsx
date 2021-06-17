@@ -1,17 +1,20 @@
 import { Box, Grid, GridItem, VStack } from '@chakra-ui/react'
-import { IUser, ProfileSummary } from 'components/Profile/ProfileSummary'
 
+import { ArticleList } from 'components/Profile/ArticleList'
 import { Container } from 'components/Container'
 import { EditProfileBtn } from 'components/Profile/EditProfileBtn'
 import { EditProfileModal } from 'components/Modal/EditProfileModal'
 import { EditProfileProvider } from 'contexts/EditProfileContext'
 import Head from 'next/head'
+import { IUser } from 'interfaces/user'
 import { ProfileDescription } from 'components/Profile/ProfileDescription'
+import { ProfileSummary } from 'components/Profile/ProfileSummary'
 import { ProjectList } from 'components/Profile/ProjectList'
 
 export default function ProfilePage() {
   const user: IUser = {
     id: '123',
+    avatar: '/img/chakra-logo.png',
     first_name: 'Luis Filipe',
     last_name: 'Fernandes Almeida',
     email: 'luisfilipe.faw@gmail.com',
@@ -51,6 +54,37 @@ export default function ProfilePage() {
     }
   ]
 
+  const articles = [
+    {
+      id: 'adasd',
+      title: 'Lorem Ipsum',
+      body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.',
+      created_at: String(Date.now()),
+      updated_at: String(Date.now())
+    },
+    {
+      id: 'adasd',
+      title: 'Lorem Ipsum',
+      body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.',
+      created_at: String(Date.now()),
+      updated_at: String(Date.now())
+    },
+    {
+      id: 'adasd',
+      title: 'Lorem Ipsum',
+      body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.',
+      created_at: String(Date.now()),
+      updated_at: String(Date.now())
+    },
+    {
+      id: 'adasd',
+      title: 'Lorem Ipsum',
+      body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.',
+      created_at: String(Date.now()),
+      updated_at: String(Date.now())
+    }
+  ]
+
   return (
     <>
       <Head>
@@ -79,6 +113,7 @@ export default function ProfilePage() {
             <VStack spacing="10">
               <ProfileDescription description={user.about} />
               <ProjectList projects={projects} />
+              <ArticleList user={user} articles={articles} />
             </VStack>
           </GridItem>
         </Grid>
