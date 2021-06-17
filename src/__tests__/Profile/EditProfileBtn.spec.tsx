@@ -6,15 +6,73 @@ import { IUser } from 'interfaces/user'
 import { useDisclosure } from '@chakra-ui/react'
 
 const user: IUser = {
-  id: 'randomId',
+  id: '123',
   avatar: '/img/chakra-logo.png',
-  first_name: 'Jane',
-  last_name: 'Doe',
-  email: 'jane.doe@example.com',
-  location: 'Jane Doe',
-  contact: '99999999999',
+  first_name: 'Luis Filipe',
+  last_name: 'Fernandes Almeida',
+  email: 'luisfilipe.faw@gmail.com',
+  location: 'Balneário Camboriú',
+  contact: '42988860098',
   status: 'Open',
-  about: 'about',
+  about:
+    'Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem maiores aspernatur quasi sed alias quo. Consequatur magnam provident iusto error rem dicta, esse dignissimos. Alias dolore dolor voluptatibus veniam aperiam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem maiores aspernatur quasi sed alias quo. Consequatur magnam provident iusto error rem dicta, esse dignissimos. Alias dolore dolor voluptatibus veniam aperiam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem maiores aspernatur quasi sed alias quo. Consequatur magnam provident iusto error rem dicta, esse dignissimos. Alias dolore dolor voluptatibus veniam aperiam.',
+  articles: [
+    {
+      id: 'adasd',
+      title: 'Lorem Ipsum',
+      body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.',
+      created_at: String(Date.now()),
+      updated_at: String(Date.now())
+    },
+    {
+      id: 'adasd',
+      title: 'Lorem Ipsum',
+      body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.',
+      created_at: String(Date.now()),
+      updated_at: String(Date.now())
+    },
+    {
+      id: 'adasd',
+      title: 'Lorem Ipsum',
+      body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.',
+      created_at: String(Date.now()),
+      updated_at: String(Date.now())
+    },
+    {
+      id: 'adasd',
+      title: 'Lorem Ipsum',
+      body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.',
+      created_at: String(Date.now()),
+      updated_at: String(Date.now())
+    }
+  ],
+  projects: [
+    {
+      id: 'asdsada',
+      title: 'Lorem Ipsum',
+      description:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.'
+    },
+    {
+      id: 'asdsada',
+      title: 'Lorem Ipsum',
+      description:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.'
+    },
+    {
+      id: 'asdsada',
+      title: 'Lorem Ipsum',
+      description:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.'
+    },
+    {
+      id: 'asdsada',
+      title: 'Lorem Ipsum',
+      description:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.'
+    }
+  ],
+
   created_at: String(Date.now()),
   updated_at: String(Date.now())
 }
@@ -39,8 +97,6 @@ describe('<EditProfileBtn />', () => {
     const { container } = render(
       <EditProfileContext.Provider
         value={{
-          user,
-          setUser: jest.fn,
           disclosure: useDisclosure(),
           handleEditUserProfile
         }}

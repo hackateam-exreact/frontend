@@ -1,7 +1,7 @@
-import Head from 'next/head'
 import { AppProps } from 'next/app'
+import { AuthProvider } from 'contexts/AuthContext'
 import { ChakraProvider } from '@chakra-ui/react'
-
+import Head from 'next/head'
 import theme from 'theme'
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -15,7 +15,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="description" content="NextJS with Chakra-ui Boilerplate" />
       </Head>
 
-      <Component {...pageProps} />
+      <AuthProvider>
+        <Component {...pageProps} />
+      </AuthProvider>
     </ChakraProvider>
   )
 }
