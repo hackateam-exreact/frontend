@@ -22,11 +22,13 @@ export function ArticleItem({ user, article }: ArticleItemProps) {
         <HStack>
           <Icon as={FiClock} />
           <Text fontSize="xs" color="gray.500">
-            5 minutos de leitura
+            {`${article.readingTime} ${
+              article.readingTime === 1 ? 'minuto' : 'minutos'
+            }`}
           </Text>
         </HStack>
         <Text fontSize="xs" color="gray.500">
-          16/06/2021
+          {article.created_at}
         </Text>
       </Flex>
     </ProfileSectionItemContainer>
