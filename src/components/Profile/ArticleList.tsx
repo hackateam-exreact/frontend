@@ -1,8 +1,7 @@
-import { Heading, VStack } from '@chakra-ui/react'
-
 import { ArticleItem } from './ArticleItem'
 import { IArticle } from 'interfaces/article'
 import { IUser } from 'interfaces/user'
+import { ProfileSectionContainer } from 'components/Container/ProfileSectionContainer'
 
 interface ArticleListProps {
   user: IUser
@@ -11,11 +10,10 @@ interface ArticleListProps {
 
 export function ArticleList({ user, articles }: ArticleListProps) {
   return (
-    <VStack align="flex-start" spacing="5" w="100%">
-      <Heading as="h3">Artigos principais</Heading>
+    <ProfileSectionContainer title="Artigos">
       {articles.map((article) => (
         <ArticleItem key={article.id} user={user} article={article} />
       ))}
-    </VStack>
+    </ProfileSectionContainer>
   )
 }

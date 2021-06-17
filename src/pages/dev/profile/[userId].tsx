@@ -21,7 +21,7 @@ export default function ProfilePage() {
         <title>{user.first_name} | Devspot</title>
       </Head>
 
-      <Box h="6rem" mb="1rem" />
+      <Box h="24" mb="1rem" />
 
       <Container>
         <Grid

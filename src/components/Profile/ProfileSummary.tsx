@@ -1,6 +1,7 @@
-import { Flex, Image, SkeletonCircle, Text, VStack } from '@chakra-ui/react'
+import { Image, SkeletonCircle, Text, VStack } from '@chakra-ui/react'
 
 import { IUser } from 'interfaces/user'
+import { ProfileSectionItemContainer } from 'components/Container/ProfileSectionItemContainer'
 import { useState } from 'react'
 
 interface ProfileSummaryProps {
@@ -12,14 +13,12 @@ export function ProfileSummary({ user }: ProfileSummaryProps) {
   const profilePicSize = '150px'
 
   return (
-    <Flex
+    <ProfileSectionItemContainer
+      mode="flex"
       direction="column"
-      bg="gray.800"
       w="72"
-      borderRadius="md"
-      p="3"
       pos="relative"
-      mt="20"
+      mt="75px"
     >
       <SkeletonCircle
         w={profilePicSize}
@@ -29,7 +28,6 @@ export function ProfileSummary({ user }: ProfileSummaryProps) {
         top="0"
         left="50%"
         transform="translate(-50%, -50%)"
-        display="inline-block"
       >
         <Image
           src="/img/chakra-logo.png"
@@ -41,7 +39,7 @@ export function ProfileSummary({ user }: ProfileSummaryProps) {
         />
       </SkeletonCircle>
       {/* mt calc (profilePicSize / 2 + 10) / 16 = 5.312 | Round to 5.25 */}
-      <VStack spacing="5" mt="20">
+      <VStack spacing="5" mt="75px">
         <Text
           fontWeight="bold"
           fontSize="lg"
@@ -68,6 +66,6 @@ export function ProfileSummary({ user }: ProfileSummaryProps) {
           </Text>
         </Text>
       </VStack>
-    </Flex>
+    </ProfileSectionItemContainer>
   )
 }

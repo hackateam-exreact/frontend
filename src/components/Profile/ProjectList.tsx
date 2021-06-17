@@ -1,7 +1,7 @@
-import { Heading, SimpleGrid, VStack } from '@chakra-ui/react'
-
 import { IProject } from 'interfaces/project'
+import { ProfileSectionContainer } from 'components/Container/ProfileSectionContainer'
 import { ProjectItem } from './ProjectItem'
+import { SimpleGrid } from '@chakra-ui/react'
 
 interface ProjectListProps {
   projects: IProject[]
@@ -9,13 +9,12 @@ interface ProjectListProps {
 
 export function ProjectList({ projects }: ProjectListProps) {
   return (
-    <VStack align="flex-start" spacing="5">
-      <Heading as="h3">Projetos principais</Heading>
+    <ProfileSectionContainer title="Projetos principais">
       <SimpleGrid columns={2} columnGap="5" rowGap="5">
         {projects.map((project) => (
           <ProjectItem key={project.id} project={project} />
         ))}
       </SimpleGrid>
-    </VStack>
+    </ProfileSectionContainer>
   )
 }

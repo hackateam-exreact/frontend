@@ -1,4 +1,6 @@
-import { Divider, Heading, Text, VStack } from '@chakra-ui/react'
+import { Divider, Text } from '@chakra-ui/react'
+
+import { ProfileSectionContainer } from 'components/Container/ProfileSectionContainer'
 
 interface ProfileDescriptionProps {
   description: string
@@ -6,18 +8,16 @@ interface ProfileDescriptionProps {
 
 export function ProfileDescription({ description }: ProfileDescriptionProps) {
   return (
-    <VStack
-      align="flex-start"
-      spacing="5"
-      p="3"
+    <ProfileSectionContainer
+      title="Descrição"
       bg="gray.800"
+      p="3"
       borderRadius="md"
     >
-      <Heading as="h3">Descrição</Heading>
       <Divider />
       <Text color="gray.500" align="justify">
         {description}
       </Text>
-    </VStack>
+    </ProfileSectionContainer>
   )
 }
