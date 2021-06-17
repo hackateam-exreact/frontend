@@ -1,19 +1,7 @@
 import { Flex, Image, SkeletonCircle, Text, VStack } from '@chakra-ui/react'
 
+import { IUser } from 'interfaces/user'
 import { useState } from 'react'
-
-export interface IUser {
-  id: string
-  first_name: string
-  last_name: string
-  email: string
-  location: string
-  contact: string
-  status: 'Open' | 'Studying' | 'Employed'
-  about: string
-  created_at: string
-  updated_at: string
-}
 
 interface ProfileSummaryProps {
   user: IUser
