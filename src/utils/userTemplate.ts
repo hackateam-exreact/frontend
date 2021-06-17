@@ -4,11 +4,13 @@ import { calcReadingTime } from './calcReadingTime'
 const user: IUser = {
   id: '123',
   avatar: '/img/chakra-logo.png',
-  first_name: 'Luis Filipe',
-  last_name: 'Fernandes Almeida',
-  email: 'luisfilipe.faw@gmail.com',
-  location: 'Balneário Camboriú',
-  contact: '42988860098',
+  first_name: 'John',
+  last_name: 'Doe',
+  name: '',
+  email: 'johndoe@example.com',
+  phone: '',
+  location: 'Doe York',
+  contact: '(99) 99999-9999',
   status: 'Open',
   about:
     'Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem maiores aspernatur quasi sed alias quo. Consequatur magnam provident iusto error rem dicta, esse dignissimos. Alias dolore dolor voluptatibus veniam aperiam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem maiores aspernatur quasi sed alias quo. Consequatur magnam provident iusto error rem dicta, esse dignissimos. Alias dolore dolor voluptatibus veniam aperiam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem maiores aspernatur quasi sed alias quo. Consequatur magnam provident iusto error rem dicta, esse dignissimos. Alias dolore dolor voluptatibus veniam aperiam.',
@@ -72,13 +74,23 @@ const user: IUser = {
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.912621963193861'
     }
   ],
-  techs: [],
+  techs: [
+    {
+      id: 'dasdsadsad',
+      title: 'React JS',
+      description:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.912621963193861asdas',
+      experience: '5',
+      thumbnail: '/img/react-logo.png'
+    }
+  ],
   created_at: String(Date.now()),
   updated_at: String(Date.now())
 }
 
 export const userTemplate: IUser = {
   ...user,
+  name: `${user.first_name} ${user.last_name}`,
   articles: user.articles.map((article) => ({
     ...article,
     readingTime: calcReadingTime(article.title + article.body)
