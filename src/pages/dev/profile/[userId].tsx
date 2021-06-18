@@ -20,6 +20,7 @@ import { IUser } from 'interfaces/user'
 import { ProfileDescription } from 'components/Profile/ProfileDescription'
 import { ProfileSummary } from 'components/Profile/ProfileSummary'
 import { ProjectList } from 'components/Profile/ProjectList'
+import { Protected } from 'components/Protected'
 import { TechList } from 'components/Profile/TechList'
 import { useAuth } from 'hooks/useAuth'
 import { useEffect } from 'react'
@@ -33,7 +34,7 @@ interface ProfilePageProps {
 }
 
 export default function ProfilePage(props: ProfilePageProps) {
-  const { user, isAuthenticated, handleUpdateUserInfo } = useAuth()
+  const { user, handleUpdateUserInfo } = useAuth()
   const { projects, articles, techs, handleUpdateUserData } = useUserData()
 
   useEffect(() => {
@@ -44,7 +45,7 @@ export default function ProfilePage(props: ProfilePageProps) {
       techs: props.techs
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user, projects, articles, techs])
+  }, [])
 
   return (
     <>
@@ -68,12 +69,12 @@ export default function ProfilePage(props: ProfilePageProps) {
                 articles={articles}
                 projects={projects}
               />
-              {isAuthenticated && (
+              <Protected needsAuthorization={true}>
                 <EditProfileProvider>
                   <EditProfileBtn user={user} />
                   <EditProfileModal />
                 </EditProfileProvider>
-              )}
+              </Protected>
             </VStack>
           </GridItem>
           <GridItem colSpan={2}>
