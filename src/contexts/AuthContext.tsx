@@ -30,6 +30,7 @@ interface AuthContextData {
   isAuthenticated: boolean
   handleSignUp: (values: SignUpParams) => Promise<void>
   handleSignIn: (values: SignInParams) => Promise<void>
+  handleUpdateUserInfo: (values: { user: IUser }) => void
   tmpSignInValues: SignInParams
 }
 
@@ -70,6 +71,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
     Router.push('/')
   }
 
+  const handleUpdateUserInfo = (values: { user: IUser }) => {
+    setUser(values.user)
+  }
+
   useEffect(() => {
     setIsAuthenticated(!!user)
   }, [user])
@@ -82,6 +87,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         isAuthenticated,
         handleSignUp,
         handleSignIn,
+        handleUpdateUserInfo,
         tmpSignInValues
       }}
     >
