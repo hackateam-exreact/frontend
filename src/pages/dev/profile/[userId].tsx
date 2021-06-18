@@ -1,4 +1,4 @@
-import { Box, Grid, GridItem, VStack } from '@chakra-ui/react'
+import { Grid, GridItem, VStack } from '@chakra-ui/react'
 import {
   articlesTemplate,
   projectsTemplate,
@@ -36,8 +36,6 @@ export default function ProfilePage(props: ProfilePageProps) {
       <Head>
         <title>{props.profile.first_name} | Devspot</title>
       </Head>
-
-      <Box h="24" mb="1rem" />
 
       <Container>
         <Grid templateColumns="repeat(3, 1fr)" gap="20" maxW="1200px" mx="auto">
