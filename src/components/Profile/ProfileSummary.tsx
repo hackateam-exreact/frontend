@@ -38,17 +38,13 @@ export function ProfileSummary({ user }: ProfileSummaryProps) {
           onLoad={() => setIsLoading(false)}
         />
       </SkeletonCircle>
-      {/* mt calc (profilePicSize / 2 + 10) / 16 = 5.312 | Round to 5.25 */}
       <VStack spacing="5" mt="75px">
         <Text
           fontWeight="bold"
           fontSize="lg"
         >{`${user.first_name} ${user.last_name}`}</Text>
         <Text fontSize="sm" color="gray.500" align="center">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium
-          quas, non ab accusantium provident deleniti repellendus sequi error
-          earum consequatur at, ipsam magni vero recusandae! Nisi nihil itaque
-          sint facere.
+          {user.about}
         </Text>
         <Text color="blue.500">{user.email}</Text>
       </VStack>
@@ -56,13 +52,13 @@ export function ProfileSummary({ user }: ProfileSummaryProps) {
         <Text>
           Artigos:{' '}
           <Text as="span" color="blue.500">
-            5 artigos
+            {user.articles.length}
           </Text>
         </Text>
         <Text>
           Projetos principais:{' '}
           <Text as="span" color="blue.500">
-            5 projetos
+            {user.projects.length}
           </Text>
         </Text>
       </VStack>
