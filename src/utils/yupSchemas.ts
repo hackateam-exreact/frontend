@@ -13,6 +13,7 @@ export const signUpSchema = yup.object().shape({
 })
 
 export const editProfileSchema = yup.object().shape({
+  avatar: yup.string(),
   about: yup.string().required('Sobre obrigatório'),
   name: yup.string().required('Nome obrigatório'),
   email: yup.string(),
