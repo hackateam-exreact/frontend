@@ -59,9 +59,7 @@ describe('<SignUpForm />', () => {
         'password'
     ).toBeTruthy()
 
-    const icon = container.querySelector(
-      'div.chakra-input__right-element > svg'
-    )
+    const icon = container.querySelector('div.chakra-input__right-addon > svg')
 
     if (icon) Simulate.click(icon)
 
