@@ -16,5 +16,6 @@ export const editProfileSchema = yup.object().shape({
   about: yup.string().required('Sobre obrigatório'),
   name: yup.string().required('Nome obrigatório'),
   email: yup.string(),
-  phone: yup.string()
+  contact: yup.string(),
+  location: yup.string()
 })
