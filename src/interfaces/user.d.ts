@@ -7,7 +7,9 @@ export interface IUser {
   avatar: string
   first_name: string
   last_name: string
+  name: string
   email: string
+  phone: string
   location: string
   contact: string
   status: 'Open' | 'Studying' | 'Employed'

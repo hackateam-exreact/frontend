@@ -3,6 +3,7 @@ import {
   ReactNode,
   SetStateAction,
   createContext,
+  useEffect,
   useState
 } from 'react'
 
@@ -12,6 +13,7 @@ import { userTemplate } from 'utils/userTemplate'
 interface AuthContextData {
   user: IUser
   setUser: Dispatch<SetStateAction<IUser>>
+  isAuthenticated: boolean
 }
 
 interface AuthProviderProps {
@@ -22,9 +24,14 @@ export const AuthContext = createContext({} as AuthContextData)
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<IUser>(userTemplate)
+  const [isAuthenticated, setIsAuthenticated] = useState(!!user)
+
+  useEffect(() => {
+    setIsAuthenticated(!!user)
+  }, [user])
 
   return (
-    <AuthContext.Provider value={{ user, setUser }}>
+    <AuthContext.Provider value={{ user, setUser, isAuthenticated }}>
       {children}
     </AuthContext.Provider>
   )

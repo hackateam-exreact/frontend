@@ -25,7 +25,7 @@ export function TechItem({ tech }: TechItemProps) {
         <Text>
           Experiência de:{' '}
           <Text as="span" color="blue.500">
-            {tech.experience}
+            {`${tech.experience} ${tech.experience === 1 ? 'ano' : 'anos'}`}
           </Text>
         </Text>
         <Text color="gray.500" align="justify">
