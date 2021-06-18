@@ -1,12 +1,11 @@
 export interface IUser {
   id: string
-  email: string
-  password: string
   first_name: string
   last_name: string
-  location?: string
-  contact?: string
-  status?: 'Open' | 'Studying' | 'Employed'
-  name: string
-  avatar?: string
+  email: string
+  location?: string | null
+  contact?: string | null
+  status?: 'Open' | 'Studying' | 'Employed' | null
+  name: string | null
+  avatar?: string | null
 }
