@@ -2,17 +2,18 @@ import { Divider, Flex, HStack, Icon, Text } from '@chakra-ui/react'
 
 import { FiClock } from 'react-icons/fi'
 import { IArticle } from 'interfaces/article'
-import { IUser } from 'interfaces/user'
 import { ProfileSectionItemContainer } from 'components/Container/ProfileSectionItemContainer'
 import { ProfileSectionItemHeading } from 'components/Heading/ProfileSectionItemHeading'
 import { UserBadge } from './UserBadge'
+import { useAuth } from 'hooks/useAuth'
 
 interface ArticleItemProps {
-  user: IUser
   article: IArticle
 }
 
-export function ArticleItem({ user, article }: ArticleItemProps) {
+export function ArticleItem({ article }: ArticleItemProps) {
+  const { user } = useAuth()
+
   return (
     <ProfileSectionItemContainer>
       <ProfileSectionItemHeading>{article.title}</ProfileSectionItemHeading>
