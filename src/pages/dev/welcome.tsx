@@ -4,9 +4,11 @@ import { Button } from 'components/Button'
 import { Container } from '../../components/Container'
 import { FiThumbsUp } from 'react-icons/fi'
 import Head from 'next/head'
-import Router from 'next/router'
+import { useAuth } from 'hooks/useAuth'
 
 export default function WelcomePage() {
+  const { user, handleSignIn } = useAuth()
+
   return (
     <>
       <Head>
@@ -39,7 +41,9 @@ export default function WelcomePage() {
           fullWidth={true}
           size="lg"
           mt="8"
-          onClick={() => Router.push('/')}
+          onClick={() =>
+            handleSignIn({ email: user.email, password: user.password })
+          }
         >
           Encontrar devs
         </Button>
