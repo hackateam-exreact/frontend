@@ -1,11 +1,12 @@
+import { articlesTemplate, userTemplate } from 'utils/userTemplate'
 import { render, screen } from 'utils/test-utils'
 
 import { ArticleList } from 'components/Profile/ArticleList'
 import { AuthProvider } from 'contexts/AuthContext'
-import { articlesTemplate } from 'utils/userTemplate'
 import { useRouter } from 'next/router'
 
 const articles = articlesTemplate
+const profile = userTemplate
 
 jest.mock('next/router', () => ({
   ...jest.requireActual('next/router'),
@@ -20,7 +21,7 @@ describe('<ArticleList />', () => {
   it('should render a project list', () => {
     render(
       <AuthProvider>
-        <ArticleList articles={articles} />
+        <ArticleList profile={profile} articles={articles} />
       </AuthProvider>
     )
 
