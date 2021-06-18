@@ -15,7 +15,7 @@ export function ProfileDescription({ about }: ProfileDescriptionProps) {
     >
       <Divider />
       <Text color="gray.500" align="justify">
-        {about ? about : ''}
+        {about && about}
       </Text>
     </ProfileSectionContainer>
   )
