@@ -7,7 +7,7 @@ import Head from 'next/head'
 import { useAuth } from 'hooks/useAuth'
 
 export default function WelcomePage() {
-  const { user, handleSignIn } = useAuth()
+  const { user, handleSignIn, tmpSignInValues } = useAuth()
 
   return (
     <>
@@ -18,8 +18,9 @@ export default function WelcomePage() {
       <Container
         alignItems="center"
         justifyContent="center"
-        w="100vw"
+        w="fit-content"
         h="100vh"
+        mx="auto"
       >
         <VStack spacing="3" w="fit-content">
           <Image
@@ -30,7 +31,7 @@ export default function WelcomePage() {
             objectFit="cover"
           />
 
-          <Heading>Seja Bem Vindo!!</Heading>
+          <Heading>Seja Bem Vindo {user.name}!!</Heading>
           <Text align="justify" fontSize="sm" color="gray.500">
             Agora é só explorar nossa plataforma e conhecer o mundo da
             tecnologia. Bora lá?
@@ -41,9 +42,7 @@ export default function WelcomePage() {
           fullWidth={true}
           size="lg"
           mt="8"
-          onClick={() =>
-            handleSignIn({ email: user.email, password: user.password })
-          }
+          onClick={() => handleSignIn(tmpSignInValues)}
         >
           Encontrar devs
         </Button>

@@ -30,6 +30,7 @@ interface AuthContextData {
   isAuthenticated: boolean
   handleSignUp: (values: SignUpParams) => Promise<void>
   handleSignIn: (values: SignInParams) => Promise<void>
+  tmpSignInValues: SignInParams
 }
 
 interface AuthProviderProps {
@@ -41,6 +42,9 @@ export const AuthContext = createContext({} as AuthContextData)
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<IUser>({} as IUser)
   const [isAuthenticated, setIsAuthenticated] = useState(!!user)
+  const [tmpSignInValues, setTmpSignInValues] = useState<SignInParams>(
+    {} as SignInParams
+  )
 
   const handleSignUp = async (values: SignUpParams) => {
     const { data: userData } = await api.post('/api/users', values)
@@ -51,11 +55,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
       avatar: '/img/chakra-logo.png'
     })
 
-    await handleSignIn({ email: values.email, password: values.password })
+    setTmpSignInValues({ email: values.email, password: values.password })
+
+    Router.push('/dev/welcome')
   }
 
   const handleSignIn = async (values: SignInParams) => {
     const { data } = await api.post('/api/users/sign_in', values)
+
+    setTmpSignInValues({} as SignInParams)
 
     updateAuthCookies(data.token)
 
@@ -68,7 +76,14 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   return (
     <AuthContext.Provider
-      value={{ user, setUser, isAuthenticated, handleSignUp, handleSignIn }}
+      value={{
+        user,
+        setUser,
+        isAuthenticated,
+        handleSignUp,
+        handleSignIn,
+        tmpSignInValues
+      }}
     >
       {children}
     </AuthContext.Provider>
