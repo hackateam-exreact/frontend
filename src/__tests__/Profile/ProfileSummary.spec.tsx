@@ -1,12 +1,18 @@
+import {
+  articlesTemplate,
+  projectsTemplate,
+  userTemplate
+} from 'utils/userTemplate'
 import { render, screen } from 'utils/test-utils'
 
 import { ProfileSummary } from 'components/Profile/ProfileSummary'
 import React from 'react'
-import { userTemplate } from 'utils/userTemplate'
 
 // import { useState } from 'react'
 
 const user = userTemplate
+const articles = articlesTemplate
+const projects = projectsTemplate
 
 // jest.mock('react', () => ({
 //   ...jest.requireActual('react'),
@@ -21,26 +27,30 @@ describe('<ProfileSummary />', () => {
   // })
 
   it('should render a card with user info', () => {
-    render(<ProfileSummary user={user} />)
+    render(
+      <ProfileSummary user={user} articles={articles} projects={projects} />
+    )
 
     expect(screen.getByAltText(user.first_name)).toBeInTheDocument()
     expect(
       screen.getByText(`${user.first_name} ${user.last_name}`)
     ).toBeInTheDocument()
-    expect(screen.getByText(user.about)).toBeInTheDocument()
+    expect(screen.getByText(String(user.about))).toBeInTheDocument()
     expect(screen.getByText(user.email)).toBeInTheDocument()
     expect(
       screen.queryByText('Artigos: ')?.firstChild?.textContent ===
-        String(user.articles.length)
+        String(articles.length)
     )
     expect(
       screen.queryByText('Projetos principais: ')?.firstChild?.textContent ===
-        String(user.projects.length)
+        String(projects.length)
     )
   })
 
   it('should call setState when image data is loaded', () => {
-    render(<ProfileSummary user={user} />)
+    render(
+      <ProfileSummary user={user} articles={articles} projects={projects} />
+    )
 
     // expect(setState).toHaveBeenCalled()
   })

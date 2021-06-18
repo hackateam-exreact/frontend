@@ -7,8 +7,8 @@ const user = userTemplate
 
 describe('<ProfileDescription />', () => {
   it('should render a card with user description', () => {
-    render(<ProfileDescription description={user.about} />)
+    render(<ProfileDescription about={user.about} />)
 
-    expect(screen.getByText(user.about)).toBeInTheDocument()
+    expect(screen.getByText(String(user.about))).toBeInTheDocument()
   })
 })
