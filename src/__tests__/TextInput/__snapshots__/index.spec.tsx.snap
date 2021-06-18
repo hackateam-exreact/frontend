@@ -27,15 +27,6 @@ exports[`<TextInput /> should render with label 1`] = `
 
 .emotion-2 {
   width: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  position: relative;
-}
-
-.emotion-3 {
-  width: 100%;
   min-width: 0px;
   outline: 2px solid transparent;
   outline-offset: 2px;
@@ -59,14 +50,14 @@ exports[`<TextInput /> should render with label 1`] = `
   padding: var(--chakra-space-3);
 }
 
-.emotion-3:hover,
-.emotion-3[data-hover] {
+.emotion-2:hover,
+.emotion-2[data-hover] {
   border-color: var(--chakra-colors-whiteAlpha-400);
 }
 
-.emotion-3[aria-readonly=true],
-.emotion-3[readonly],
-.emotion-3[data-readonly] {
+.emotion-2[aria-readonly=true],
+.emotion-2[readonly],
+.emotion-2[data-readonly] {
   box-shadow: none!important;
   -webkit-user-select: all;
   -moz-user-select: all;
@@ -74,39 +65,39 @@ exports[`<TextInput /> should render with label 1`] = `
   user-select: all;
 }
 
-.emotion-3[disabled],
-.emotion-3[aria-disabled=true],
-.emotion-3[data-disabled] {
+.emotion-2[disabled],
+.emotion-2[aria-disabled=true],
+.emotion-2[data-disabled] {
   opacity: 0.4;
   cursor: not-allowed;
 }
 
-.emotion-3[aria-invalid=true],
-.emotion-3[data-invalid] {
+.emotion-2[aria-invalid=true],
+.emotion-2[data-invalid] {
   border-color: #FF4062;
   box-shadow: 0 0 0 1px #FF4062;
 }
 
-.emotion-3:focus,
-.emotion-3[data-focus] {
+.emotion-2:focus,
+.emotion-2[data-focus] {
   z-index: 1;
   border-color: #5271FF;
   box-shadow: 0 0 0 1px #5271FF;
 }
 
-.emotion-3::-webkit-input-placeholder {
+.emotion-2::-webkit-input-placeholder {
   font-size: var(--chakra-fontSizes-sm);
 }
 
-.emotion-3::-moz-placeholder {
+.emotion-2::-moz-placeholder {
   font-size: var(--chakra-fontSizes-sm);
 }
 
-.emotion-3:-ms-input-placeholder {
+.emotion-2:-ms-input-placeholder {
   font-size: var(--chakra-fontSizes-sm);
 }
 
-.emotion-3::placeholder {
+.emotion-2::placeholder {
   font-size: var(--chakra-fontSizes-sm);
 }
 
@@ -121,14 +112,10 @@ exports[`<TextInput /> should render with label 1`] = `
   >
     Label
   </label>
-  <div
-    class="chakra-input__group emotion-2"
-  >
-    <input
-      class="chakra-input emotion-3"
-      id="email"
-      name="email"
-    />
-  </div>
+  <input
+    class="chakra-input emotion-2"
+    id="email"
+    name="email"
+  />
 </div>
 `;

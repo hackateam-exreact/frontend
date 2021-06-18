@@ -37,10 +37,31 @@ const TextInputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
   return (
     <FormControl isInvalid={!!error}>
       {label && <FormLabel htmlFor={inputName}>{label}</FormLabel>}
-      <InputGroup>
-        {!!leftIcon && (
-          <InputLeftElement pointerEvents="all">{leftIcon}</InputLeftElement>
-        )}
+      {!!leftIcon || !!rightIcon ? (
+        <InputGroup>
+          {!!leftIcon && (
+            <InputLeftElement pointerEvents="all">{leftIcon}</InputLeftElement>
+          )}
+          <ChakraInput
+            name={inputName}
+            id={inputName}
+            focusBorderColor={focusBorderColor}
+            errorBorderColor="red.500"
+            bg="gray.800"
+            border="none"
+            p="3"
+            size="lg"
+            _placeholder={{ fontSize: 'sm' }}
+            ref={ref}
+            {...rest}
+          />
+          {!!rightIcon && (
+            <InputRightElement pointerEvents="all">
+              {rightIcon}
+            </InputRightElement>
+          )}
+        </InputGroup>
+      ) : (
         <ChakraInput
           name={inputName}
           id={inputName}
@@ -54,10 +75,7 @@ const TextInputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
           ref={ref}
           {...rest}
         />
-        {!!rightIcon && (
-          <InputRightElement pointerEvents="all">{rightIcon}</InputRightElement>
-        )}
-      </InputGroup>
+      )}
       {!!error && (
         <FormErrorMessage color="red.500">{error.message}</FormErrorMessage>
       )}

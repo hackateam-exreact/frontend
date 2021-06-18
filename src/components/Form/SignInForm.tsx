@@ -1,14 +1,14 @@
 import {
-  Button,
   Link as ChakraLink,
   Heading,
   Icon,
-  Link,
   Text,
   VStack
 } from '@chakra-ui/react'
 import { FiEye, FiEyeOff } from 'react-icons/fi'
 
+import { Button } from 'components/Button'
+import Link from 'next/link'
 import { TextInput } from 'components/TextInput'
 import { signInSchema } from 'utils/yupSchemas'
 import { useForm } from 'react-hook-form'
