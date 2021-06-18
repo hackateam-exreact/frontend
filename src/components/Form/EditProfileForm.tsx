@@ -11,7 +11,10 @@ import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
-type EditProfileData = Pick<IUser, 'about' | 'name' | 'email' | 'contact'>
+type EditProfileParams = Pick<
+  IUser,
+  'about' | 'name' | 'email' | 'contact' | 'location'
+>
 
 export function EditProfileForm() {
   const { disclosure } = useEditProfile()
@@ -31,10 +34,11 @@ export function EditProfileForm() {
     setValue('name', user.name)
     setValue('email', user.email)
     setValue('contact', user.contact)
+    setValue('location', user.location)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const onSubmit = (values: EditProfileData) => {
+  const onSubmit = (values: EditProfileParams) => {
     console.log(values)
   }
 
@@ -70,6 +74,13 @@ export function EditProfileForm() {
           type="number"
           placeholder="(99) 99999-9999"
           {...register('contact')}
+        />
+        <TextInput
+          inputName="location"
+          error={errors.location}
+          label="Localização"
+          placeholder="Rio do sul/SC"
+          {...register('location')}
         />
       </VStack>
       <HStack justify="flex-end" spacing="5" w="100%">
