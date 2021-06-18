@@ -6,6 +6,7 @@ export interface IUser {
   location?: string | null
   contact?: string | null
   status?: 'Open' | 'Studying' | 'Employed' | null
+  about?: string | null
   name: string | null
   avatar?: string | null
 }
