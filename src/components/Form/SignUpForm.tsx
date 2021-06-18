@@ -3,7 +3,8 @@ import {
   Heading,
   Icon,
   Text,
-  VStack
+  VStack,
+  useToast
 } from '@chakra-ui/react'
 import { FiEye, FiEyeOff } from 'react-icons/fi'
 import React, { useState } from 'react'
@@ -21,8 +22,8 @@ interface SignUpFormProps {
 }
 
 interface SignUpData {
-  firstName: string
-  lastName: string
+  first_name: string
+  last_name: string
   email: string
   password: string
 }
@@ -30,19 +31,35 @@ interface SignUpData {
 export function SignUpForm({ target = 'dev' }: SignUpFormProps) {
   const [showPassword, setShowPassword] = useState(false)
   const highlightColor = target === 'dev' ? 'blue.500' : 'green.500'
+  const toast = useToast()
 
   const { handleSignUp } = useAuth()
 
   const {
     register,
     handleSubmit,
+    reset,
     formState: { isSubmitting, errors }
   } = useForm({
     resolver: yupResolver(signUpSchema)
   })
 
   const onSubmit = async (values: SignUpData) => {
-    await handleSignUp(values)
+    try {
+      await handleSignUp(values)
+    } catch (error) {
+      if (error.response.data.message.email[0]) {
+        toast({
+          title: 'Erro ao criar conta',
+          description: 'Já existe uma conta com este email',
+          status: 'error',
+          duration: 3000,
+          isClosable: true
+        })
+
+        reset()
+      }
+    }
   }
 
   return (
@@ -61,18 +78,16 @@ export function SignUpForm({ target = 'dev' }: SignUpFormProps) {
       </Text>
       <VStack w="100%" spacing="1">
         <TextInput
-          inputName="firstName"
-          error={errors.firstName}
-          type="firstName"
+          inputName="first_name"
+          error={errors.first_name}
           placeholder="Nome"
-          {...register('firstName')}
+          {...register('first_name')}
         />
         <TextInput
-          inputName="lastName"
-          error={errors.lastName}
-          type="lastName"
+          inputName="last_name"
+          error={errors.last_name}
           placeholder="Sobrenome"
-          {...register('lastName')}
+          {...register('last_name')}
         />
         <TextInput
           inputName="email"
