@@ -1,14 +1,22 @@
 import { Image, SkeletonCircle, Text, VStack } from '@chakra-ui/react'
 
+import { IArticle } from 'interfaces/article'
+import { IProject } from 'interfaces/project'
 import { IUser } from 'interfaces/user'
 import { ProfileSectionItemContainer } from 'components/Container/ProfileSectionItemContainer'
 import { useState } from 'react'
 
 interface ProfileSummaryProps {
   user: IUser
+  articles: IArticle[]
+  projects: IProject[]
 }
 
-export function ProfileSummary({ user }: ProfileSummaryProps) {
+export function ProfileSummary({
+  user,
+  articles,
+  projects
+}: ProfileSummaryProps) {
   const [isLoading, setIsLoading] = useState(true)
   const profilePicSize = '150px'
 
@@ -52,13 +60,13 @@ export function ProfileSummary({ user }: ProfileSummaryProps) {
         <Text>
           Artigos:{' '}
           <Text as="span" color="blue.500">
-            {user.articles.length}
+            {articles.length}
           </Text>
         </Text>
         <Text>
           Projetos principais:{' '}
           <Text as="span" color="blue.500">
-            {user.projects.length}
+            {projects.length}
           </Text>
         </Text>
       </VStack>
