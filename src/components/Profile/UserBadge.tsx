@@ -20,7 +20,7 @@ export function UserBadge({ user, badgeSide = 'left' }: UserBadgeProps) {
           {user.email}
         </Text>
       </VStack>
-      {badgeSide === 'right' && <Avatar src={user.avatar} />}
+      {badgeSide === 'right' && <Avatar src={user.avatar} name={user.name} />}
     </HStack>
   )
 }

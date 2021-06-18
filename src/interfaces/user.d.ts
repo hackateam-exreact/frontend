@@ -1,6 +1,6 @@
 export interface IUser {
   id: string
-  avatar: string | null
+  avatar?: string
   first_name: string
   last_name: string
   email: string
@@ -8,5 +8,5 @@ export interface IUser {
   contact: string | null
   status: 'Open' | 'Studying' | 'Employed' | null
   about: string | null
-  name: string | null
+  name: string
 }
