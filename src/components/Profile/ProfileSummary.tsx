@@ -1,4 +1,4 @@
-import { Image, SkeletonCircle, Text, VStack } from '@chakra-ui/react'
+import { Avatar, SkeletonCircle, Text, VStack } from '@chakra-ui/react'
 
 import { IArticle } from 'interfaces/article'
 import { IProject } from 'interfaces/project'
@@ -36,13 +36,11 @@ export function ProfileSummary({
         left="50%"
         transform="translate(-50%, -50%)"
       >
-        <Image
+        <Avatar
           src={user.avatar}
           alt={user.first_name}
           w={profilePicSize}
           h={profilePicSize}
-          objectFit="cover"
-          borderRadius="50%"
           onLoad={() => setIsLoading(false)}
         />
       </SkeletonCircle>
