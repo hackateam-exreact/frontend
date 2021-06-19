@@ -1,11 +1,9 @@
 import { ReactNode, createContext } from 'react'
 import { UseDisclosureReturn, useDisclosure } from '@chakra-ui/react'
 
-import { IUser } from 'interfaces/user'
-
 interface EditProfileContextData {
   disclosure: UseDisclosureReturn
-  handleEditUserProfile: (user: IUser) => void
+  handleEditUserProfile: () => void
 }
 
 interface EditProfileProviderProps {
