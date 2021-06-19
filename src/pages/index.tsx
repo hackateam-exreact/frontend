@@ -21,7 +21,7 @@ export default function Home() {
     marginLeft: '1rem',
     w: '52',
     py: '4rem'
-  }
+  } 
   const bannerSize = '550px'
 
   return (
