@@ -18,8 +18,8 @@ export interface InputProps extends ChakraInputProps {
   label?: string
   error?: FieldError
   focusBorderColor?: 'blue.500' | 'green.500'
-  rightIcon?: ReactElement
-  leftIcon?: ReactElement
+  rightIcon?: ReactElement | string
+  leftIcon?: ReactElement | string
 }
 
 const TextInputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (

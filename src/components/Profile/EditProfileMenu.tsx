@@ -10,12 +10,14 @@ import {
 import { FiChevronDown } from 'react-icons/fi'
 import { useCreateArticle } from 'hooks/useCreateArticle'
 import { useCreateProject } from 'hooks/useCreateProject'
+import { useCreateSkill } from 'hooks/useCreateSkill'
 import { useEditProfile } from 'hooks/useEditProfile'
 
 export function EditProfileMenu() {
   const { handleEditUserProfile } = useEditProfile()
   const { handleCreateProject } = useCreateProject()
   const { handleCreateArticle } = useCreateArticle()
+  const { handleCreateSkill } = useCreateSkill()
 
   return (
     <Menu>
@@ -26,6 +28,7 @@ export function EditProfileMenu() {
         <MenuItem onClick={handleEditUserProfile}>Editar perfil</MenuItem>
         <MenuItem onClick={handleCreateProject}>Adicionar projeto</MenuItem>
         <MenuItem onClick={handleCreateArticle}>Adicionar artigo</MenuItem>
+        <MenuItem onClick={handleCreateSkill}>Adicionar habilidade</MenuItem>
       </MenuList>
     </Menu>
   )

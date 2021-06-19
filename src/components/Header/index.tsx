@@ -1,4 +1,5 @@
 import { Link as ChakraLink, Flex, HStack, Image } from '@chakra-ui/react'
+import { useEffect, useState } from 'react'
 
 import Link from 'next/link'
 import { Searchbar } from './Searchbar'
@@ -9,15 +10,21 @@ import { useRouter } from 'next/router'
 export function Header() {
   const { user } = useAuth()
   const { asPath } = useRouter()
+  const [showHeader, setShowHeader] = useState(true)
 
-  let showHeader = true
-  const length = asPath.split('/').length
-  const page = asPath.split('/')[length - 1]
+  const handleCheckCurrentPage = () => {
+    const length = asPath.split('/').length
+    const page = asPath !== '/' ? asPath.split('/')[length - 1] : '/'
 
-  // TODO fix conditional for header showing up
-  if (page === 'signin' || page === 'signup' || asPath === '/') {
-    showHeader = false
+    if (page === '/' || page === 'signin' || page === 'signup') {
+      setShowHeader(false)
+    }
   }
+
+  useEffect(() => {
+    handleCheckCurrentPage()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [asPath])
 
   return (
     <>

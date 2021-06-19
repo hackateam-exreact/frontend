@@ -12,6 +12,8 @@ import { CreateArticleModal } from 'components/Modal/CreateArticleModal'
 import { CreateArticleProvider } from 'contexts/CreateArticleContext'
 import { CreateProjectModal } from 'components/Modal/CreateProjectModal'
 import { CreateProjectProvider } from 'contexts/CreateProjectContext'
+import { CreateSkillModal } from 'components/Modal/CreateSkillModal'
+import { CreateSkillProvider } from 'contexts/CreateSkillContext'
 import { EditProfileMenu } from 'components/Profile/EditProfileMenu'
 import { EditProfileModal } from 'components/Modal/EditProfileModal'
 import { EditProfileProvider } from 'contexts/EditProfileContext'
@@ -54,7 +56,10 @@ export default function ProfilePage(props: ProfilePageProps) {
                 <EditProfileProvider>
                   <CreateArticleProvider>
                     <CreateProjectProvider>
-                      <EditProfileMenu />
+                      <CreateSkillProvider>
+                        <EditProfileMenu />
+                        <CreateSkillModal />
+                      </CreateSkillProvider>
                       <CreateProjectModal />
                     </CreateProjectProvider>
                     <CreateArticleModal />
