@@ -22,7 +22,7 @@ export function ProfileSummary({
   articles,
   projects
 }: ProfileSummaryProps) {
-  const { disclosure } = useEditProfile()
+  const { handleEditUserProfile } = useEditProfile()
   const [isLoading, setIsLoading] = useState(true)
   const profilePicSize = '150px'
 
@@ -80,7 +80,7 @@ export function ProfileSummary({
       </ProfileSectionItemContainer>
 
       <Protected>
-        <Button leftIcon={<Icon as={FiEdit} />} onClick={disclosure.onOpen}>
+        <Button leftIcon={<Icon as={FiEdit} />} onClick={handleEditUserProfile}>
           Editar perfil
         </Button>
         <EditProfileModal />
