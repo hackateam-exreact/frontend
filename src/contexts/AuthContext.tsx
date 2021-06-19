@@ -1,16 +1,32 @@
-import {
-  Dispatch,
-  ReactNode,
-  SetStateAction,
-  createContext,
-  useState
-} from 'react'
+import { ReactNode, createContext, useEffect, useState } from 'react'
+import Router, { useRouter } from 'next/router'
 
 import { IUser } from 'interfaces/user'
+import { api } from 'services/api'
+import { destroyAuthCookies } from 'utils/destroyAuthCookies'
+import { parseCookies } from 'nookies'
+import { updateAuthCookies } from 'utils/updateAuthCookies'
 
-interface AuthContextData {
+interface SignInParams {
+  email: string
+  password: string
+}
+
+interface SignUpParams {
+  first_name: string
+  last_name: string
+  email: string
+  password: string
+}
+
+export interface AuthContextData {
   user: IUser
-  setUser: Dispatch<SetStateAction<IUser>>
+  isAuthenticated: boolean
+  isAuthorized: boolean
+  handleSignUp: (values: SignUpParams) => Promise<void>
+  handleSignIn: (values: SignInParams) => Promise<void>
+  handleSignOut: () => void
+  handleUpdateUserData: (userData: IUser) => void
 }
 
 interface AuthProviderProps {
@@ -20,89 +36,100 @@ interface AuthProviderProps {
 export const AuthContext = createContext({} as AuthContextData)
 
 export function AuthProvider({ children }: AuthProviderProps) {
-  const [user, setUser] = useState<IUser>({
-    id: '123',
-    avatar: '/img/chakra-logo.png',
-    first_name: 'Luis Filipe',
-    last_name: 'Fernandes Almeida',
-    email: 'luisfilipe.faw@gmail.com',
-    location: 'Balneário Camboriú',
-    contact: '42988860098',
-    status: 'Open',
-    about:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem maiores aspernatur quasi sed alias quo. Consequatur magnam provident iusto error rem dicta, esse dignissimos. Alias dolore dolor voluptatibus veniam aperiam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem maiores aspernatur quasi sed alias quo. Consequatur magnam provident iusto error rem dicta, esse dignissimos. Alias dolore dolor voluptatibus veniam aperiam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem maiores aspernatur quasi sed alias quo. Consequatur magnam provident iusto error rem dicta, esse dignissimos. Alias dolore dolor voluptatibus veniam aperiam.',
-    articles: [
-      {
-        id: 'adasd',
-        title: 'Lorem Ipsum',
-        body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.',
-        created_at: String(Date.now()),
-        updated_at: String(Date.now())
-      },
-      {
-        id: 'adasd',
-        title: 'Lorem Ipsum',
-        body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.',
-        created_at: String(Date.now()),
-        updated_at: String(Date.now())
-      },
-      {
-        id: 'adasd',
-        title: 'Lorem Ipsum',
-        body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.',
-        created_at: String(Date.now()),
-        updated_at: String(Date.now())
-      },
-      {
-        id: 'adasd',
-        title: 'Lorem Ipsum',
-        body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.',
-        created_at: String(Date.now()),
-        updated_at: String(Date.now())
+  const { asPath } = useRouter()
+
+  const [user, setUser] = useState<IUser>({} as IUser)
+  const [isAuthenticated, setIsAuthenticated] = useState(!!user)
+  const [isAuthorized, setIsAuthorized] = useState(false)
+
+  const handleSignUp = async (values: SignUpParams) => {
+    const { data } = await api.post('/api/users', values)
+
+    const userData = {
+      ...data.user,
+      about: data.user.description,
+      avatar: data.user.image_url
+        ? data.user.image_url
+        : '/img/fallback-avatar.png',
+      name: `${data.user.first_name} ${data.user.last_name}`
+    }
+
+    handleUpdateUserData(userData)
+
+    updateAuthCookies(data.token)
+
+    Router.push('/dev/welcome')
+  }
+
+  const handleSignIn = async (values: SignInParams) => {
+    const { data } = await api.post('/api/users/sign_in', values)
+
+    const userData = {
+      ...data.user,
+      about: data.user.description,
+      avatar: data.user.image_url
+        ? data.user.image_url
+        : '/img/fallback-avatar.png',
+      name: `${data.user.first_name} ${data.user.last_name}`
+    }
+
+    handleUpdateUserData(userData)
+
+    updateAuthCookies(data.token)
+
+    Router.push('/')
+  }
+
+  const handleSignOut = () => {
+    destroyAuthCookies()
+
+    localStorage.removeItem('devspot.user')
+
+    Router.reload()
+  }
+
+  const handleUpdateUserData = (userData: IUser) => {
+    setUser(userData)
+    localStorage.setItem('devspot.user', JSON.stringify(userData))
+  }
+
+  useEffect(() => {
+    setIsAuthenticated(!!user)
+
+    const length = asPath.split('/').length
+
+    setIsAuthorized(asPath.split('/')[length - 1] === user.id)
+  }, [user, asPath])
+
+  useEffect(() => {
+    ;(async () => {
+      const cookies = parseCookies(undefined)
+
+      if (!cookies['devspot.token']) {
+        localStorage.removeItem('devspot.user')
       }
-    ],
-    projects: [
-      {
-        id: 'asdsada',
-        title: 'Lorem Ipsum',
-        description:
-          'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.'
-      },
-      {
-        id: 'asdsada',
-        title: 'Lorem Ipsum',
-        description:
-          'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.'
-      },
-      {
-        id: 'asdsada',
-        title: 'Lorem Ipsum',
-        description:
-          'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.'
-      },
-      {
-        id: 'asdsada',
-        title: 'Lorem Ipsum',
-        description:
-          'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.'
+
+      const local = localStorage.getItem('devspot.user')
+      if (local) handleUpdateUserData(JSON.parse(local))
+
+      api.defaults.headers = {
+        Authorization: `Bearer ${cookies['devspot.token']}`
       }
-    ],
-    techs: [
-      {
-        id: '213123',
-        thumbnail: '/img/react-logo.png',
-        title: 'React JS',
-        experience: '1-2 anos',
-        description:
-          'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.'
-      }
-    ],
-    created_at: String(Date.now()),
-    updated_at: String(Date.now())
-  })
+    })()
+  }, [])
 
   return (
-    <AuthContext.Provider value={{ user, setUser }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        isAuthenticated,
+        isAuthorized,
+        handleSignUp,
+        handleSignIn,
+        handleSignOut,
+        handleUpdateUserData
+      }}
+    >
       {children}
     </AuthContext.Provider>
   )

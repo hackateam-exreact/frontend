@@ -10,6 +10,7 @@ import {
 
 import { Container } from 'components/Container'
 import { FaLongArrowAltLeft } from 'react-icons/fa'
+import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import Router from 'next/router'
 import { SignUpForm } from 'components/Form/SignUpForm'
@@ -59,4 +60,10 @@ export default function SignInPage() {
       </Container>
     </>
   )
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+  return {
+    props: {}
+  }
 }

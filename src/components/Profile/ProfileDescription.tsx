@@ -1,12 +1,11 @@
 import { Divider, Text } from '@chakra-ui/react'
 
+import { IUser } from 'interfaces/user'
 import { ProfileSectionContainer } from 'components/Container/ProfileSectionContainer'
 
-interface ProfileDescriptionProps {
-  description: string
-}
+type ProfileDescriptionProps = Pick<IUser, 'about'>
 
-export function ProfileDescription({ description }: ProfileDescriptionProps) {
+export function ProfileDescription({ about }: ProfileDescriptionProps) {
   return (
     <ProfileSectionContainer
       title="Descrição"
@@ -16,7 +15,7 @@ export function ProfileDescription({ description }: ProfileDescriptionProps) {
     >
       <Divider />
       <Text color="gray.500" align="justify">
-        {description}
+        {about && about}
       </Text>
     </ProfileSectionContainer>
   )

@@ -1,6 +1,6 @@
 import { render, screen } from 'utils/test-utils'
-import { FiMail } from 'react-icons/fi'
 
+import { FiMail } from 'react-icons/fi'
 import { TextInput } from '../../components/TextInput'
 
 describe('<TextInput />', () => {
@@ -49,5 +49,11 @@ describe('<TextInput />', () => {
     )
 
     expect(screen.getByText('Invalid E-mail')).toBeInTheDocument()
+  })
+
+  it('should not render input group if there is no icon props', () => {
+    render(<TextInput label="Label" inputName="email" />)
+
+    expect(screen.queryByTestId('input-group')).toBeNull()
   })
 })

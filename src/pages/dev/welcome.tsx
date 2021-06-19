@@ -5,8 +5,11 @@ import { Container } from '../../components/Container'
 import { FiThumbsUp } from 'react-icons/fi'
 import Head from 'next/head'
 import Router from 'next/router'
+import { useAuth } from 'hooks/useAuth'
 
 export default function WelcomePage() {
+  const { user } = useAuth()
+
   return (
     <>
       <Head>
@@ -16,8 +19,9 @@ export default function WelcomePage() {
       <Container
         alignItems="center"
         justifyContent="center"
-        w="100vw"
-        h="100vh"
+        w="fit-content"
+        h="calc(100vh - 6rem - 1rem)"
+        mx="auto"
       >
         <VStack spacing="3" w="fit-content">
           <Image
@@ -28,7 +32,7 @@ export default function WelcomePage() {
             objectFit="cover"
           />
 
-          <Heading>Seja Bem Vindo!!</Heading>
+          <Heading>Seja Bem Vindo(a) {user.name}!!</Heading>
           <Text align="justify" fontSize="sm" color="gray.500">
             Agora é só explorar nossa plataforma e conhecer o mundo da
             tecnologia. Bora lá?
@@ -39,7 +43,7 @@ export default function WelcomePage() {
           fullWidth={true}
           size="lg"
           mt="8"
-          onClick={() => Router.push('/')}
+          onClick={() => Router.push('/search')}
         >
           Encontrar devs
         </Button>

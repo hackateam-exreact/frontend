@@ -1,14 +1,22 @@
-import { Image, SkeletonCircle, Text, VStack } from '@chakra-ui/react'
+import { Avatar, SkeletonCircle, Text, VStack } from '@chakra-ui/react'
 
+import { IArticle } from 'interfaces/article'
+import { IProject } from 'interfaces/project'
 import { IUser } from 'interfaces/user'
 import { ProfileSectionItemContainer } from 'components/Container/ProfileSectionItemContainer'
 import { useState } from 'react'
 
 interface ProfileSummaryProps {
   user: IUser
+  articles: IArticle[]
+  projects: IProject[]
 }
 
-export function ProfileSummary({ user }: ProfileSummaryProps) {
+export function ProfileSummary({
+  user,
+  articles,
+  projects
+}: ProfileSummaryProps) {
   const [isLoading, setIsLoading] = useState(true)
   const profilePicSize = '150px'
 
@@ -16,7 +24,6 @@ export function ProfileSummary({ user }: ProfileSummaryProps) {
     <ProfileSectionItemContainer
       mode="flex"
       direction="column"
-      w="72"
       pos="relative"
       mt="75px"
     >
@@ -29,26 +36,20 @@ export function ProfileSummary({ user }: ProfileSummaryProps) {
         left="50%"
         transform="translate(-50%, -50%)"
       >
-        <Image
-          src="/img/chakra-logo.png"
+        <Avatar
+          src={user.avatar}
           alt={user.first_name}
           w={profilePicSize}
           h={profilePicSize}
-          objectFit="cover"
           onLoad={() => setIsLoading(false)}
         />
       </SkeletonCircle>
-      {/* mt calc (profilePicSize / 2 + 10) / 16 = 5.312 | Round to 5.25 */}
-      <VStack spacing="5" mt="75px">
-        <Text
-          fontWeight="bold"
-          fontSize="lg"
-        >{`${user.first_name} ${user.last_name}`}</Text>
-        <Text fontSize="sm" color="gray.500" align="center">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium
-          quas, non ab accusantium provident deleniti repellendus sequi error
-          earum consequatur at, ipsam magni vero recusandae! Nisi nihil itaque
-          sint facere.
+      <VStack spacing="5" mt="75px" w="100%" align="center">
+        <Text fontWeight="bold" fontSize="lg">
+          {user.name}
+        </Text>
+        <Text fontSize="sm" color="gray.500">
+          {user.about}
         </Text>
         <Text color="blue.500">{user.email}</Text>
       </VStack>
@@ -56,13 +57,13 @@ export function ProfileSummary({ user }: ProfileSummaryProps) {
         <Text>
           Artigos:{' '}
           <Text as="span" color="blue.500">
-            5 artigos
+            {articles.length}
           </Text>
         </Text>
         <Text>
           Projetos principais:{' '}
           <Text as="span" color="blue.500">
-            5 projetos
+            {projects.length}
           </Text>
         </Text>
       </VStack>

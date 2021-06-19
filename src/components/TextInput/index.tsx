@@ -5,8 +5,8 @@ import {
   FormErrorMessage,
   FormLabel,
   InputGroup,
-  InputLeftElement,
-  InputRightElement
+  InputLeftAddon,
+  InputRightAddon
 } from '@chakra-ui/react'
 import { ForwardRefRenderFunction, forwardRef } from 'react'
 
@@ -18,8 +18,8 @@ export interface InputProps extends ChakraInputProps {
   label?: string
   error?: FieldError
   focusBorderColor?: 'blue.500' | 'green.500'
-  rightIcon?: ReactElement
-  leftIcon?: ReactElement
+  rightIcon?: ReactElement | string
+  leftIcon?: ReactElement | string
 }
 
 const TextInputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
@@ -37,10 +37,24 @@ const TextInputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
   return (
     <FormControl isInvalid={!!error}>
       {label && <FormLabel htmlFor={inputName}>{label}</FormLabel>}
-      <InputGroup>
-        {!!leftIcon && (
-          <InputLeftElement pointerEvents="all">{leftIcon}</InputLeftElement>
-        )}
+      {!!leftIcon || !!rightIcon ? (
+        <InputGroup size="lg" data-testid="input-group">
+          {!!leftIcon && <InputLeftAddon>{leftIcon}</InputLeftAddon>}
+          <ChakraInput
+            name={inputName}
+            id={inputName}
+            focusBorderColor={focusBorderColor}
+            errorBorderColor="red.500"
+            bg="gray.800"
+            border="none"
+            p="3"
+            _placeholder={{ fontSize: 'sm' }}
+            ref={ref}
+            {...rest}
+          />
+          {!!rightIcon && <InputRightAddon>{rightIcon}</InputRightAddon>}
+        </InputGroup>
+      ) : (
         <ChakraInput
           name={inputName}
           id={inputName}
@@ -54,10 +68,7 @@ const TextInputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
           ref={ref}
           {...rest}
         />
-        {!!rightIcon && (
-          <InputRightElement pointerEvents="all">{rightIcon}</InputRightElement>
-        )}
-      </InputGroup>
+      )}
       {!!error && (
         <FormErrorMessage color="red.500">{error.message}</FormErrorMessage>
       )}
