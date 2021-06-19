@@ -5,8 +5,8 @@ import {
   FormErrorMessage,
   FormLabel,
   InputGroup,
-  InputLeftElement,
-  InputRightElement
+  InputLeftAddon,
+  InputRightAddon
 } from '@chakra-ui/react'
 import { ForwardRefRenderFunction, forwardRef } from 'react'
 
@@ -38,10 +38,8 @@ const TextInputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
     <FormControl isInvalid={!!error}>
       {label && <FormLabel htmlFor={inputName}>{label}</FormLabel>}
       {!!leftIcon || !!rightIcon ? (
-        <InputGroup>
-          {!!leftIcon && (
-            <InputLeftElement pointerEvents="all">{leftIcon}</InputLeftElement>
-          )}
+        <InputGroup size="lg">
+          {!!leftIcon && <InputLeftAddon>{leftIcon}</InputLeftAddon>}
           <ChakraInput
             name={inputName}
             id={inputName}
@@ -50,16 +48,11 @@ const TextInputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
             bg="gray.800"
             border="none"
             p="3"
-            size="lg"
             _placeholder={{ fontSize: 'sm' }}
             ref={ref}
             {...rest}
           />
-          {!!rightIcon && (
-            <InputRightElement pointerEvents="all">
-              {rightIcon}
-            </InputRightElement>
-          )}
+          {!!rightIcon && <InputRightAddon>{rightIcon}</InputRightAddon>}
         </InputGroup>
       ) : (
         <ChakraInput

@@ -23,7 +23,7 @@ export default function SignInPage() {
         <title>Sign In | Devspot</title>
       </Head>
 
-      <Container direction="row" w="100vw" h="5rem">
+      <Container direction="row" w="100%" h="5rem">
         <Flex align="center" w="100%" maxW="992px" mx="auto">
           <IconButton
             aria-label="Voltar para página inicial"
@@ -38,7 +38,7 @@ export default function SignInPage() {
       <Container
         alignItems="center"
         justifyContent="center"
-        w="100vw"
+        w="100%"
         h="calc(100vh - 5rem)"
       >
         <SimpleGrid columns={2} columnGap={40} maxW="992px" mx="auto">

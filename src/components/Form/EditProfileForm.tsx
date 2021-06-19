@@ -1,5 +1,7 @@
-import { Button as ChakraButton, HStack, VStack } from '@chakra-ui/react'
+import { Button as ChakraButton, HStack, Icon, VStack } from '@chakra-ui/react'
+import { FiMail, FiMapPin, FiPhone } from 'react-icons/fi'
 
+import { BsPerson } from 'react-icons/bs'
 import { Button } from 'components/Button'
 import { IUser } from 'interfaces/user'
 import { TextArea } from 'components/TextArea'
@@ -13,7 +15,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 
 type EditProfileParams = Pick<
   IUser,
-  'about' | 'name' | 'email' | 'contact' | 'location'
+  'avatar' | 'about' | 'name' | 'email' | 'contact' | 'location'
 >
 
 export function EditProfileForm() {
@@ -30,6 +32,7 @@ export function EditProfileForm() {
   })
 
   useEffect(() => {
+    setValue('avatar', user.avatar)
     setValue('about', user.about)
     setValue('name', user.name)
     setValue('email', user.email)
@@ -45,6 +48,14 @@ export function EditProfileForm() {
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)} spacing="10">
       <VStack align="flex-start" spacing="5" w="100%">
+        <TextInput
+          inputName="avatar"
+          error={errors.avatar}
+          label="Avatar"
+          placeholder="https://theurlforyourimage.com.br"
+          leftIcon={<Icon as={BsPerson} />}
+          {...register('avatar')}
+        />
         <TextArea
           inputName="about"
           error={errors.about}
@@ -58,6 +69,7 @@ export function EditProfileForm() {
           error={errors.name}
           label="Nome"
           placeholder="John Doe"
+          leftIcon={<Icon as={BsPerson} />}
           {...register('name')}
         />
         <TextInput
@@ -65,6 +77,7 @@ export function EditProfileForm() {
           error={errors.email}
           label="Email"
           placeholder="something@example.com"
+          leftIcon={<Icon as={FiMail} />}
           {...register('email')}
         />
         <TextInput
@@ -73,6 +86,7 @@ export function EditProfileForm() {
           label="Telefone (DDD + Número)"
           type="number"
           placeholder="44998762314"
+          leftIcon={<Icon as={FiPhone} />}
           {...register('contact')}
         />
         <TextInput
@@ -80,6 +94,7 @@ export function EditProfileForm() {
           error={errors.location}
           label="Localização"
           placeholder="Rio do sul/SC"
+          leftIcon={<Icon as={FiMapPin} />}
           {...register('location')}
         />
       </VStack>
