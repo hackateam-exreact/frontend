@@ -50,7 +50,7 @@ export function CreateArticleForm() {
       </VStack>
       <HStack justify="flex-end" spacing="5" w="100%">
         <Button type="submit" size="lg" isLoading={isSubmitting}>
-          Atualizar
+          Adicionar
         </Button>
         <ChakraButton variant="ghost" size="lg" onClick={disclosure.onClose}>
           Cancelar
