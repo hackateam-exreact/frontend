@@ -16,23 +16,25 @@ export function Header() {
   if (page === 'signin' || page === 'signup') showHeader = false
 
   return (
-    showHeader && (
-      <Flex w="100%" h="24" borderBottom="1px" borderColor="gray.800" mb="5">
-        <HStack w="100%" maxW="1400px" mx="auto" align="center" spacing="10">
-          <Link href="/" passHref={true}>
-            <ChakraLink>
-              <Image
-                src="/img/logo.png"
-                alt="Devspot"
-                w="225px"
-                objectFit="cover"
-              />
-            </ChakraLink>
-          </Link>
-          <Searchbar />
-          <UserBadge user={user} badgeSide="right" />
-        </HStack>
-      </Flex>
-    )
+    <>
+      {showHeader && (
+        <Flex w="100%" h="24" borderBottom="1px" borderColor="gray.800" mb="5">
+          <HStack w="100%" maxW="1400px" mx="auto" align="center" spacing="10">
+            <Link href="/" passHref={true}>
+              <ChakraLink>
+                <Image
+                  src="/img/logo.png"
+                  alt="Devspot"
+                  w="225px"
+                  objectFit="cover"
+                />
+              </ChakraLink>
+            </Link>
+            <Searchbar />
+            <UserBadge user={user} badgeSide="right" />
+          </HStack>
+        </Flex>
+      )}
+    </>
   )
 }
