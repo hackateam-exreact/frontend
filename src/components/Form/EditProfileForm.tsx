@@ -70,9 +70,9 @@ export function EditProfileForm() {
         <TextInput
           inputName="contact"
           error={errors.contact}
-          label="Telefone"
+          label="Telefone (DDD + Número)"
           type="number"
-          placeholder="(99) 99999-9999"
+          placeholder="44998762314"
           {...register('contact')}
         />
         <TextInput

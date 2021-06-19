@@ -6,9 +6,9 @@ import {
   useEffect,
   useState
 } from 'react'
+import Router, { useRouter } from 'next/router'
 
 import { IUser } from 'interfaces/user'
-import Router from 'next/router'
 import { api } from 'services/api'
 import { updateAuthCookies } from 'utils/updateAuthCookies'
 
@@ -28,6 +28,7 @@ interface AuthContextData {
   user: IUser
   setUser: Dispatch<SetStateAction<IUser>>
   isAuthenticated: boolean
+  isAuthorized: boolean
   handleSignUp: (values: SignUpParams) => Promise<void>
   handleSignIn: (values: SignInParams) => Promise<void>
   handleUpdateUserInfo: (values: { user: IUser }) => void
@@ -41,8 +42,11 @@ interface AuthProviderProps {
 export const AuthContext = createContext({} as AuthContextData)
 
 export function AuthProvider({ children }: AuthProviderProps) {
+  const { asPath } = useRouter()
+
   const [user, setUser] = useState<IUser>({} as IUser)
   const [isAuthenticated, setIsAuthenticated] = useState(!!user)
+  const [isAuthorized, setIsAuthorized] = useState(false)
   const [tmpSignInValues, setTmpSignInValues] = useState<SignInParams>(
     {} as SignInParams
   )
@@ -77,7 +81,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   useEffect(() => {
     setIsAuthenticated(!!user)
-  }, [user])
+
+    const length = asPath.split('/').length
+
+    setIsAuthorized(asPath.split('/')[length - 1] === user.id)
+  }, [user, asPath])
 
   return (
     <AuthContext.Provider
@@ -85,6 +93,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         user,
         setUser,
         isAuthenticated,
+        isAuthorized,
         handleSignUp,
         handleSignIn,
         handleUpdateUserInfo,
