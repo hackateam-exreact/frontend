@@ -10,6 +10,7 @@ import {
 } from '@chakra-ui/react'
 
 import { Button } from 'components/Button'
+import { GetStaticProps } from 'next'
 import Router from 'next/router'
 
 export default function Home() {
@@ -104,8 +105,9 @@ export default function Home() {
     </>
   )
 }
-  
+
 export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {}
   }
+}
