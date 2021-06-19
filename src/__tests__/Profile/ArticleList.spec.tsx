@@ -1,14 +1,19 @@
 import { render, screen } from 'utils/test-utils'
 
 import { ArticleList } from 'components/Profile/ArticleList'
-import { userTemplate } from 'utils/userTemplate'
+import { AuthProvider } from 'contexts/AuthContext'
+import { articlesTemplate } from 'utils/userTemplate'
 
-const user = userTemplate
+const articles = articlesTemplate
 
 describe('<ArticleList />', () => {
   it('should render a project list', () => {
-    render(<ArticleList user={user} articles={user.articles} />)
+    render(
+      <AuthProvider>
+        <ArticleList articles={articles} />
+      </AuthProvider>
+    )
 
-    expect(screen.getByText(user.articles[0].title)).toBeInTheDocument()
+    expect(screen.getByText(articles[0].title)).toBeInTheDocument()
   })
 })

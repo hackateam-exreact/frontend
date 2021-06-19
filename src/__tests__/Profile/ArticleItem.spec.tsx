@@ -1,15 +1,20 @@
 import { render, screen } from 'utils/test-utils'
 
 import { ArticleItem } from 'components/Profile/ArticleItem'
-import { userTemplate } from 'utils/userTemplate'
+import { AuthProvider } from 'contexts/AuthContext'
+import { articlesTemplate } from 'utils/userTemplate'
 
-const user = userTemplate
+const articles = articlesTemplate
 
 describe('<ArticleItem />', () => {
   it('should render an article card', () => {
-    const article = user.articles[0]
+    const article = articles[0]
 
-    render(<ArticleItem user={user} article={article} />)
+    render(
+      <AuthProvider>
+        <ArticleItem article={article} />
+      </AuthProvider>
+    )
 
     expect(screen.getByText(article.title)).toBeInTheDocument()
     expect(
@@ -19,9 +24,13 @@ describe('<ArticleItem />', () => {
   })
 
   it('should render reading time in plural', () => {
-    const article = user.articles[1]
+    const article = articles[1]
 
-    render(<ArticleItem user={user} article={article} />)
+    render(
+      <AuthProvider>
+        <ArticleItem article={article} />
+      </AuthProvider>
+    )
 
     expect(
       screen.getByText(`${article.readingTime} minutos`)

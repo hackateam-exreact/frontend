@@ -1,13 +1,13 @@
 import { render, screen } from 'utils/test-utils'
 
 import { ProjectItem } from 'components/Profile/ProjectItem'
-import { userTemplate } from 'utils/userTemplate'
+import { projectsTemplate } from 'utils/userTemplate'
 
-const user = userTemplate
+const projects = projectsTemplate
 
 describe('<ProjectItem />', () => {
   it('should render a project card', () => {
-    const project = user.projects[0]
+    const project = projects[0]
 
     render(<ProjectItem project={project} />)
 

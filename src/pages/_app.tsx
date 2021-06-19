@@ -2,6 +2,7 @@ import { AppProps } from 'next/app'
 import { AuthProvider } from 'contexts/AuthContext'
 import { ChakraProvider } from '@chakra-ui/react'
 import Head from 'next/head'
+import { UserDataProvider } from 'contexts/UserDataContext'
 import theme from 'theme'
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -16,7 +17,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
 
       <AuthProvider>
-        <Component {...pageProps} />
+        <UserDataProvider>
+          <Component {...pageProps} />
+        </UserDataProvider>
       </AuthProvider>
     </ChakraProvider>
   )
