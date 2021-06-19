@@ -13,6 +13,8 @@ export function Header() {
   let showHeader = true
   const length = asPath.split('/').length
   const page = asPath.split('/')[length - 1]
+
+  // TODO fix conditional for header showing up
   if (page === 'signin' || page === 'signup' || asPath === '/') {
     showHeader = false
   }
