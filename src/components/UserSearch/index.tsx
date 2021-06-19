@@ -71,7 +71,6 @@ export function UserSearch({
         <Button
           backgroundColor="blue.500"
           fullWidth={false}
-          sizes="lg"
           w="250px"
           p="2rem"
           onClick={() => Router.push(`/dev/profile/${userToken}`)}
