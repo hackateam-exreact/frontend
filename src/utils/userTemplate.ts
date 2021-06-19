@@ -2,7 +2,6 @@ import { IArticle } from 'interfaces/article'
 import { IProject } from 'interfaces/project'
 import { ITech } from 'interfaces/tech'
 import { IUser } from 'interfaces/user'
-import { calcReadingTime } from './calcReadingTime'
 
 export const userTemplate: IUser = {
   id: '123',
@@ -45,45 +44,32 @@ export const projectsTemplate: IProject[] = [
   }
 ]
 
-const articles: IArticle[] = [
+export const articlesTemplate: IArticle[] = [
   {
     id: 'fghjki',
     title: 'Lorem Ipsum1',
     body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora.',
-    readingTime: 0,
-    created_at: String(Date.now()),
-    updated_at: String(Date.now())
+    created_at: String(Date.now())
   },
   {
     id: 'fghj',
     title: 'Lorem Ipsum2',
     body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.',
-    readingTime: 0,
-    created_at: String(Date.now()),
-    updated_at: String(Date.now())
+    created_at: String(Date.now())
   },
   {
     id: 'fghjuki',
     title: 'Lorem Ipsum3',
     body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis oditLorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit',
-    readingTime: 0,
-    created_at: String(Date.now()),
-    updated_at: String(Date.now())
+    created_at: String(Date.now())
   },
   {
     id: 'grsfdf',
     title: 'Lorem Ipsum4',
     body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit2334',
-    readingTime: 0,
-    created_at: String(Date.now()),
-    updated_at: String(Date.now())
+    created_at: String(Date.now())
   }
 ]
-
-export const articlesTemplate: IArticle[] = articles.map((article) => ({
-  ...article,
-  readingTime: calcReadingTime(article.title + article.body)
-}))
 
 export const techsTemplate: ITech[] = [
   {

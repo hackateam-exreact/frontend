@@ -31,7 +31,6 @@ interface AuthContextData {
   isAuthorized: boolean
   handleSignUp: (values: SignUpParams) => Promise<void>
   handleSignIn: (values: SignInParams) => Promise<void>
-  handleUpdateUserInfo: (values: { user: IUser }) => void
   tmpSignInValues: SignInParams
 }
 
@@ -52,12 +51,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
   )
 
   const handleSignUp = async (values: SignUpParams) => {
-    const { data: userData } = await api.post('/api/users', values)
+    const { data } = await api.post('/api/users', values)
 
-    setUser({
-      ...userData.user,
-      name: `${userData.user.first_name} ${userData.user.last_name}`,
-      avatar: '/img/chakra-logo.png'
+    handleUpdateUserInfo({
+      ...data.user,
+      name: `${data.user.first_name} ${data.user.last_name}`
     })
 
     setTmpSignInValues({ email: values.email, password: values.password })
@@ -67,6 +65,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   const handleSignIn = async (values: SignInParams) => {
     const { data } = await api.post('/api/users/sign_in', values)
+
+    handleUpdateUserInfo(data.user)
 
     setTmpSignInValues({} as SignInParams)
 
@@ -96,7 +96,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
         isAuthorized,
         handleSignUp,
         handleSignIn,
-        handleUpdateUserInfo,
         tmpSignInValues
       }}
     >
