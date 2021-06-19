@@ -26,6 +26,7 @@ export interface AuthContextData {
   handleSignUp: (values: SignUpParams) => Promise<void>
   handleSignIn: (values: SignInParams) => Promise<void>
   handleSignOut: () => void
+  handleUpdateUserData: (userData: IUser) => void
 }
 
 interface AuthProviderProps {
@@ -111,7 +112,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
       const local = localStorage.getItem('devspot.user')
       if (local) handleUpdateUserData(JSON.parse(local))
 
-      return
+      api.defaults.headers = {
+        Authorization: `Bearer ${cookies['devspot.token']}`
+      }
     })()
   }, [])
 
@@ -123,7 +126,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
         isAuthorized,
         handleSignUp,
         handleSignIn,
-        handleSignOut
+        handleSignOut,
+        handleUpdateUserData
       }}
     >
       {children}

@@ -1,4 +1,10 @@
-import { Button as ChakraButton, HStack, Icon, VStack } from '@chakra-ui/react'
+import {
+  Button as ChakraButton,
+  HStack,
+  Icon,
+  VStack,
+  useToast
+} from '@chakra-ui/react'
 import { FiMail, FiMapPin, FiPhone } from 'react-icons/fi'
 
 import { BsPerson } from 'react-icons/bs'
@@ -19,8 +25,9 @@ type EditProfileParams = Pick<
 >
 
 export function EditProfileForm() {
-  const { disclosure } = useEditProfile()
-  const { user } = useAuth()
+  const { disclosure, handleUpdateUserProfile } = useEditProfile()
+  const { user, handleUpdateUserData } = useAuth()
+  const toast = useToast()
 
   const {
     register,
@@ -41,8 +48,36 @@ export function EditProfileForm() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const onSubmit = (values: EditProfileParams) => {
-    console.log(values)
+  const onSubmit = async (values: EditProfileParams) => {
+    try {
+      const updatedValues = {
+        ...values,
+        first_name: values.name.split(' ')[0],
+        last_name: values.name.split(' ')[1],
+        description: values.about,
+        image_url: values.avatar
+      }
+
+      const userData = await handleUpdateUserProfile(updatedValues)
+
+      handleUpdateUserData(userData)
+
+      toast({
+        title: 'Dados atualizados',
+        description: 'Dados atualizados com sucesso',
+        status: 'success',
+        duration: 3000,
+        isClosable: true
+      })
+    } catch (error) {
+      toast({
+        title: 'Erro ao atualizar',
+        description: 'Ocorreu um erro ao atualizar as informações',
+        status: 'error',
+        duration: 3000,
+        isClosable: true
+      })
+    }
   }
 
   return (

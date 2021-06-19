@@ -20,7 +20,7 @@ export default function WelcomePage() {
         alignItems="center"
         justifyContent="center"
         w="fit-content"
-        h="100vh"
+        h="calc(100vh - 6rem - 1rem)"
         mx="auto"
       >
         <VStack spacing="3" w="fit-content">
@@ -32,7 +32,7 @@ export default function WelcomePage() {
             objectFit="cover"
           />
 
-          <Heading>Seja Bem Vindo {user.name}!!</Heading>
+          <Heading>Seja Bem Vindo(a) {user.name}!!</Heading>
           <Text align="justify" fontSize="sm" color="gray.500">
             Agora é só explorar nossa plataforma e conhecer o mundo da
             tecnologia. Bora lá?
