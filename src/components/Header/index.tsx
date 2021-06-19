@@ -1,5 +1,5 @@
 import { Link as ChakraLink, Flex, HStack, Image } from '@chakra-ui/react'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import Link from 'next/link'
 import { Searchbar } from './Searchbar'
@@ -30,7 +30,14 @@ export function Header() {
     <>
       {showHeader && (
         <Flex w="100%" h="24" borderBottom="1px" borderColor="gray.800" mb="5">
-          <HStack w="100%" maxW="1400px" mx="auto" align="center" spacing="10">
+          <HStack
+            w="100%"
+            maxW="1400px"
+            mx="auto"
+            align="center"
+            spacing="10"
+            px="5"
+          >
             <Link href="/" passHref={true}>
               <ChakraLink>
                 <Image

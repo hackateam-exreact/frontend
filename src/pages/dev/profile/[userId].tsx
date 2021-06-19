@@ -2,8 +2,7 @@ import { Grid, GridItem, VStack } from '@chakra-ui/react'
 import {
   articlesTemplate,
   projectsTemplate,
-  techsTemplate,
-  userTemplate
+  techsTemplate
 } from 'utils/userTemplate'
 
 import { ArticleList } from 'components/Profile/ArticleList'
@@ -28,6 +27,7 @@ import { ProfileSummary } from 'components/Profile/ProfileSummary'
 import { ProjectList } from 'components/Profile/ProjectList'
 import { Protected } from 'components/Protected'
 import { TechList } from 'components/Profile/TechList'
+import { api } from 'services/api'
 
 interface ProfilePageProps {
   profile: IUser
@@ -83,19 +83,42 @@ export default function ProfilePage(props: ProfilePageProps) {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  // const userId = params?.userId
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  const userId = params?.userId
 
-  // const { data: props.profile } = await api.get(`/api/users/${String(userId)}`)
+  try {
+    const { data: profileData } = await api.get(`/api/users/${String(userId)}`)
+    console.log(profileData.user)
 
-  const profile = userTemplate
-  const projects = projectsTemplate
-  const articles = articlesTemplate
-  const techs = techsTemplate
+    const profile = {
+      ...profileData.user,
+      about: profileData.user.description,
+      avatar: profileData.user.image_url
+        ? profileData.user.image_url
+        : '/img/fallback-avatar.png',
+      name: `${profileData.user.first_name} ${profileData.user.last_name}`
+    }
 
-  // TODO chamada a api para retornar dados do usuario (projects, articles, techs)
+    const projects = projectsTemplate
+
+    const articles = articlesTemplate
+
+    const techs = techsTemplate
+
+    return {
+      props: { profile, projects, articles, techs }
+    }
+  } catch (error) {
+    console.log(error.response)
+    // return {
+    //   redirect: {
+    //     destination: '/dev/signin',
+    //     permanent: false
+    //   }
+    // }
+  }
 
   return {
-    props: { profile, projects, articles, techs }
+    props: {}
   }
 }

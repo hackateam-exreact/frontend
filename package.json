@@ -31,6 +31,7 @@
     "@emotion/react": "11.1.5",
     "@emotion/styled": "11.1.5",
     "@hookform/resolvers": "^2.5.2",
+    "@types/nookies": "^2.0.3",
     "axios": "^0.21.1",
     "framer-motion": "4.1.11",
     "next": "latest",
