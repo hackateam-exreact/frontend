@@ -8,8 +8,7 @@ import {
 
 import { ArticleList } from 'components/Profile/ArticleList'
 import { Container } from 'components/Container'
-import { EditProfileBtn } from 'components/Profile/EditProfileBtn'
-import { EditProfileModal } from 'components/Modal/EditProfileModal'
+import { CreateArticleProvider } from 'contexts/CreateArticleContext'
 import { EditProfileProvider } from 'contexts/EditProfileContext'
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
@@ -20,7 +19,6 @@ import { IUser } from 'interfaces/user'
 import { ProfileDescription } from 'components/Profile/ProfileDescription'
 import { ProfileSummary } from 'components/Profile/ProfileSummary'
 import { ProjectList } from 'components/Profile/ProjectList'
-import { Protected } from 'components/Protected'
 import { TechList } from 'components/Profile/TechList'
 
 interface ProfilePageProps {
@@ -41,24 +39,25 @@ export default function ProfilePage(props: ProfilePageProps) {
         <Grid templateColumns="repeat(3, 1fr)" gap="20" maxW="1200px" mx="auto">
           <GridItem>
             <VStack align="center" spacing="10">
-              <ProfileSummary
-                user={props.profile}
-                articles={props.articles}
-                projects={props.projects}
-              />
-              <Protected>
-                <EditProfileProvider>
-                  <EditProfileBtn user={props.profile} />
-                  <EditProfileModal />
-                </EditProfileProvider>
-              </Protected>
+              <EditProfileProvider>
+                <ProfileSummary
+                  user={props.profile}
+                  articles={props.articles}
+                  projects={props.projects}
+                />
+              </EditProfileProvider>
             </VStack>
           </GridItem>
           <GridItem colSpan={2}>
             <VStack spacing="10">
               <ProfileDescription about={props.profile.about} />
               <ProjectList projects={props.projects} />
-              <ArticleList profile={props.profile} articles={props.articles} />
+              <CreateArticleProvider>
+                <ArticleList
+                  profile={props.profile}
+                  articles={props.articles}
+                />
+              </CreateArticleProvider>
               <TechList techs={props.techs} />
             </VStack>
           </GridItem>

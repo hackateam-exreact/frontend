@@ -20,3 +20,8 @@ export const editProfileSchema = yup.object().shape({
   contact: yup.string().max(11, 'Máximo de 11 dígitos (DDD + Número com 9)'),
   location: yup.string()
 })
+
+export const createArticleSchema = yup.object().shape({
+  link: yup.string().required('Link obrigatório'),
+  title: yup.string().required('Título obrigatório')
+})
