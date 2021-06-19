@@ -8,7 +8,12 @@ import {
 
 import { ArticleList } from 'components/Profile/ArticleList'
 import { Container } from 'components/Container'
+import { CreateArticleModal } from 'components/Modal/CreateArticleModal'
 import { CreateArticleProvider } from 'contexts/CreateArticleContext'
+import { CreateProjectModal } from 'components/Modal/CreateProjectModal'
+import { CreateProjectProvider } from 'contexts/CreateProjectContext'
+import { EditProfileMenu } from 'components/Profile/EditProfileMenu'
+import { EditProfileModal } from 'components/Modal/EditProfileModal'
 import { EditProfileProvider } from 'contexts/EditProfileContext'
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
@@ -19,6 +24,7 @@ import { IUser } from 'interfaces/user'
 import { ProfileDescription } from 'components/Profile/ProfileDescription'
 import { ProfileSummary } from 'components/Profile/ProfileSummary'
 import { ProjectList } from 'components/Profile/ProjectList'
+import { Protected } from 'components/Protected'
 import { TechList } from 'components/Profile/TechList'
 
 interface ProfilePageProps {
@@ -39,25 +45,30 @@ export default function ProfilePage(props: ProfilePageProps) {
         <Grid templateColumns="repeat(3, 1fr)" gap="20" maxW="1200px" mx="auto">
           <GridItem>
             <VStack align="center" spacing="10">
-              <EditProfileProvider>
-                <ProfileSummary
-                  user={props.profile}
-                  articles={props.articles}
-                  projects={props.projects}
-                />
-              </EditProfileProvider>
+              <ProfileSummary
+                user={props.profile}
+                articles={props.articles}
+                projects={props.projects}
+              />
+              <Protected>
+                <EditProfileProvider>
+                  <CreateArticleProvider>
+                    <CreateProjectProvider>
+                      <EditProfileMenu />
+                      <CreateProjectModal />
+                    </CreateProjectProvider>
+                    <CreateArticleModal />
+                  </CreateArticleProvider>
+                  <EditProfileModal />
+                </EditProfileProvider>
+              </Protected>
             </VStack>
           </GridItem>
           <GridItem colSpan={2}>
             <VStack spacing="10">
               <ProfileDescription about={props.profile.about} />
               <ProjectList projects={props.projects} />
-              <CreateArticleProvider>
-                <ArticleList
-                  profile={props.profile}
-                  articles={props.articles}
-                />
-              </CreateArticleProvider>
+              <ArticleList profile={props.profile} articles={props.articles} />
               <TechList techs={props.techs} />
             </VStack>
           </GridItem>
