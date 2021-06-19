@@ -13,7 +13,9 @@ export function Header() {
   let showHeader = true
   const length = asPath.split('/').length
   const page = asPath.split('/')[length - 1]
-  if (page === 'signin' || page === 'signup') showHeader = false
+  if (page === 'signin' || page === 'signup' || asPath === '/') {
+    showHeader = false
+  }
 
   return (
     <>
