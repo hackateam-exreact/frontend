@@ -3,7 +3,7 @@ import { UseDisclosureReturn, useDisclosure } from '@chakra-ui/react'
 import { ReactNode } from 'react'
 import { createContext } from 'react'
 
-interface CreateProjectContextData {
+export interface CreateProjectContextData {
   disclosure: UseDisclosureReturn
   handleCreateProject: () => void
 }

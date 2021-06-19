@@ -46,7 +46,7 @@ describe('<SignInForm />', () => {
     expect(screen.getByText('Cadastre-se')).toBeInTheDocument()
   })
 
-  it('should toggle show password when eye icon is clicked', () => {
+  it('should toggle show password', () => {
     const { container } = render(<SignInForm />)
 
     expect(
@@ -63,7 +63,7 @@ describe('<SignInForm />', () => {
     ).toBeTruthy()
   })
 
-  it('should call onSubmit fn when form is submitted', () => {
+  it('should submit form', () => {
     const { container } = render(<SignInForm />)
 
     const button = container.querySelector('button[type="submit"]')
@@ -71,14 +71,6 @@ describe('<SignInForm />', () => {
     if (button) Simulate.click(button)
 
     expect(handleSubmit).toHaveBeenCalled()
-  })
-
-  it('should render highlight colors as green when target prop is hunter', () => {
-    render(<SignInForm target="hunter" />)
-
-    const heading = screen.queryByText('Login para Devs')
-
-    if (heading) expect(window.getComputedStyle(heading).color === 'green.500')
   })
 
   // TODO testar fn onSubmit depois de implementar integração com backend

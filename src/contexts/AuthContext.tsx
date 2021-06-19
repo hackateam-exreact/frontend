@@ -24,7 +24,7 @@ interface SignUpParams {
   password: string
 }
 
-interface AuthContextData {
+export interface AuthContextData {
   user: IUser
   setUser: Dispatch<SetStateAction<IUser>>
   isAuthenticated: boolean

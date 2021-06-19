@@ -38,7 +38,7 @@ const TextInputBase: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
     <FormControl isInvalid={!!error}>
       {label && <FormLabel htmlFor={inputName}>{label}</FormLabel>}
       {!!leftIcon || !!rightIcon ? (
-        <InputGroup size="lg">
+        <InputGroup size="lg" data-testid="input-group">
           {!!leftIcon && <InputLeftAddon>{leftIcon}</InputLeftAddon>}
           <ChakraInput
             name={inputName}

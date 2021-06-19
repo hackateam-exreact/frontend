@@ -20,8 +20,8 @@ export function CreateSkillModal() {
     <Modal isOpen={disclosure.isOpen} onClose={disclosure.onClose} size="2xl">
       <ModalOverlay />
       <ModalContent bg="black.500">
-        <ModalHeader>Criando artigo de {user.first_name}</ModalHeader>
-        <ModalCloseButton />
+        <ModalHeader>Criando habilidade de {user.first_name}</ModalHeader>
+        <ModalCloseButton data-testid="close" />
         <ModalBody>
           <CreateSkillForm />
         </ModalBody>
