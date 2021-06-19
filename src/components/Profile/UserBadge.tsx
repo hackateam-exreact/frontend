@@ -1,6 +1,14 @@
-import { Avatar, Button, HStack, Text, VStack } from '@chakra-ui/react'
+import {
+  Avatar,
+  Button,
+  Link as ChakraLink,
+  HStack,
+  Text,
+  VStack
+} from '@chakra-ui/react'
 
 import { IUser } from 'interfaces/user'
+import Link from 'next/link'
 
 interface UserBadgeProps {
   user: IUser
@@ -14,9 +22,11 @@ export function UserBadge({ user, badgeSide = 'left' }: UserBadgeProps) {
       <VStack>
         {user.name ? (
           <>
-            <Text fontSize="sm" fontWeight="bold">
-              {user.name}
-            </Text>
+            <Link href={`/dev/profile/${user.id}`} passHref={true}>
+              <ChakraLink fontSize="sm" fontWeight="bold">
+                {user.name}
+              </ChakraLink>
+            </Link>
             <Text fontSize="xs" color="gray.500">
               {user.email}
             </Text>
