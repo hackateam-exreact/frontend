@@ -29,7 +29,13 @@ export function Header() {
   return (
     <>
       {showHeader && (
-        <Flex w="100%" h="24" borderBottom="1px" borderColor="gray.800" mb="5">
+        <Flex
+          w="100%"
+          h="6rem"
+          borderBottom="1px"
+          borderColor="gray.800"
+          mb="1rem"
+        >
           <HStack
             w="100%"
             maxW="1400px"
