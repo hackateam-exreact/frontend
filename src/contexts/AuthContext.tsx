@@ -1,9 +1,10 @@
 import { ReactNode, createContext, useEffect, useState } from 'react'
 import Router, { useRouter } from 'next/router'
-import { destroyCookie, parseCookies } from 'nookies'
 
 import { IUser } from 'interfaces/user'
 import { api } from 'services/api'
+import { destroyAuthCookies } from 'utils/destroyAuthCookies'
+import { parseCookies } from 'nookies'
 import { updateAuthCookies } from 'utils/updateAuthCookies'
 
 interface SignInParams {
@@ -79,9 +80,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }
 
   const handleSignOut = () => {
-    destroyCookie(undefined, 'devspot.token')
+    destroyAuthCookies()
 
-    Router.push('/')
+    localStorage.removeItem('devspot.user')
+
+    Router.reload()
   }
 
   const handleUpdateUserData = (userData: IUser) => {
@@ -102,7 +105,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       const cookies = parseCookies(undefined)
 
       if (!cookies['devspot.token']) {
-        localStorage.clear()
+        localStorage.removeItem('devspot.user')
       }
 
       const local = localStorage.getItem('devspot.user')
