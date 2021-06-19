@@ -25,3 +25,9 @@ export const createArticleSchema = yup.object().shape({
   link: yup.string().required('Link obrigatório'),
   title: yup.string().required('Título obrigatório')
 })
+
+export const createProjectSchema = yup.object().shape({
+  title: yup.string().required('Título obrigatório'),
+  description: yup.string().required('Descrição obrigatória'),
+  repositories: yup.string()
+})
