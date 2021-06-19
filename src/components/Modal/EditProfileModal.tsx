@@ -21,7 +21,7 @@ export function EditProfileModal() {
       <ModalOverlay />
       <ModalContent bg="black.500">
         <ModalHeader>Editando perfil de {user.first_name}</ModalHeader>
-        <ModalCloseButton />
+        <ModalCloseButton data-testid="close" />
         <ModalBody>
           <EditProfileForm />
         </ModalBody>

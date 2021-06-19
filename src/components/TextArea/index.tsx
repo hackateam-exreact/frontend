@@ -25,7 +25,7 @@ const TextAreaBase: ForwardRefRenderFunction<
   ref
 ) => {
   return (
-    <FormControl>
+    <FormControl isInvalid={!!error}>
       {label && <FormLabel htmlFor={inputName}>{label}</FormLabel>}
       <ChakraTextArea
         name={inputName}

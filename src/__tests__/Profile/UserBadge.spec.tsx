@@ -19,6 +19,13 @@ describe('<UserBadge />', () => {
   it('should render a badge with user avatar on the right side', () => {
     const { container } = render(<UserBadge badgeSide="right" user={user} />)
 
-    expect(container.querySelector('.chakra-avatar').nextSibling).toBeFalsy()
+    expect(container.querySelector('.chakra-avatar')?.nextSibling).toBeFalsy()
+  })
+
+  it('should render sign in and sign up buttons if user is not authenticated', () => {
+    render(<UserBadge user={null} />)
+
+    expect(screen.getByText('Sign In')).toBeInTheDocument()
+    expect(screen.getByText('Sign Up')).toBeInTheDocument()
   })
 })

@@ -23,7 +23,6 @@ describe('<Protected />', () => {
           isAuthorized: true,
           handleSignIn: jest.fn(),
           handleSignUp: jest.fn(),
-          handleUpdateUserInfo: jest.fn(),
           setUser: jest.fn(),
           tmpSignInValues: { email: '', password: '' },
           user: {} as IUser
@@ -44,7 +43,6 @@ describe('<Protected />', () => {
           isAuthorized: false,
           handleSignIn: jest.fn(),
           handleSignUp: jest.fn(),
-          handleUpdateUserInfo: jest.fn(),
           setUser: jest.fn(),
           tmpSignInValues: { email: '', password: '' },
           user: {} as IUser

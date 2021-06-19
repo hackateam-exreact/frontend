@@ -11,16 +11,16 @@ import { IUser } from 'interfaces/user'
 import Link from 'next/link'
 
 interface UserBadgeProps {
-  user: IUser
+  user: IUser | null
   badgeSide?: 'left' | 'right'
 }
 
 export function UserBadge({ user, badgeSide = 'left' }: UserBadgeProps) {
   return (
     <HStack spacing="3" align="center">
-      {badgeSide === 'left' && <Avatar src={user.avatar} />}
+      {badgeSide === 'left' && <Avatar src={user?.avatar} />}
       <VStack>
-        {user.name ? (
+        {user ? (
           <>
             <Link href={`/dev/profile/${user.id}`} passHref={true}>
               <ChakraLink fontSize="sm" fontWeight="bold">
@@ -38,7 +38,7 @@ export function UserBadge({ user, badgeSide = 'left' }: UserBadgeProps) {
           </HStack>
         )}
       </VStack>
-      {badgeSide === 'right' && <Avatar src={user.avatar} name={user.name} />}
+      {badgeSide === 'right' && <Avatar src={user?.avatar} name={user?.name} />}
     </HStack>
   )
 }

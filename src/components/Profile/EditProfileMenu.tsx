@@ -25,10 +25,21 @@ export function EditProfileMenu() {
         Editar ou adicionar
       </MenuButton>
       <MenuList bg="black.500">
-        <MenuItem onClick={handleEditUserProfile}>Editar perfil</MenuItem>
-        <MenuItem onClick={handleCreateProject}>Adicionar projeto</MenuItem>
-        <MenuItem onClick={handleCreateArticle}>Adicionar artigo</MenuItem>
-        <MenuItem onClick={handleCreateSkill}>Adicionar habilidade</MenuItem>
+        <MenuItem
+          onClick={handleEditUserProfile}
+          data-testid="menu-item-profile"
+        >
+          Editar perfil
+        </MenuItem>
+        <MenuItem onClick={handleCreateProject} data-testid="menu-item-project">
+          Adicionar projeto
+        </MenuItem>
+        <MenuItem onClick={handleCreateArticle} data-testid="menu-item-article">
+          Adicionar artigo
+        </MenuItem>
+        <MenuItem onClick={handleCreateSkill} data-testid="menu-item-skill">
+          Adicionar habilidade
+        </MenuItem>
       </MenuList>
     </Menu>
   )

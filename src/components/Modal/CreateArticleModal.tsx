@@ -21,7 +21,7 @@ export function CreateArticleModal() {
       <ModalOverlay />
       <ModalContent bg="black.500">
         <ModalHeader>Criando artigo de {user.first_name}</ModalHeader>
-        <ModalCloseButton />
+        <ModalCloseButton data-testid="close" />
         <ModalBody>
           <CreateArticleForm />
         </ModalBody>

@@ -39,3 +39,6 @@ public/workbox-*.js
 
 # storybook
 storybook-static
+
+# vscode extensions
+/.VSCodeCounter

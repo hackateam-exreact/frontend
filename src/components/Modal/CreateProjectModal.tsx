@@ -21,7 +21,7 @@ export function CreateProjectModal() {
       <ModalOverlay />
       <ModalContent bg="black.500">
         <ModalHeader>Criando projeto de {user.first_name}</ModalHeader>
-        <ModalCloseButton />
+        <ModalCloseButton data-testid="close" />
         <ModalBody>
           <CreateProjectForm />
         </ModalBody>
