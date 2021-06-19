@@ -37,20 +37,20 @@ export function ProfileSummary({
         transform="translate(-50%, -50%)"
       >
         <Image
-          src="/img/chakra-logo.png"
+          src={user.avatar}
           alt={user.first_name}
           w={profilePicSize}
           h={profilePicSize}
           objectFit="cover"
+          borderRadius="50%"
           onLoad={() => setIsLoading(false)}
         />
       </SkeletonCircle>
-      <VStack spacing="5" mt="75px">
-        <Text
-          fontWeight="bold"
-          fontSize="lg"
-        >{`${user.first_name} ${user.last_name}`}</Text>
-        <Text fontSize="sm" color="gray.500" align="center">
+      <VStack spacing="5" mt="75px" w="100%" align="center">
+        <Text fontWeight="bold" fontSize="lg">
+          {user.name}
+        </Text>
+        <Text fontSize="sm" color="gray.500">
           {user.about}
         </Text>
         <Text color="blue.500">{user.email}</Text>
