@@ -38,6 +38,7 @@ const TextAreaBase: ForwardRefRenderFunction<
         size="lg"
         _placeholder={{ fontSize: 'sm' }}
         ref={ref}
+        maxH="400px"
         {...rest}
       />
       {!!error && (
