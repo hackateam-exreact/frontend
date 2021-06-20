@@ -88,7 +88,6 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 
   try {
     const { data: profileData } = await api.get(`/api/users/${String(userId)}`)
-    console.log(profileData.user)
 
     const profile = {
       ...profileData.user,

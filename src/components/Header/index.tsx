@@ -1,7 +1,7 @@
 import { Link as ChakraLink, Flex, HStack, Image } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
 
 import Link from 'next/link'
+import React from 'react'
 import { Searchbar } from './Searchbar'
 import { UserBadge } from 'components/Profile/UserBadge'
 import { useAuth } from 'hooks/useAuth'
@@ -10,25 +10,12 @@ import { useRouter } from 'next/router'
 export function Header() {
   const { user } = useAuth()
   const { asPath } = useRouter()
-  const [showHeader, setShowHeader] = useState(true)
 
-  const handleCheckCurrentPage = () => {
-    const length = asPath.split('/').length
-    const page = asPath !== '/' ? asPath.split('/')[length - 1] : '/'
-
-    if (asPath === '/' || page === 'signin' || page === 'signup') {
-      setShowHeader(false)
-    }
-  }
-
-  useEffect(() => {
-    handleCheckCurrentPage()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [asPath])
+  const blacklist = ['/', '/dev/signin', '/dev/signup', '/dev/welcome']
 
   return (
     <>
-      {showHeader && (
+      {!blacklist.includes(asPath) && (
         <Flex
           w="100%"
           h="6rem"
