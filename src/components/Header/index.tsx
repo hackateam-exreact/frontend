@@ -16,7 +16,7 @@ export function Header() {
     const length = asPath.split('/').length
     const page = asPath !== '/' ? asPath.split('/')[length - 1] : '/'
 
-    if (page === '/' || page === 'signin' || page === 'signup') {
+    if (asPath === '/' || page === 'signin' || page === 'signup') {
       setShowHeader(false)
     }
   }

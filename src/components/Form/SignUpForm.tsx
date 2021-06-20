@@ -49,17 +49,15 @@ export function SignUpForm({ target = 'dev' }: SignUpFormProps) {
     try {
       await handleSignUp(values)
     } catch (error) {
-      if (error.response.data.message.email[0]) {
-        toast({
-          title: 'Erro ao criar conta',
-          description: 'Já existe uma conta com este email',
-          status: 'error',
-          duration: 3000,
-          isClosable: true
-        })
+      toast({
+        title: 'Erro ao criar conta',
+        description: 'Já existe uma conta com este email',
+        status: 'error',
+        duration: 3000,
+        isClosable: true
+      })
 
-        reset()
-      }
+      reset()
     }
   }
 
