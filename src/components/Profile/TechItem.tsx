@@ -12,7 +12,10 @@ export function TechItem({ tech }: TechItemProps) {
   const techThumbSize = '120px'
 
   return (
-    <ProfileSectionItemContainer direction="row" align="center">
+    <ProfileSectionItemContainer
+      direction={{ sm: 'column', lg: 'row' }}
+      align="center"
+    >
       <Image
         src={tech.thumbnail}
         alt={tech.title}

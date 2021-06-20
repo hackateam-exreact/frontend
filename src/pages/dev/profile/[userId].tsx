@@ -1,4 +1,4 @@
-import { Grid, GridItem, VStack } from '@chakra-ui/react'
+import { Stack, VStack } from '@chakra-ui/react'
 import {
   articlesTemplate,
   projectsTemplate,
@@ -28,6 +28,9 @@ import { ProjectList } from 'components/Profile/ProjectList'
 import { Protected } from 'components/Protected'
 import { TechList } from 'components/Profile/TechList'
 import { api } from 'services/api'
+import { useAuth } from 'hooks/useAuth'
+import { useEffect } from 'react'
+import { useState } from 'react'
 
 interface ProfilePageProps {
   profile: IUser
@@ -37,47 +40,78 @@ interface ProfilePageProps {
 }
 
 export default function ProfilePage(props: ProfilePageProps) {
+  const { user } = useAuth()
+  const [profile, setProfile] = useState<IUser>(props.profile)
+  const [projects] = useState<IProject[]>(props.projects)
+  const [articles] = useState<IArticle[]>(props.articles)
+  const [techs] = useState<ITech[]>(props.techs)
+
+  useEffect(() => {
+    ;(async () => {
+      if (user.id === profile.id) {
+        const { data } = await api.get(`/api/users/${profile.id}`)
+
+        const profileData = {
+          ...data.user,
+          about: data.user.description,
+          avatar: data.user.image_url
+            ? data.user.image_url
+            : '/img/fallback-avatar.png',
+          name: `${data.user.first_name} ${data.user.last_name}`
+        }
+
+        setProfile(profileData)
+
+        // TODO live update de projetos, artigos e techs
+      }
+    })()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user])
+
   return (
     <>
       <Head>
-        <title>{props.profile.first_name} | Devspot</title>
+        <title>{profile.first_name} | Devspot</title>
       </Head>
 
-      <Container>
-        <Grid templateColumns="repeat(3, 1fr)" gap="20" maxW="1200px" mx="auto">
-          <GridItem>
-            <VStack align="center" spacing="10">
-              <ProfileSummary
-                user={props.profile}
-                articles={props.articles}
-                projects={props.projects}
-              />
-              <Protected>
-                <EditProfileProvider>
-                  <CreateArticleProvider>
-                    <CreateProjectProvider>
-                      <CreateSkillProvider>
-                        <EditProfileMenu />
-                        <CreateSkillModal />
-                      </CreateSkillProvider>
-                      <CreateProjectModal />
-                    </CreateProjectProvider>
-                    <CreateArticleModal />
-                  </CreateArticleProvider>
-                  <EditProfileModal />
-                </EditProfileProvider>
-              </Protected>
-            </VStack>
-          </GridItem>
-          <GridItem colSpan={2}>
-            <VStack spacing="10">
-              <ProfileDescription about={props.profile.about} />
-              <ProjectList projects={props.projects} />
-              <ArticleList profile={props.profile} articles={props.articles} />
-              <TechList techs={props.techs} />
-            </VStack>
-          </GridItem>
-        </Grid>
+      <Container w="100%">
+        <Stack
+          direction={{ sm: 'column', lg: 'row' }}
+          w="100%"
+          maxW="1400px"
+          mx="auto"
+          justify="space-between"
+          spacing="20"
+        >
+          <VStack align="center" spacing="10" w={{ sm: '100%', lg: '30%' }}>
+            <ProfileSummary
+              user={profile}
+              articles={articles}
+              projects={projects}
+            />
+            <Protected>
+              <EditProfileProvider>
+                <CreateArticleProvider>
+                  <CreateProjectProvider>
+                    <CreateSkillProvider>
+                      <EditProfileMenu />
+                      <CreateSkillModal />
+                    </CreateSkillProvider>
+                    <CreateProjectModal />
+                  </CreateProjectProvider>
+                  <CreateArticleModal />
+                </CreateArticleProvider>
+                <EditProfileModal />
+              </EditProfileProvider>
+            </Protected>
+          </VStack>
+          <VStack spacing="10" w={{ sm: '100%', lg: '70%' }}>
+            <ProfileDescription about={profile.about} />
+            <ProjectList projects={projects} />
+            <ArticleList profile={profile} articles={articles} />
+            <TechList techs={techs} />
+          </VStack>
+        </Stack>
       </Container>
     </>
   )
