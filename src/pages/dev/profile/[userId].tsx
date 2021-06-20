@@ -9,8 +9,10 @@ import {
 } from '@chakra-ui/react'
 
 import { ArticleList } from 'components/Profile/ArticleList'
+import { CertificateList } from 'components/Profile/CertificateList'
 import { Container } from 'components/Container'
 import { CreateArticleModal } from 'components/Modal/CreateArticleModal'
+import { CreateCertificateModal } from 'components/Modal/CreateCertificateModal'
 import { CreateProjectModal } from 'components/Modal/CreateProjectModal'
 import { CreateSkillModal } from 'components/Modal/CreateSkillModal'
 import { EditProfileMenu } from 'components/Profile/EditProfileMenu'
@@ -19,6 +21,7 @@ import { FiRefreshCw } from 'react-icons/fi'
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import { IArticle } from 'interfaces/article'
+import { ICertificate } from 'interfaces/certificate'
 import { IProject } from 'interfaces/project'
 import { ISkill } from 'interfaces/skill'
 import { IUser } from 'interfaces/user'
@@ -38,6 +41,7 @@ interface ProfilePageProps {
   projects: IProject[]
   articles: IArticle[]
   skills: ISkill[]
+  certificates: ICertificate[]
 }
 
 export default function ProfilePage(props: ProfilePageProps) {
@@ -47,6 +51,9 @@ export default function ProfilePage(props: ProfilePageProps) {
   const [profile, setProfile] = useState<IUser>(props.profile)
   const [projects] = useState<IProject[]>(props.projects)
   const [skills, setSkills] = useState<ISkill[]>(props.skills)
+  const [certificates, setCertificates] = useState<ICertificate[]>(
+    props.certificates
+  )
 
   const handleFetchNewData = async () => {
     setIsLoading(true)
@@ -95,6 +102,21 @@ export default function ProfilePage(props: ProfilePageProps) {
 
     setSkills(formattedSkills)
 
+    const { data: certificatesData } = await api.get(
+      `/api/certificates/${profile.id}`
+    )
+
+    const formattedCertificates: ICertificate[] =
+      certificatesData.list_of_certificates.map(
+        (certificate: ICertificate) => ({
+          id: certificate.id,
+          url: certificate.url,
+          title: certificate.title
+        })
+      )
+
+    setCertificates(formattedCertificates)
+
     setIsLoading(false)
   }
 
@@ -138,6 +160,7 @@ export default function ProfilePage(props: ProfilePageProps) {
                     onClick={handleFetchNewData}
                   />
                 </HStack>
+                <CreateCertificateModal />
                 <CreateSkillModal />
                 <CreateProjectModal />
                 <CreateArticleModal />
@@ -149,6 +172,7 @@ export default function ProfilePage(props: ProfilePageProps) {
               <ProjectList projects={projects} />
               <ArticleList profile={profile} articles={articles} />
               <SkillList skills={skills} />
+              <CertificateList certificates={certificates} />
             </VStack>
           </Stack>
         </Container>
@@ -204,10 +228,23 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
       })
     )
 
+    const { data: certificatesData } = await api.get(
+      `/api/certificates/${String(userId)}`
+    )
+
+    const certificates: ICertificate[] =
+      certificatesData.list_of_certificates.map(
+        (certificate: ICertificate) => ({
+          id: certificate.id,
+          url: certificate.url,
+          title: certificate.title
+        })
+      )
+
     const projects = projectsTemplate
 
     return {
-      props: { profile, projects, articles, skills }
+      props: { profile, projects, articles, skills, certificates }
     }
   } catch (error) {
     console.log(error.response)

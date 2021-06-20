@@ -9,6 +9,7 @@ import {
 
 import { FiChevronDown } from 'react-icons/fi'
 import { useCreateArticle } from 'hooks/useCreateArticle'
+import { useCreateCertificate } from 'hooks/useCreateCertificate'
 import { useCreateProject } from 'hooks/useCreateProject'
 import { useCreateSkill } from 'hooks/useCreateSkill'
 import { useEditProfile } from 'hooks/useEditProfile'
@@ -18,6 +19,7 @@ export function EditProfileMenu() {
   const { disclosure: projectDisclosure } = useCreateProject()
   const { disclosure: articleDisclosure } = useCreateArticle()
   const { disclosure: skillDisclosure } = useCreateSkill()
+  const { disclosure: certificateDisclosure } = useCreateCertificate()
 
   return (
     <Menu>
@@ -48,6 +50,12 @@ export function EditProfileMenu() {
           data-testid="menu-item-skill"
         >
           Adicionar habilidade
+        </MenuItem>
+        <MenuItem
+          onClick={certificateDisclosure.onOpen}
+          data-testid="menu-item-certificate"
+        >
+          Adicionar certificado
         </MenuItem>
       </MenuList>
     </Menu>

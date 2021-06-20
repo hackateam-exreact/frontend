@@ -1,4 +1,4 @@
-import { UseDisclosureReturn, useDisclosure } from '@chakra-ui/react'
+import { UseDisclosureReturn, useDisclosure, useToast } from '@chakra-ui/react'
 
 import { ReactNode } from 'react'
 import { api } from 'services/api'
@@ -27,13 +27,27 @@ export function CreateArticleProvider({
   children
 }: CreateArticleProviderProps) {
   const disclosure = useDisclosure()
+  const toast = useToast()
 
   const handleCreateArticle = async (values: CreateArticleParams) => {
     await api.post('/api/articles', values)
   }
 
   const handleDeleteArticle = async (articleId: string) => {
-    await api.delete(`/api/articles/${articleId}`)
+    try {
+      await api.delete(`/api/articles/${articleId}`)
+      toast({
+        title: 'Artigo excluído',
+        status: 'success',
+        duration: 2000
+      })
+    } catch (error) {
+      toast({
+        title: 'Erro ao excluir artigo',
+        status: 'error',
+        duration: 2000
+      })
+    }
   }
 
   return (

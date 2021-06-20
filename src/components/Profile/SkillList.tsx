@@ -8,7 +8,7 @@ interface SkillList {
 
 export function SkillList({ skills }: SkillList) {
   return (
-    <ProfileSectionContainer title="Habilidades">
+    <ProfileSectionContainer title={`Habilidades (${skills.length})`}>
       {skills.map((skill) => (
         <SkillItem key={skill.id} skill={skill} />
       ))}

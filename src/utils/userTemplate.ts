@@ -70,6 +70,7 @@ export const articlesTemplate: IArticle[] = [
 export const techsTemplate: ISkill[] = [
   {
     id: 'dasdsadsad',
+    skill_id: 'asdadad',
     title: 'React JS',
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.912621963193861asdas',
@@ -77,6 +78,7 @@ export const techsTemplate: ISkill[] = [
   },
   {
     id: 'asdsad',
+    skill_id: 'adsadasd',
     title: 'React Native',
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.912621963193861asdas',

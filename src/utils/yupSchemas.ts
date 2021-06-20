@@ -41,3 +41,8 @@ export const createSkillSchema = yup.object().shape({
   skill_id: yup.string().required('Skill obrigatória'),
   abstract: yup.string().required('Descrição obrigatória')
 })
+
+export const createCertificateSchema = yup.object().shape({
+  url: yup.string().required('Link obrigatório'),
+  title: yup.string().required('Título obrigatório')
+})

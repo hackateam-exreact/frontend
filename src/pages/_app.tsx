@@ -2,6 +2,7 @@ import { AppProps } from 'next/app'
 import { AuthProvider } from 'contexts/AuthContext'
 import { ChakraProvider } from '@chakra-ui/react'
 import { CreateArticleProvider } from 'contexts/CreateArticleContext'
+import { CreateCertificateProvider } from 'contexts/CreateCertificateContext'
 import { CreateProjectProvider } from 'contexts/CreateProjectContext'
 import { CreateSkillProvider } from 'contexts/CreateSkillContext'
 import { EditProfileProvider } from 'contexts/EditProfileContext'
@@ -25,8 +26,10 @@ function MyApp({ Component, pageProps }: AppProps) {
           <CreateArticleProvider>
             <CreateProjectProvider>
               <CreateSkillProvider>
-                <Header />
-                <Component {...pageProps} />
+                <CreateCertificateProvider>
+                  <Header />
+                  <Component {...pageProps} />
+                </CreateCertificateProvider>
               </CreateSkillProvider>
             </CreateProjectProvider>
           </CreateArticleProvider>
