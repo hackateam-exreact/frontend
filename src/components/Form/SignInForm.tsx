@@ -44,15 +44,13 @@ export function SignInForm({ target = 'dev' }: SignInFormProps) {
     try {
       await handleSignIn(values)
     } catch (error) {
-      if (error.response.data.message === 'Please verify your credentials') {
-        toast({
-          title: 'Error ao logar',
-          description: 'Credenciais incorretas',
-          status: 'error',
-          duration: 3000,
-          isClosable: true
-        })
-      }
+      toast({
+        title: 'Error ao logar',
+        description: 'Credenciais incorretas',
+        status: 'error',
+        duration: 3000,
+        isClosable: true
+      })
     }
   }
 
