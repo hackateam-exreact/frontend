@@ -38,12 +38,6 @@ export const createProjectSchema = yup.object().shape({
 })
 
 export const createSkillSchema = yup.object().shape({
-  skill: yup.string().required('Skill obrigatória'),
-  experience: yup
-    .number()
-    .required('Experiência obrigatória (se menos de 1 ano, colocar 0)')
-    .positive()
-    .integer()
-    .max(80),
-  description: yup.string().required('Descrição obrigatória')
+  skill_id: yup.string().required('Skill obrigatória'),
+  abstract: yup.string().required('Descrição obrigatória')
 })

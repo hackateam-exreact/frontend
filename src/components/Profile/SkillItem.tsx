@@ -1,14 +1,14 @@
 import { Image, Text, VStack } from '@chakra-ui/react'
 
-import { ITech } from 'interfaces/tech'
+import { ISkill } from 'interfaces/skill'
 import { ProfileSectionItemContainer } from 'components/Container/ProfileSectionItemContainer'
 import { ProfileSectionItemHeading } from 'components/Heading/ProfileSectionItemHeading'
 
-interface TechItemProps {
-  tech: ITech
+interface SkillItemProps {
+  skill: ISkill
 }
 
-export function TechItem({ tech }: TechItemProps) {
+export function SkillItem({ skill }: SkillItemProps) {
   const techThumbSize = '120px'
 
   return (
@@ -17,22 +17,17 @@ export function TechItem({ tech }: TechItemProps) {
       align="center"
     >
       <Image
-        src={tech.thumbnail}
-        alt={tech.title}
+        src={skill.thumbnail}
+        alt={skill.title}
         w={techThumbSize}
         h={techThumbSize}
+        borderRadius="50%"
         objectFit="cover"
       />
       <VStack align="flex-start">
-        <ProfileSectionItemHeading>{tech.title}</ProfileSectionItemHeading>
-        <Text>
-          Experiência de:{' '}
-          <Text as="span" color="blue.500">
-            {`${tech.experience} ${tech.experience === 1 ? 'ano' : 'anos'}`}
-          </Text>
-        </Text>
+        <ProfileSectionItemHeading>{skill.title}</ProfileSectionItemHeading>
         <Text color="gray.500" align="justify">
-          {tech.description}
+          {skill.description}
         </Text>
       </VStack>
     </ProfileSectionItemContainer>

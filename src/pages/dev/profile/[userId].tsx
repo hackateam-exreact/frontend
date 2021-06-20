@@ -7,7 +7,6 @@ import {
   Stack,
   VStack
 } from '@chakra-ui/react'
-import { projectsTemplate, techsTemplate } from 'utils/userTemplate'
 
 import { ArticleList } from 'components/Profile/ArticleList'
 import { Container } from 'components/Container'
@@ -21,14 +20,15 @@ import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import { IArticle } from 'interfaces/article'
 import { IProject } from 'interfaces/project'
-import { ITech } from 'interfaces/tech'
+import { ISkill } from 'interfaces/skill'
 import { IUser } from 'interfaces/user'
 import { ProfileDescription } from 'components/Profile/ProfileDescription'
 import { ProfileSummary } from 'components/Profile/ProfileSummary'
 import { ProjectList } from 'components/Profile/ProjectList'
 import { Protected } from 'components/Protected'
-import { TechList } from 'components/Profile/TechList'
+import { SkillList } from 'components/Profile/SkillList'
 import { api } from 'services/api'
+import { projectsTemplate } from 'utils/userTemplate'
 import { useAuth } from 'hooks/useAuth'
 import { useEffect } from 'react'
 import { useState } from 'react'
@@ -37,7 +37,7 @@ interface ProfilePageProps {
   profile: IUser
   projects: IProject[]
   articles: IArticle[]
-  techs: ITech[]
+  skills: ISkill[]
 }
 
 export default function ProfilePage(props: ProfilePageProps) {
@@ -46,7 +46,7 @@ export default function ProfilePage(props: ProfilePageProps) {
   const [articles, setArticles] = useState<IArticle[]>(props.articles)
   const [profile, setProfile] = useState<IUser>(props.profile)
   const [projects] = useState<IProject[]>(props.projects)
-  const [techs] = useState<ITech[]>(props.techs)
+  const [skills, setSkills] = useState<ISkill[]>(props.skills)
 
   const handleFetchNewData = async () => {
     setIsLoading(true)
@@ -63,8 +63,6 @@ export default function ProfilePage(props: ProfilePageProps) {
 
     setProfile(formattedProfile)
 
-    // TODO live update de projetos, artigos e techs
-
     const { data: articlesData } = await api.get(`/api/articles/${profile.id}`)
 
     const formattedArticles = articlesData.list_of_articles.map(
@@ -76,6 +74,27 @@ export default function ProfilePage(props: ProfilePageProps) {
     )
 
     setArticles(formattedArticles)
+
+    const { data: skillsData } = await api.get(`/api/skills/${profile.id}`)
+
+    const formattedSkills: ISkill[] = skillsData.user_skills.map(
+      (skill: {
+        id: string
+        abstract: string
+        skill: {
+          image_url: string
+          name: string
+        }
+      }) => ({
+        id: skill.id,
+        thumbnail: skill.skill.image_url,
+        title: skill.skill.name,
+        description: skill.abstract
+      })
+    )
+
+    setSkills(formattedSkills)
+
     setIsLoading(false)
   }
 
@@ -129,7 +148,7 @@ export default function ProfilePage(props: ProfilePageProps) {
               <ProfileDescription about={profile.about} />
               <ProjectList projects={projects} />
               <ArticleList profile={profile} articles={articles} />
-              <TechList techs={techs} />
+              <SkillList skills={skills} />
             </VStack>
           </Stack>
         </Container>
@@ -165,12 +184,30 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
       })
     )
 
+    const { data: skillsData } = await api.get(`/api/skills/${String(userId)}`)
+
+    const skills: ISkill[] = skillsData.user_skills.map(
+      (skill: {
+        id: string
+        skill_id: string
+        abstract: string
+        skill: {
+          image_url: string
+          name: string
+        }
+      }) => ({
+        id: skill.id,
+        skill_id: skill.skill_id,
+        thumbnail: skill.skill.image_url,
+        title: skill.skill.name,
+        description: skill.abstract
+      })
+    )
+
     const projects = projectsTemplate
 
-    const techs = techsTemplate
-
     return {
-      props: { profile, projects, articles, techs }
+      props: { profile, projects, articles, skills }
     }
   } catch (error) {
     console.log(error.response)
