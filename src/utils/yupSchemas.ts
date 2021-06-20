@@ -15,12 +15,14 @@ export const signUpSchema = yup.object().shape({
 export const editProfileSchema = yup.object().shape({
   avatar: yup.string().nullable(),
   about: yup.string().required('Sobre obrigatório').nullable(),
-  name: yup.string().required('Nome obrigatório'),
+  first_name: yup.string().required('Nome obrigatório'),
+  last_name: yup.string().required('Sobrenome obrigatório'),
   email: yup.string(),
   contact: yup
     .string()
     .max(11, 'Máximo de 11 dígitos (DDD + Número com 9)')
     .nullable(),
+  status: yup.string().nullable(),
   location: yup.string().nullable()
 })
 

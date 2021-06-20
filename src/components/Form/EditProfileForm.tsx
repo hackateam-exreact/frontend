@@ -5,13 +5,15 @@ import {
   VStack,
   useToast
 } from '@chakra-ui/react'
-import { FiMail, FiMapPin, FiPhone } from 'react-icons/fi'
+import { FiCheck, FiMail, FiMapPin, FiPhone } from 'react-icons/fi'
 
 import { BsPerson } from 'react-icons/bs'
 import { Button } from 'components/Button'
 import { IUser } from 'interfaces/user'
+import { SelectInput } from 'components/SelectInput'
 import { TextArea } from 'components/TextArea'
 import { TextInput } from 'components/TextInput'
+import colors from 'theme/foundations/colors'
 import { editProfileSchema } from 'utils/yupSchemas'
 import { useAuth } from 'hooks/useAuth'
 import { useEditProfile } from 'hooks/useEditProfile'
@@ -21,13 +23,21 @@ import { yupResolver } from '@hookform/resolvers/yup'
 
 type EditProfileParams = Pick<
   IUser,
-  'avatar' | 'about' | 'name' | 'email' | 'contact' | 'location'
+  | 'avatar'
+  | 'about'
+  | 'first_name'
+  | 'last_name'
+  | 'email'
+  | 'status'
+  | 'contact'
+  | 'location'
 >
 
 export function EditProfileForm() {
   const { disclosure, handleUpdateUserProfile } = useEditProfile()
   const { user, handleUpdateUserData } = useAuth()
   const toast = useToast()
+  const optionBg = colors.gray[800]
 
   const {
     register,
@@ -41,8 +51,10 @@ export function EditProfileForm() {
   useEffect(() => {
     setValue('avatar', user.avatar)
     setValue('about', user.about)
-    setValue('name', user.name)
+    setValue('first_name', user.first_name)
+    setValue('last_name', user.last_name)
     setValue('email', user.email)
+    setValue('status', user.status)
     setValue('contact', user.contact)
     setValue('location', user.location)
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -52,8 +64,6 @@ export function EditProfileForm() {
     try {
       const updatedValues = {
         ...values,
-        first_name: values.name.split(' ')[0],
-        last_name: values.name.split(' ')[1],
         description: values.about,
         image_url: values.avatar
       }
@@ -99,22 +109,52 @@ export function EditProfileForm() {
           placeholder="Fale um pouco sobre você"
           {...register('about')}
         />
-        <TextInput
-          inputName="name"
-          error={errors.name}
-          label="Nome"
-          placeholder="John Doe"
-          leftIcon={<Icon as={BsPerson} />}
-          {...register('name')}
-        />
-        <TextInput
-          inputName="email"
-          error={errors.email}
-          label="Email"
-          placeholder="something@example.com"
-          leftIcon={<Icon as={FiMail} />}
-          {...register('email')}
-        />
+        <HStack w="100%" spacing="10">
+          <TextInput
+            inputName="first_name"
+            error={errors.first_name}
+            label="Nome"
+            placeholder="John"
+            leftIcon={<Icon as={BsPerson} />}
+            {...register('first_name')}
+          />
+          <TextInput
+            inputName="last_name"
+            error={errors.last_name}
+            label="Sobrenome"
+            placeholder="Doe"
+            leftIcon={<Icon as={BsPerson} />}
+            {...register('last_name')}
+          />
+        </HStack>
+        <HStack w="100%" spacing="10">
+          <TextInput
+            inputName="email"
+            error={errors.email}
+            label="Email"
+            placeholder="something@example.com"
+            leftIcon={<Icon as={FiMail} />}
+            {...register('email')}
+          />
+          <SelectInput
+            inputName="status"
+            error={errors.status}
+            label="Status"
+            placeholder="Selecione um status"
+            icon={<Icon as={FiCheck} />}
+            {...register('status')}
+          >
+            <option value="open" style={{ backgroundColor: optionBg }}>
+              Open
+            </option>
+            <option value="studying" style={{ backgroundColor: optionBg }}>
+              Studying
+            </option>
+            <option value="employed" style={{ backgroundColor: optionBg }}>
+              Employed
+            </option>
+          </SelectInput>
+        </HStack>
         <TextInput
           inputName="contact"
           error={errors.contact}
