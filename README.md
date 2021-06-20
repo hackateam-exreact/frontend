@@ -1,75 +1,76 @@
-![NextJs with Chakra-ui Boilerplate](https://i.imgur.com/WfNLFV8.png)
+<!-- PROJECT LOGO -->
+<br />
+<p align="center">
+  <a href="https://github.com/hackateam-exreact/backend">
+    <img src="https://media.discordapp.net/attachments/851820377159106644/855570181208276992/logo.png" alt="Logo">
+  </a>
 
-This is a [Next.js](https://nextjs.org/) boilerplate
 
-## What is inside?
+  <p align="center">
+    Boost your chances to get a job as a developer
+  </p>
+</p>
 
-This project uses lot of stuff as:
+<br/>
 
-- [NextJS](https://nextjs.org/)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Chakra-ui](https://chakra-ui.com/)
-- [PWA](https://web.dev/progressive-web-apps/)
-- [Jest](https://jestjs.io/)
-- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro)
-- [Storybook](https://storybook.js.org/)
-- [Eslint](https://eslint.org/)
-- [Prettier](https://prettier.io/)
-- [Husky](https://github.com/typicode/husky)
 
+
+<!-- TABLE OF CONTENTS -->
+<details open="open">
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#contact">Contact</a></li>
+    
+  </ol>
+</details>
+
+
+
+<!-- ABOUT THE PROJECT -->
+## About The Project
+
+There are many ways to expose your developer portfolio in the internet, but they lack of some exclusiveness, or is just too much effort creating your own website. So Devspot is here to make it easy, you can create your portfolio in a plataform that helps devs know each other by their interest, search devs for their skills and build your own portfolio, showing articles, experiences, skills, personal projects and much more.
+
+
+### Built With
+
+* [React JS](https://reactjs.org/)
+* [Next.js](https://nextjs.org/)
+* [Chakra UI](https://chakra-ui.com/)
+
+
+
+<!-- GETTING STARTED -->
 ## Getting Started
 
-To create a project from this boilerplate run:
+### Prerequisites
 
-```bash
-yarn create next-app MY_PROJECT_NAME --example https://github.com/Lukazovic/nextjs-with-chakra-ui-boilerplate
-```
+* node
+* yarn
 
-Then, run the development server:
+### Installation
 
-```bash
-yarn dev
-```
+* Create a `.env.local` file with the template in `.env.example` file 
+* Install dependencies with `yarn`
+* Start your dev server with `yarn dev`
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+Now you can visit [`localhost:3000`](http://localhost:3000) from your browser.
 
-## Commands
 
-- `dev`: runs your application on `localhost:3000`
-- `build`: creates the production build version
-- `start`: starts a simple server with the build production code
-- `lint`: runs the linter in all components and pages
-- `test`: runs jest to test all components and pages
-- `test:watch`: runs jest in watch mode
-- `typecheck`: check typescript types
-- `generate`: creates a component scaffold
-- `storybook`: runs storybook on `localhost:6006`
-- `build-storybook`: create the build version of storybook
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## 🤔 How to Contribute
-
-- Fork this repository;
-- Create your branch with your feature: `git checkout -b my-feature`;
-- Commit your feature: `git commit -m 'feat: My new feature'`;
-- Push to your branch: `git push origin my-feature`.
-
-Then merge your pull request, you can now delete your branch
-
-## :pencil: Author
-
-<table>
-  <tr>
-    <td align="center"><a href="https://github.com/Lukazovic"><img src="https://avatars0.githubusercontent.com/u/54550926?s=460&u=cdeeac652ce0597a986fbdcff6e249ad27a1f1da&v=4" width="100px;" alt=""/><br /><sub><b>Lucas Vieira</b></sub></a><br /></td>
-  <tr>
-</table>
+<!-- CONTACT -->
+## Contact
