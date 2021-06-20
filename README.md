@@ -74,3 +74,9 @@ Now you can visit [`localhost:3000`](http://localhost:3000) from your browser.
 
 <!-- CONTACT -->
 ## Contact
+
+Hildebrando Viana Matos - hildocontato@gmail.com
+
+André Victor - andrevictor50@gmail.com
+
+Luis Filipe Fernandes Almeida - luisfilipefa.dev@gmail.com
