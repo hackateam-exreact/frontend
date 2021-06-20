@@ -74,7 +74,7 @@ export default function ProfilePage(props: ProfilePageProps) {
         <title>{profile.first_name} | Devspot</title>
       </Head>
 
-      <Container w="100%">
+      <Container w="100%" py="3">
         <Stack
           direction={{ sm: 'column', lg: 'row' }}
           w="100%"

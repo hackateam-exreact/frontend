@@ -30,7 +30,6 @@ export function Header() {
           h={{ lg: '6rem' }}
           borderBottom="1px"
           borderColor="gray.800"
-          mb="1rem"
         >
           <Stack
             direction={{ sm: 'column', lg: 'column' }}
