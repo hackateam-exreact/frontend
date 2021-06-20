@@ -1,10 +1,11 @@
 import { createBreakpoints } from '@chakra-ui/theme-tools'
 
 const breakpoints = createBreakpoints({
-  sm: '576px',
-  md: '768px',
-  lg: '992px',
-  xl: '1200px'
+  sm: '375px',
+  md: '576px',
+  lg: '768px',
+  xl: '992px',
+  '2xl': '1200px'
 })
 
 export default breakpoints
