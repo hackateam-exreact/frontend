@@ -21,11 +21,4 @@ describe('<UserBadge />', () => {
 
     expect(container.querySelector('.chakra-avatar')?.nextSibling).toBeFalsy()
   })
-
-  it('should render sign in and sign up buttons if user is not authenticated', () => {
-    render(<UserBadge user={null} />)
-
-    expect(screen.getByText('Sign In')).toBeInTheDocument()
-    expect(screen.getByText('Sign Up')).toBeInTheDocument()
-  })
 })
