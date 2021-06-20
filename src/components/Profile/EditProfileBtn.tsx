@@ -13,9 +13,10 @@ export function EditProfileBtn({ user }: EditProfileBtnProps) {
 
   return (
     <Button
-      leftIcon={<Icon as={FiEdit} />}
+      leftIcon={<Icon as={FiEdit} fontSize="24" />}
       onClick={() => handleEditUserProfile(user)}
       size="lg"
+      fontFamily="Roboto"
     >
       Editar perfil
     </Button>

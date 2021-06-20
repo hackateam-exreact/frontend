@@ -11,6 +11,7 @@ import { ProfileSummary } from 'components/Profile/ProfileSummary'
 import { ProjectList } from 'components/Profile/ProjectList'
 import { TechList } from 'components/Profile/TechList'
 import { useAuth } from 'hooks/useAuth'
+import { Certificates } from 'components/Profile/Certificates'
 
 export default function ProfilePage() {
   const { user, isAuthenticated } = useAuth()
@@ -29,6 +30,7 @@ export default function ProfilePage() {
           gap="5rem"
           maxW="1200px"
           mx="auto"
+          my="2rem"
         >
           <GridItem>
             <VStack align="center" spacing="10">
@@ -47,6 +49,10 @@ export default function ProfilePage() {
               <ProjectList projects={user.projects} />
               <ArticleList user={user} articles={user.articles} />
               <TechList techs={user.techs} />
+              <Certificates
+                certificatesName="Ignite Trilha de React"
+                certificatesURL="https://google.com"
+              />
             </VStack>
           </GridItem>
         </Grid>
