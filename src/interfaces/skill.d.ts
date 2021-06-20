@@ -1,7 +1,7 @@
-export interface ITech {
+export interface ISkill {
   id: string
+  skill_id: string
   thumbnail: string
   title: string
-  experience: number
   description: string
 }

@@ -1,6 +1,6 @@
 import { IArticle } from 'interfaces/article'
 import { IProject } from 'interfaces/project'
-import { ITech } from 'interfaces/tech'
+import { ISkill } from 'interfaces/skill'
 import { IUser } from 'interfaces/user'
 
 export const userTemplate: IUser = {
@@ -67,13 +67,12 @@ export const articlesTemplate: IArticle[] = [
   }
 ]
 
-export const techsTemplate: ITech[] = [
+export const techsTemplate: ISkill[] = [
   {
     id: 'dasdsadsad',
     title: 'React JS',
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.912621963193861asdas',
-    experience: 5,
     thumbnail: '/img/react-logo.png'
   },
   {
@@ -81,7 +80,6 @@ export const techsTemplate: ITech[] = [
     title: 'React Native',
     description:
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.912621963193861asdas',
-    experience: 1,
     thumbnail: '/img/react-logo.png'
   }
 ]
