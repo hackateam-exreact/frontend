@@ -1,11 +1,18 @@
 import { UseDisclosureReturn, useDisclosure } from '@chakra-ui/react'
 
 import { ReactNode } from 'react'
+import { api } from 'services/api'
 import { createContext } from 'react'
+
+interface CreateArticleParams {
+  title: string
+  url: string
+}
 
 export interface CreateArticleContextData {
   disclosure: UseDisclosureReturn
-  handleCreateArticle: () => void
+  handleCreateArticle: (values: CreateArticleParams) => Promise<void>
+  handleDeleteArticle: (articleId: string) => Promise<void>
 }
 
 interface CreateArticleProviderProps {
@@ -21,12 +28,22 @@ export function CreateArticleProvider({
 }: CreateArticleProviderProps) {
   const disclosure = useDisclosure()
 
-  const handleCreateArticle = () => {
-    disclosure.onOpen()
+  const handleCreateArticle = async (values: CreateArticleParams) => {
+    await api.post('/api/articles', values)
+  }
+
+  const handleDeleteArticle = async (articleId: string) => {
+    await api.delete(`/api/articles/${articleId}`)
   }
 
   return (
-    <CreateArticleContext.Provider value={{ disclosure, handleCreateArticle }}>
+    <CreateArticleContext.Provider
+      value={{
+        disclosure,
+        handleCreateArticle,
+        handleDeleteArticle
+      }}
+    >
       {children}
     </CreateArticleContext.Provider>
   )

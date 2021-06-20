@@ -14,10 +14,10 @@ import { useCreateSkill } from 'hooks/useCreateSkill'
 import { useEditProfile } from 'hooks/useEditProfile'
 
 export function EditProfileMenu() {
-  const { handleEditUserProfile } = useEditProfile()
-  const { handleCreateProject } = useCreateProject()
-  const { handleCreateArticle } = useCreateArticle()
-  const { handleCreateSkill } = useCreateSkill()
+  const { disclosure: profileDisclosure } = useEditProfile()
+  const { disclosure: projectDisclosure } = useCreateProject()
+  const { disclosure: articleDisclosure } = useCreateArticle()
+  const { disclosure: skillDisclosure } = useCreateSkill()
 
   return (
     <Menu>
@@ -26,18 +26,27 @@ export function EditProfileMenu() {
       </MenuButton>
       <MenuList bg="black.500">
         <MenuItem
-          onClick={handleEditUserProfile}
+          onClick={profileDisclosure.onOpen}
           data-testid="menu-item-profile"
         >
           Editar perfil
         </MenuItem>
-        <MenuItem onClick={handleCreateProject} data-testid="menu-item-project">
+        <MenuItem
+          onClick={projectDisclosure.onOpen}
+          data-testid="menu-item-project"
+        >
           Adicionar projeto
         </MenuItem>
-        <MenuItem onClick={handleCreateArticle} data-testid="menu-item-article">
+        <MenuItem
+          onClick={articleDisclosure.onOpen}
+          data-testid="menu-item-article"
+        >
           Adicionar artigo
         </MenuItem>
-        <MenuItem onClick={handleCreateSkill} data-testid="menu-item-skill">
+        <MenuItem
+          onClick={skillDisclosure.onOpen}
+          data-testid="menu-item-skill"
+        >
           Adicionar habilidade
         </MenuItem>
       </MenuList>
