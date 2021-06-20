@@ -144,13 +144,13 @@ export function EditProfileForm() {
             icon={<Icon as={FiCheck} />}
             {...register('status')}
           >
-            <option value="open" style={{ backgroundColor: optionBg }}>
+            <option value="Open" style={{ backgroundColor: optionBg }}>
               Open
             </option>
-            <option value="studying" style={{ backgroundColor: optionBg }}>
+            <option value="Studying" style={{ backgroundColor: optionBg }}>
               Studying
             </option>
-            <option value="employed" style={{ backgroundColor: optionBg }}>
+            <option value="Employed" style={{ backgroundColor: optionBg }}>
               Employed
             </option>
           </SelectInput>

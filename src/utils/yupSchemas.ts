@@ -27,7 +27,7 @@ export const editProfileSchema = yup.object().shape({
 })
 
 export const createArticleSchema = yup.object().shape({
-  link: yup.string().required('Link obrigatório'),
+  url: yup.string().required('Link obrigatório'),
   title: yup.string().required('Título obrigatório')
 })
 

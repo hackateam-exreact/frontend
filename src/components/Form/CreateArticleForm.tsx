@@ -1,4 +1,10 @@
-import { Button as ChakraButton, HStack, Icon, VStack } from '@chakra-ui/react'
+import {
+  Button as ChakraButton,
+  HStack,
+  Icon,
+  VStack,
+  useToast
+} from '@chakra-ui/react'
 
 import { Button } from 'components/Button'
 import { FiLink } from 'react-icons/fi'
@@ -11,12 +17,13 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 interface CreateArticleData {
-  link: string
   title: string
+  url: string
 }
 
 export function CreateArticleForm() {
-  const { disclosure } = useCreateArticle()
+  const { disclosure, handleCreateArticle } = useCreateArticle()
+  const toast = useToast()
 
   const {
     register,
@@ -24,20 +31,31 @@ export function CreateArticleForm() {
     formState: { isSubmitting, errors }
   } = useForm({ resolver: yupResolver(createArticleSchema) })
 
-  const onSubmit = (values: CreateArticleData) => {
-    console.log(values)
+  const onSubmit = async (values: CreateArticleData) => {
+    try {
+      await handleCreateArticle(values)
+    } catch (error) {
+      console.log(error.response)
+      toast({
+        title: 'Erro ao cadastrar',
+        description: 'Erro ao cadastrar novo artigo',
+        status: 'error',
+        duration: 3000,
+        isClosable: true
+      })
+    }
   }
 
   return (
     <VStack as="form" onSubmit={handleSubmit(onSubmit)} spacing="10">
       <VStack align="flex-start" spacing="5" w="100%">
         <TextInput
-          inputName="link"
-          error={errors.link}
+          inputName="url"
+          error={errors.url}
           label="Link do artigo"
           placeholder="https://theurlforyourarticle.com.br"
           leftIcon={<Icon as={FiLink} />}
-          {...register('link')}
+          {...register('url')}
         />
         <TextInput
           inputName="title"
