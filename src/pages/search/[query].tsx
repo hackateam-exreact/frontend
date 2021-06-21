@@ -1,21 +1,25 @@
-import { Flex, Text, Icon } from '@chakra-ui/react'
-import { UserSearch } from 'components/UserSearch'
-import { FiTerminal, FiSearch } from 'react-icons/fi'
-import Head from 'next/head'
+import { FiSearch, FiTerminal } from 'react-icons/fi'
+import { Flex, Icon, Text } from '@chakra-ui/react'
 
-interface ResultSearch {
-  resultSearch: string
+import { GetServerSideProps } from 'next'
+import Head from 'next/head'
+import { IUser } from 'interfaces/user'
+import { UserSearch } from 'components/UserSearch'
+import { api } from 'services/api'
+
+interface SearchProps {
+  results: IUser[]
+  query: string
 }
 
-export default function Search({ resultSearch }: ResultSearch) {
-  console.log(resultSearch)
+export default function Search({ results, query }: SearchProps) {
   return (
     <>
       <Head>
-        <title>{resultSearch && `${resultSearch} | `}Search in Devspot</title>
+        <title>{`Resultados (${results.length}) | Devspot`}</title>
       </Head>
       <Flex w="100%" maxW="760px" m="1rem auto" p="8" flexDirection="column">
-        {resultSearch ? (
+        {results.length ? (
           <>
             <Flex w="100%" alignCenter="center" justifyContent="space-between">
               <Text
@@ -27,8 +31,7 @@ export default function Search({ resultSearch }: ResultSearch) {
               >
                 Estes foram os resultados para:{' '}
                 <Text as="span" color="blue.500">
-                  {resultSearch}
-                  {/* Pegar do input de pesquisa */}
+                  {query}
                 </Text>
               </Text>
 
@@ -39,12 +42,7 @@ export default function Search({ resultSearch }: ResultSearch) {
                 justifyContent="space-between"
               >
                 <Icon as={FiTerminal} fontSize="30" />
-                <Text>
-                  Encontramos
-                  <br />
-                  mais de 20 devs
-                  {/* Pegar do back-end a quantidade de devs retornados*/}
-                </Text>
+                <Text>Encontramos {results.length} devs</Text>
               </Flex>
             </Flex>
 
@@ -55,15 +53,9 @@ export default function Search({ resultSearch }: ResultSearch) {
               alignItems="center"
               justifyContent="center"
             >
-              <UserSearch
-                userToken="Hildebrando-Viana Matos"
-                urlImageUser="https://avatars.githubusercontent.com/u/70374072?v=4"
-                nameUser="Hildebrando Viana Matos"
-                emailUser="hildocontato@gmail.com"
-                descUser="I'm Hildebrando Viana Matos and I'm a web and mobile developer and designer 🎓"
-                numberArticle={8}
-                numberProjects={4}
-              />
+              {results.map((user) => (
+                <UserSearch key={user.id} user={user} />
+              ))}
             </Flex>
 
             <Text
@@ -104,4 +96,28 @@ export default function Search({ resultSearch }: ResultSearch) {
       </Flex>
     </>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  const query = params?.query
+
+  const { data } = await api.get(`/api/skills/search/${String(query)}`)
+
+  const results = data.user_list.map(
+    (user: {
+      first_name: string
+      last_name: string
+      image_url: string
+      description: string
+    }) => ({
+      ...user,
+      name: `${user.first_name} ${user.last_name}`,
+      avatar: user.image_url ? user.image_url : '/img/fallback-avatar.png',
+      about: user.description
+    })
+  )
+
+  return {
+    props: { results, query }
+  }
 }

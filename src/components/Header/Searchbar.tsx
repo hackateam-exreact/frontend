@@ -1,5 +1,6 @@
 import { FiSearch } from 'react-icons/fi'
 import { Icon } from '@chakra-ui/react'
+import Router from 'next/router'
 import { TextInput } from 'components/TextInput'
 import { useRef } from 'react'
 
@@ -7,15 +8,18 @@ export function Searchbar() {
   const query = useRef<HTMLInputElement>(null)
 
   const handleSearch = async () => {
-    console.log(query.current?.value)
+    const formattedQuery = query.current?.value.replace(/\b\w/g, (l) =>
+      l.toUpperCase()
+    )
+
+    Router.push(`/search/${formattedQuery}`)
   }
 
   return (
     <TextInput
       inputName="search"
-      placeholder="Pesquisar por tecnologia (ex: React)"
-      onChange={handleSearch}
-      rightIcon={<Icon as={FiSearch} />}
+      placeholder="Pesquisar por tecnologias separadas por espaço (ex: React Docker REST)"
+      rightIcon={<Icon as={FiSearch} onClick={() => handleSearch()} />}
       borderRadius="full"
       ref={query}
     />
