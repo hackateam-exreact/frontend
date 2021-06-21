@@ -8,7 +8,7 @@ interface ProjectListProps {
 
 export function ProjectList({ projects }: ProjectListProps) {
   return (
-    <ProfileSectionContainer title="Projetos principais">
+    <ProfileSectionContainer title={`Projetos principais (${projects.length})`}>
       {projects.map((project) => (
         <ProjectItem key={project.id} project={project} />
       ))}

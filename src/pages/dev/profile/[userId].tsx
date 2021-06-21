@@ -31,7 +31,6 @@ import { ProjectList } from 'components/Profile/ProjectList'
 import { Protected } from 'components/Protected'
 import { SkillList } from 'components/Profile/SkillList'
 import { api } from 'services/api'
-import { projectsTemplate } from 'utils/userTemplate'
 import { useAuth } from 'hooks/useAuth'
 import { useEffect } from 'react'
 import { useState } from 'react'
@@ -49,7 +48,7 @@ export default function ProfilePage(props: ProfilePageProps) {
   const { user } = useAuth()
   const [articles, setArticles] = useState<IArticle[]>(props.articles)
   const [profile, setProfile] = useState<IUser>(props.profile)
-  const [projects] = useState<IProject[]>(props.projects)
+  const [projects, setProjects] = useState<IProject[]>(props.projects)
   const [skills, setSkills] = useState<ISkill[]>(props.skills)
   const [certificates, setCertificates] = useState<ICertificate[]>(
     props.certificates
@@ -116,6 +115,12 @@ export default function ProfilePage(props: ProfilePageProps) {
       )
 
     setCertificates(formattedCertificates)
+
+    const { data: projectsData } = await api.get(`/api/projects/${profile.id}`)
+
+    const formattedProjects: IProject[] = [...projectsData.list_of_projects]
+
+    setProjects(formattedProjects)
 
     setIsLoading(false)
   }
@@ -241,7 +246,11 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
         })
       )
 
-    const projects = projectsTemplate
+    const { data: projectsData } = await api.get(
+      `/api/projects/${String(userId)}`
+    )
+
+    const projects: IProject[] = [...projectsData.list_of_projects]
 
     return {
       props: { profile, projects, articles, skills, certificates }
