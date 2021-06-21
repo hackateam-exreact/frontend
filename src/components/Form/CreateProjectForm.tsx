@@ -10,6 +10,7 @@ import React, { useState } from 'react'
 
 import { BiGitBranch } from 'react-icons/bi'
 import { Button } from 'components/Button'
+import { ChangeEvent } from 'react'
 import { FiPlus } from 'react-icons/fi'
 import { MdTitle } from 'react-icons/md'
 import { TextInput } from 'components/TextInput'
@@ -23,7 +24,10 @@ export function CreateProjectForm() {
   const { disclosure, handleCreateProject } = useCreateProject()
   const toast = useToast()
 
-  const handleInputChange = (e, index: number) => {
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
     const { name, value } = e.target
     const list = [...repositoryList]
     list[index][name] = value
