@@ -1,9 +1,4 @@
-import { IArticle } from 'interfaces/article'
-import { IProject } from 'interfaces/project'
-import { ISkill } from 'interfaces/skill'
-import { IUser } from 'interfaces/user'
-
-export const userTemplate: IUser = {
+export const userTemplate = {
   id: '123',
   avatar: '/img/chakra-logo.png',
   first_name: 'John',
@@ -17,34 +12,30 @@ export const userTemplate: IUser = {
     'Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem maiores aspernatur quasi sed alias quo. Consequatur magnam provident iusto error rem dicta, esse dignissimos. Alias dolore dolor voluptatibus veniam aperiam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem maiores aspernatur quasi sed alias quo. Consequatur magnam provident iusto error rem dicta, esse dignissimos. Alias dolore dolor voluptatibus veniam aperiam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem maiores aspernatur quasi sed alias quo. Consequatur magnam provident iusto error rem dicta, esse dignissimos. Alias dolore dolor voluptatibus veniam aperiam.'
 }
 
-export const projectsTemplate: IProject[] = [
+export const projectsTemplate = [
   {
     id: 'asufhSUI',
-    title: 'Lorem Ipsumdasd',
-    description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit141241441'
+    name: 'Lorem Ipsumdasd',
+    github_projects: []
   },
   {
     id: '12083ucn182y3',
-    title: 'Lorem Ipsumasdsadasdas',
-    description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.1289631298461298461'
+    name: 'Lorem Ipsumasdsadasdas',
+    github_projects: []
   },
   {
     id: '18241283y',
-    title: 'Lorem Ipsujhgfdsfgm',
-    description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.12836412984619286'
+    name: 'Lorem Ipsujhgfdsfgm',
+    github_projects: []
   },
   {
     id: 'dasdasdasqwr',
-    title: 'Lorem Ipsumdfghyjuki',
-    description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque sunt necessitatibus mollitia ipsa tempora. Odit, esse fuga nostrum tempore aliquid cum. Doloribus, minima quis eius perferendis consequuntur quia perspiciatis odit.912621963193861'
+    name: 'Lorem Ipsumdfghyjuki',
+    github_projects: []
   }
 ]
 
-export const articlesTemplate: IArticle[] = [
+export const articlesTemplates = [
   {
     id: 'fghjki',
     title: 'Lorem Ipsum1',
@@ -67,7 +58,7 @@ export const articlesTemplate: IArticle[] = [
   }
 ]
 
-export const techsTemplate: ISkill[] = [
+export const techsTemplate = [
   {
     id: 'dasdsadsad',
     skill_id: 'asdadad',
