@@ -31,8 +31,6 @@ import { ProjectList } from 'components/Profile/ProjectList'
 import { Protected } from 'components/Protected'
 import { SkillList } from 'components/Profile/SkillList'
 import { api } from 'services/api'
-import { useAuth } from 'hooks/useAuth'
-import { useEffect } from 'react'
 import { useState } from 'react'
 
 interface ProfilePageProps {
@@ -45,7 +43,6 @@ interface ProfilePageProps {
 
 export default function ProfilePage(props: ProfilePageProps) {
   const [isLoading, setIsLoading] = useState(false)
-  const { user } = useAuth()
   const [articles, setArticles] = useState<IArticle[]>(props.articles)
   const [profile, setProfile] = useState<IUser>(props.profile)
   const [projects, setProjects] = useState<IProject[]>(props.projects)
@@ -124,11 +121,6 @@ export default function ProfilePage(props: ProfilePageProps) {
 
     setIsLoading(false)
   }
-
-  useEffect(() => {
-    handleFetchNewData()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user])
 
   return (
     <>
