@@ -69,7 +69,11 @@ export default function Home() {
         >
           <Text fontSize="2xl">O que você deseja fazer?</Text>
           <Stack direction={{ sm: 'column', lg: 'row' }} spacing="5" mt="3">
-            <Button py="8" leftIcon={<Icon as={FiCode} fontSize="32" />}>
+            <Button
+              py="8"
+              leftIcon={<Icon as={FiCode} fontSize="32" />}
+              onClick={() => Router.push('/search')}
+            >
               Explorar
             </Button>
             <Menu>

@@ -1,6 +1,6 @@
-import { FiSearch, FiTerminal } from 'react-icons/fi'
 import { Flex, Icon, Text } from '@chakra-ui/react'
 
+import { FiTerminal } from 'react-icons/fi'
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import { IUser } from 'interfaces/user'
@@ -12,14 +12,14 @@ interface SearchProps {
   query: string
 }
 
-export default function Search({ results, query }: SearchProps) {
+export default function SearchQuery({ results, query }: SearchProps) {
   return (
     <>
       <Head>
         <title>{`Resultados (${results.length}) | Devspot`}</title>
       </Head>
       <Flex w="100%" maxW="760px" m="1rem auto" p="8" flexDirection="column">
-        {results.length ? (
+        {results.length && (
           <>
             <Flex w="100%" alignCenter="center" justifyContent="space-between">
               <Text
@@ -67,31 +67,6 @@ export default function Search({ results, query }: SearchProps) {
               Estes são todos os resultados
             </Text>
           </>
-        ) : (
-          <Flex
-            alignItems="center"
-            justifyContent="center"
-            flexDirection="column"
-          >
-            <Icon as={FiSearch} fontSize="255px" color="blue.500" />
-            <Text
-              my="1rem"
-              fontFamily="Ubuntu"
-              fontSize="2rem"
-              fontWeight="700"
-            >
-              Pesquise outros Devs
-            </Text>
-            <Text
-              fontSize="sm"
-              fontWeight="400"
-              fontFamily="Ubuntu"
-              color="gray.500"
-            >
-              Use a barra de pesquisa do Menu da página para pesquisar Devs pelo
-              nome ou por sua tecnologias
-            </Text>
-          </Flex>
         )}
       </Flex>
     </>
