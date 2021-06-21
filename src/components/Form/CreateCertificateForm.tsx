@@ -11,34 +11,39 @@ import { FiLink } from 'react-icons/fi'
 import { MdTitle } from 'react-icons/md'
 import React from 'react'
 import { TextInput } from 'components/TextInput'
-import { createArticleSchema } from 'utils/yupSchemas'
-import { useCreateArticle } from 'hooks/useCreateArticle'
+import { createCertificateSchema } from 'utils/yupSchemas'
+import { useCreateCertificate } from 'hooks/useCreateCertificate'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
-interface CreateArticleData {
+interface CreateCertificateData {
   title: string
   url: string
 }
 
-export function CreateArticleForm() {
-  const { disclosure, handleCreateArticle } = useCreateArticle()
+export function CreateCertificateForm() {
+  const { disclosure, handleCreateCertificate } = useCreateCertificate()
   const toast = useToast()
 
   const {
     register,
     handleSubmit,
     formState: { isSubmitting, errors }
-  } = useForm({ resolver: yupResolver(createArticleSchema) })
+  } = useForm({ resolver: yupResolver(createCertificateSchema) })
 
-  const onSubmit = async (values: CreateArticleData) => {
+  const onSubmit = async (values: CreateCertificateData) => {
     try {
-      await handleCreateArticle(values)
+      await handleCreateCertificate(values)
+      toast({
+        title: 'Certificado cadastrado',
+        status: 'success',
+        duration: 3000,
+        isClosable: true
+      })
     } catch (error) {
       console.log(error.response)
       toast({
         title: 'Erro ao cadastrar',
-        description: 'Erro ao cadastrar novo artigo',
         status: 'error',
         duration: 3000,
         isClosable: true
@@ -52,16 +57,16 @@ export function CreateArticleForm() {
         <TextInput
           inputName="url"
           error={errors.url}
-          label="Link do artigo"
-          placeholder="https://theurlforyourarticle.com.br"
+          label="Link do certificado"
+          placeholder="https://theurlforyourcertificate.com.br"
           leftIcon={<Icon as={FiLink} />}
           {...register('url')}
         />
         <TextInput
           inputName="title"
           error={errors.title}
-          label="Título do artigo"
-          placeholder="Meu artigo"
+          label="Título"
+          placeholder="Meu certificado"
           leftIcon={<Icon as={MdTitle} />}
           {...register('title')}
         />

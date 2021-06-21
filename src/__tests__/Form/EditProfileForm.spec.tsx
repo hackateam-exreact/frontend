@@ -46,7 +46,8 @@ describe('<EditProfileForm />', () => {
     expect(
       screen.getByPlaceholderText('Fale um pouco sobre você')
     ).toBeInTheDocument()
-    expect(screen.getByPlaceholderText('John Doe')).toBeInTheDocument()
+    expect(screen.getByPlaceholderText('John')).toBeInTheDocument()
+    expect(screen.getByPlaceholderText('Doe')).toBeInTheDocument()
     expect(
       screen.getByPlaceholderText('something@example.com')
     ).toBeInTheDocument()

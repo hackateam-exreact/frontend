@@ -77,7 +77,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
     updateAuthCookies(data.token)
 
-    Router.push('/')
+    Router.push('/dev/welcome')
   }
 
   const handleSignOut = () => {

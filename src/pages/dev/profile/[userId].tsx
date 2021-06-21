@@ -1,84 +1,187 @@
-import { Grid, GridItem, VStack } from '@chakra-ui/react'
 import {
-  articlesTemplate,
-  projectsTemplate,
-  techsTemplate
-} from 'utils/userTemplate'
+  Flex,
+  HStack,
+  Icon,
+  IconButton,
+  Spinner,
+  Stack,
+  VStack
+} from '@chakra-ui/react'
 
 import { ArticleList } from 'components/Profile/ArticleList'
+import { CertificateList } from 'components/Profile/CertificateList'
 import { Container } from 'components/Container'
 import { CreateArticleModal } from 'components/Modal/CreateArticleModal'
-import { CreateArticleProvider } from 'contexts/CreateArticleContext'
+import { CreateCertificateModal } from 'components/Modal/CreateCertificateModal'
 import { CreateProjectModal } from 'components/Modal/CreateProjectModal'
-import { CreateProjectProvider } from 'contexts/CreateProjectContext'
 import { CreateSkillModal } from 'components/Modal/CreateSkillModal'
-import { CreateSkillProvider } from 'contexts/CreateSkillContext'
 import { EditProfileMenu } from 'components/Profile/EditProfileMenu'
 import { EditProfileModal } from 'components/Modal/EditProfileModal'
-import { EditProfileProvider } from 'contexts/EditProfileContext'
+import { FiRefreshCw } from 'react-icons/fi'
 import { GetServerSideProps } from 'next'
 import Head from 'next/head'
 import { IArticle } from 'interfaces/article'
+import { ICertificate } from 'interfaces/certificate'
 import { IProject } from 'interfaces/project'
-import { ITech } from 'interfaces/tech'
+import { ISkill } from 'interfaces/skill'
 import { IUser } from 'interfaces/user'
 import { ProfileDescription } from 'components/Profile/ProfileDescription'
 import { ProfileSummary } from 'components/Profile/ProfileSummary'
 import { ProjectList } from 'components/Profile/ProjectList'
 import { Protected } from 'components/Protected'
-import { TechList } from 'components/Profile/TechList'
+import { SkillList } from 'components/Profile/SkillList'
 import { api } from 'services/api'
+import { useAuth } from 'hooks/useAuth'
+import { useEffect } from 'react'
+import { useState } from 'react'
 
 interface ProfilePageProps {
   profile: IUser
   projects: IProject[]
   articles: IArticle[]
-  techs: ITech[]
+  skills: ISkill[]
+  certificates: ICertificate[]
 }
 
 export default function ProfilePage(props: ProfilePageProps) {
+  const [isLoading, setIsLoading] = useState(false)
+  const { user } = useAuth()
+  const [articles, setArticles] = useState<IArticle[]>(props.articles)
+  const [profile, setProfile] = useState<IUser>(props.profile)
+  const [projects, setProjects] = useState<IProject[]>(props.projects)
+  const [skills, setSkills] = useState<ISkill[]>(props.skills)
+  const [certificates, setCertificates] = useState<ICertificate[]>(
+    props.certificates
+  )
+
+  const handleFetchNewData = async () => {
+    setIsLoading(true)
+    const { data: profileData } = await api.get(`/api/users/${profile.id}`)
+
+    const formattedProfile = {
+      ...profileData.user,
+      about: profileData.user.description,
+      avatar: profileData.user.image_url
+        ? profileData.user.image_url
+        : '/img/fallback-avatar.png',
+      name: `${profileData.user.first_name} ${profileData.user.last_name}`
+    }
+
+    setProfile(formattedProfile)
+
+    const { data: articlesData } = await api.get(`/api/articles/${profile.id}`)
+
+    const formattedArticles = articlesData.list_of_articles.map(
+      (article: IArticle) => ({
+        id: article.id,
+        title: article.title,
+        url: article.url
+      })
+    )
+
+    setArticles(formattedArticles)
+
+    const { data: skillsData } = await api.get(`/api/skills/${profile.id}`)
+
+    const formattedSkills: ISkill[] = skillsData.user_skills.map(
+      (skill: {
+        id: string
+        abstract: string
+        skill: {
+          image_url: string
+          name: string
+        }
+      }) => ({
+        id: skill.id,
+        thumbnail: skill.skill.image_url,
+        title: skill.skill.name,
+        description: skill.abstract
+      })
+    )
+
+    setSkills(formattedSkills)
+
+    const { data: certificatesData } = await api.get(
+      `/api/certificates/${profile.id}`
+    )
+
+    const formattedCertificates: ICertificate[] =
+      certificatesData.list_of_certificates.map(
+        (certificate: ICertificate) => ({
+          id: certificate.id,
+          url: certificate.url,
+          title: certificate.title
+        })
+      )
+
+    setCertificates(formattedCertificates)
+
+    const { data: projectsData } = await api.get(`/api/projects/${profile.id}`)
+
+    const formattedProjects: IProject[] = [...projectsData.list_of_projects]
+
+    setProjects(formattedProjects)
+
+    setIsLoading(false)
+  }
+
+  useEffect(() => {
+    handleFetchNewData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user])
+
   return (
     <>
       <Head>
-        <title>{props.profile.first_name} | Devspot</title>
+        <title>{profile.first_name} | Devspot</title>
       </Head>
 
-      <Container>
-        <Grid templateColumns="repeat(3, 1fr)" gap="20" maxW="1200px" mx="auto">
-          <GridItem>
-            <VStack align="center" spacing="10">
+      {isLoading ? (
+        <Flex w="100vw" h="calc(100vh - 6rem)" align="center" justify="center">
+          <Spinner />
+        </Flex>
+      ) : (
+        <Container w="100%" py="3">
+          <Stack
+            direction={{ sm: 'column', lg: 'row' }}
+            w="100%"
+            maxW="1400px"
+            mx="auto"
+            justify="space-between"
+            spacing="20"
+          >
+            <VStack align="center" spacing="10" w={{ sm: '100%', lg: '30%' }}>
               <ProfileSummary
-                user={props.profile}
-                articles={props.articles}
-                projects={props.projects}
+                user={profile}
+                articles={articles}
+                projects={projects}
               />
               <Protected>
-                <EditProfileProvider>
-                  <CreateArticleProvider>
-                    <CreateProjectProvider>
-                      <CreateSkillProvider>
-                        <EditProfileMenu />
-                        <CreateSkillModal />
-                      </CreateSkillProvider>
-                      <CreateProjectModal />
-                    </CreateProjectProvider>
-                    <CreateArticleModal />
-                  </CreateArticleProvider>
-                  <EditProfileModal />
-                </EditProfileProvider>
+                <HStack spacing="5" w="100%">
+                  <EditProfileMenu />
+                  <IconButton
+                    aria-label="Atualizar"
+                    icon={<Icon as={FiRefreshCw} />}
+                    onClick={handleFetchNewData}
+                  />
+                </HStack>
+                <CreateCertificateModal />
+                <CreateSkillModal />
+                <CreateProjectModal />
+                <CreateArticleModal />
+                <EditProfileModal />
               </Protected>
             </VStack>
-          </GridItem>
-          <GridItem colSpan={2}>
-            <VStack spacing="10">
-              <ProfileDescription about={props.profile.about} />
-              <ProjectList projects={props.projects} />
-              <ArticleList profile={props.profile} articles={props.articles} />
-              <TechList techs={props.techs} />
+            <VStack spacing="10" w={{ sm: '100%', lg: '70%' }}>
+              <ProfileDescription about={profile.about} />
+              <ProjectList projects={projects} />
+              <ArticleList profile={profile} articles={articles} />
+              <SkillList skills={skills} />
+              <CertificateList certificates={certificates} />
             </VStack>
-          </GridItem>
-        </Grid>
-      </Container>
+          </Stack>
+        </Container>
+      )}
     </>
   )
 }
@@ -89,7 +192,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   try {
     const { data: profileData } = await api.get(`/api/users/${String(userId)}`)
 
-    const profile = {
+    const profile: IUser = {
       ...profileData.user,
       about: profileData.user.description,
       avatar: profileData.user.image_url
@@ -98,23 +201,62 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
       name: `${profileData.user.first_name} ${profileData.user.last_name}`
     }
 
-    const projects = projectsTemplate
+    const { data: articlesData } = await api.get(
+      `/api/articles/${String(userId)}`
+    )
 
-    const articles = articlesTemplate
+    const articles: IArticle[] = articlesData.list_of_articles.map(
+      (article: IArticle) => ({
+        id: article.id,
+        title: article.title,
+        url: article.url
+      })
+    )
 
-    const techs = techsTemplate
+    const { data: skillsData } = await api.get(`/api/skills/${String(userId)}`)
+
+    const skills: ISkill[] = skillsData.user_skills.map(
+      (skill: {
+        id: string
+        skill_id: string
+        abstract: string
+        skill: {
+          image_url: string
+          name: string
+        }
+      }) => ({
+        id: skill.id,
+        skill_id: skill.skill_id,
+        thumbnail: skill.skill.image_url,
+        title: skill.skill.name,
+        description: skill.abstract
+      })
+    )
+
+    const { data: certificatesData } = await api.get(
+      `/api/certificates/${String(userId)}`
+    )
+
+    const certificates: ICertificate[] =
+      certificatesData.list_of_certificates.map(
+        (certificate: ICertificate) => ({
+          id: certificate.id,
+          url: certificate.url,
+          title: certificate.title
+        })
+      )
+
+    const { data: projectsData } = await api.get(
+      `/api/projects/${String(userId)}`
+    )
+
+    const projects: IProject[] = [...projectsData.list_of_projects]
 
     return {
-      props: { profile, projects, articles, techs }
+      props: { profile, projects, articles, skills, certificates }
     }
   } catch (error) {
     console.log(error.response)
-    // return {
-    //   redirect: {
-    //     destination: '/dev/signin',
-    //     permanent: false
-    //   }
-    // }
   }
 
   return {

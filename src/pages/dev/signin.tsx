@@ -4,7 +4,6 @@ import {
   Icon,
   IconButton,
   Image,
-  SimpleGrid,
   VStack
 } from '@chakra-ui/react'
 
@@ -42,12 +41,20 @@ export default function SignInPage() {
         w="100%"
         h="calc(100vh - 5rem)"
       >
-        <SimpleGrid columns={2} columnGap={40} maxW="992px" mx="auto">
+        <Flex
+          maxW="992px"
+          mx="auto"
+          direction={{ sm: 'column', lg: 'row' }}
+          align="center"
+          justify={{ sm: 'space-evenly', lg: 'space-between' }}
+          h="100%"
+          w="100%"
+        >
           <VStack align="center" justify="center">
             <Image
               src="/img/logo.png"
               alt="Devspot"
-              w="max"
+              w="350px"
               objectFit="cover"
             />
             <Heading align="center" fontWeight="normal">
@@ -55,7 +62,7 @@ export default function SignInPage() {
             </Heading>
           </VStack>
           <SignInForm />
-        </SimpleGrid>
+        </Flex>
       </Container>
     </>
   )

@@ -1,16 +1,14 @@
-import { extendTheme } from '@chakra-ui/react'
-
-// Global style overrides
-import styles from './styles'
-
-// Foundational style overrides
-import config from './foundations/config'
-import fonts from './foundations/fonts'
-import colors from './foundations/colors'
-import shadows from './foundations/shadows'
-
 // Component style overrides
 import Button from './components/button'
+import breakpoints from './foundations/breakpoints'
+import colors from './foundations/colors'
+// Foundational style overrides
+import config from './foundations/config'
+import { extendTheme } from '@chakra-ui/react'
+import fonts from './foundations/fonts'
+import shadows from './foundations/shadows'
+// Global style overrides
+import styles from './styles'
 
 const customTheme = {
   styles,
@@ -18,6 +16,7 @@ const customTheme = {
   config,
   colors,
   shadows,
+  breakpoints,
   components: {
     Button
   }

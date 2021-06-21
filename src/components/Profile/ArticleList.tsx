@@ -11,8 +11,8 @@ interface ArticleListProps {
 
 export function ArticleList({ profile, articles }: ArticleListProps) {
   return (
-    <ProfileSectionContainer title="Artigos">
-      {articles?.map((article) => (
+    <ProfileSectionContainer title={`Artigos (${articles.length})`}>
+      {articles.map((article) => (
         <ArticleItem key={article.id} profile={profile} article={article} />
       ))}
     </ProfileSectionContainer>
